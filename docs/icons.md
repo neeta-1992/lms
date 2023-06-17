@@ -1,0 +1,40 @@
+# Icons
+
+- Pulse (dashboard icon) - <i class="bi bi-activity" style="font-size: 1.15rem; font-weight-bold"></i>
+- Columns - <i class="bi bi-columns"></i>
+- Exit - <i class="bi bi-x-circle"></i>
+- PDF - <i class="bi bi-file-earmark-pdf"></i>
+- CSV - <i class="bi bi-filetype-csv"></i>
+- Excel - <i class="bi bi-filetype-xls"></i>
+- File Upload - <i class="bi bi-cloud-arrow-up"></i>
+- Exclamation - <i class="bi bi-exclamation-circle"></i>
+- eye - <i class="bi bi-eye"></i>
+- Eye Slash - <i class="bi bi-eye-slash"></i>
+- Lock Fill - <i class="bi bi-lock-fill"></i>
+- Unlock Fill - <i class="bi bi-unlock-fill"></i> -- fa-solid fa-unlock
+- Unlock - <i class="bi bi-unlock"></i>
+- Refresh - <i class="bi bi-arrow-repeat"></i> -- fa-thin fa-sync
+- Undo - <i class="bi bi-arrow-clockwise"></i>
+- Calendar/Task - <i class="bi bi-calendar2-event"></i> -- fa-thin fa-calendar-clock
+- Trash - <i class="bi bi-trash"></i>
+- Envelope - <i class="bi bi-envelope"></i>
+- User/Person - <i class="bi bi-person"></i>
+- Users/People - <i class="bi bi-people"></i>
+- Print - <i class="bi bi-printer"></i>
+- Question - <i class="bi bi-question-circle"></i>
+- Reply - <i class="bi bi-reply"></i>
+- Reply All - <i class="bi bi-reply-all"></i>
+- Search - <i class="bi bi-search"></i>
+- Send - <i class="bi bi-send"></i>
+- Sort
+ -- <i class="bi bi-sort-alpha-down"></i>
+ -- <i class="bi bi-sort-alpha-up"></i>
+ -- <i class="bi bi-sort-down"></i>
+ -- <i class="bi bi-sort-up"></i>
+ -- <i class="bi bi-sort-numeric-down"></i>
+ -- <i class="bi bi-sort-numeric-up"></i>
+- Favorite - <i class="bi bi-star-fill"></i> / <i class="bi bi-star"></i>
+- Notes - <i class="bi bi-stickies"></i>
+- Action Menu - <i class="bi bi-three-dots"></i>
+- Clone - <i class="bi bi-files"></i>
+- New Version - <i class="bi bi-file-earmark-plus"></i>
