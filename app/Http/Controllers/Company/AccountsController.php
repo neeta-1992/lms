@@ -86,7 +86,10 @@ class AccountsController extends Controller
         $version = !empty($data->version) ? $data->version : '';
         /* dd( $quotePolicy); */
         $todayAlert = AccountAlert::getData(['accountId'=>$id])->get();
-        return view($this->viwePath."show",['route'=>$this->route,'data'=>$data,'id'=>$id,'viwePath'=>$this->viwePath,'activePage'=>$this->activePage,'stateData'=>$stateData,'todayAlert'=>$todayAlert]);
+        $electronicPaymentSettings = Setting::getData(['type'=>'electronic-payment-setting'])->first();
+        $EPS = !empty($electronicPaymentSettings->json) ? json_decode($electronicPaymentSettings->json) : null;
+
+        return view($this->viwePath."show",['route'=>$this->route,'data'=>$data,'id'=>$id,'viwePath'=>$this->viwePath,'activePage'=>$this->activePage,'stateData'=>$stateData,'todayAlert'=>$todayAlert,'EPS'=>$EPS]);
     }
 
     /* suspend-account */
@@ -262,8 +265,15 @@ class AccountsController extends Controller
         try {
            if ($request->ajax()) {
                 $inputs = $request->post();
+                $payment_method = $request->post('payment_method');
+                if($payment_method == 'credit_card'){
+                    $inputs['card_token'] = $request->post('sqtoken');
+                }else{
+                    $inputs['card_token'] = $request->post('sqtoken');
+                }
                 $inputs['id'] = $id;
                 $inputs['activePage'] = $this->activePage;
+               /*  dd($inputs); */
                 $this->model::insertOrUpdate($inputs);
                 
                 return   response()->json(['status'=>true,'msg'=>$this->pageTitle.' has been updated successfully','type'=>'account'], 200);
@@ -1118,6 +1128,8 @@ class AccountsController extends Controller
                         '.$action.'
                     </div>
                 </div>';
+                }else{
+                    $action = $row->transaction_type;
                 }
 
                 $dataArr[] = array(
@@ -1128,8 +1140,6 @@ class AccountsController extends Controller
                     "credit"              => (!empty($row?->credit) && $row?->credit != "0.00") ? dollerFA($row?->credit) : '',
                     "balance"             => dollerFA($row?->balance),
                     "description"         => $row?->description,
-                  //  "action"              => $action,
-
                 );
             }
         }
@@ -1144,7 +1154,7 @@ class AccountsController extends Controller
 
         try {
             $data    = TransactionHistory::getData(['accountId'=>$accountId,'id'=>$id])->firstOrFail();
-            
+           
             if ($request->ajax() && $request->isMethod('post') ) {
                 return response()->json(['status'=>true,'data'=>$data], 200);
             }

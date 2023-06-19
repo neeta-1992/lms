@@ -13,6 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
+      
         if (!Schema::hasTable('return_premium_commissions')) {
             Schema::create('return_premium_commissions', function (Blueprint $table) {
                 $table->uuid('id')->primary();

@@ -834,37 +834,50 @@ class Permissions
     public static function insurdsPermission(){
         $arr=[
             [
-                "text" => __('labels.account'),
+                "text" => __('labels.reprint_payment_letter'),
                 "key" => 'account',
                 "permissions"=>[
-                    ['text' => __('labels.reprint_payment_letter'), 'name' => 'reprint_payment_letter', 'route' => ''],
-                    ['text' => __('labels.reprint_payment_coupons'), 'name' => 'reprint_payment_coupons', 'route' => ''],
-                    ['text' => __('labels.change_insured_payment_info'), 'name' => 'change_insured_payment_info', 'route' => ''],
+                    ['text' => __('labels.enable'), 'name' => 'reprint_payment_letter', 'route' => '','value' => 'enable','block'=>false, 'class'=>'checkboxradio'],
+                    ['text' => __('labels.disable'), 'name' => 'reprint_payment_letter', 'route' => '','value' => 'disable','block'=>false,'class'=>'checkboxradio']
+                
+                ]
+
+            ],
+            [
+                "text" => __('labels.reprint_payment_coupons'),
+                "key" => 'account',
+                "permissions"=>[
+                    ['text' => __('labels.enable'), 'name' => 'reprint_payment_coupons', 'route' => '','value' => 'enable','block'=>false, 'class'=>'checkboxradio'],
+                    ['text' => __('labels.disable'), 'name' => 'reprint_payment_coupons', 'route' => '','value' => 'disable','block'=>false, 'class'=>'checkboxradio'],
+
                 ]
 
             ],
 
             [
-                "text" => __('labels.entity'),
+                "text" => __('labels.change_insured_payment_info'),
                 "key" => 'entity',
                 "permissions"=>[
-                    ['text' => __('labels.view_partial_masked_insured_ach_bank_account_number'), 'name' => 'view_partial_masked_insured_ach_bank_account_number', 'route' => ''],
+                    ['text' => __('labels.enable'), 'name' => 'change_insured_payment_info', 'route' => '','value' => 'enable','block'=>false, 'class'=>'checkboxradio'],
+                    ['text' => __('labels.disable'), 'name' => 'change_insured_payment_info', 'route' => '','value' => 'disable','block'=>false, 'class'=>'checkboxradio',]
                 ]
             ],
 
             [
-                "text" => __('labels.users'),
+                "text" => __('labels.view_partial_masked_insured_ach_bank_account_number'),
                 "key" => 'users',
                 "permissions"=>[
-                    ['text' => __('labels.edit_user_profile'), 'name' => 'edit_user_profile', 'route' => ''],
+                    ['text' => __('labels.enable'), 'name' => 'view_partial_masked_insured_ach_bank_account_number', 'route' => '','value' => 'enable','block'=>false, 'class'=>'checkboxradio'],
+                    ['text' => __('labels.disable'), 'name' => 'view_partial_masked_insured_ach_bank_account_number', 'route' => '','value' => 'disable','block'=>false, 'class'=>'checkboxradio'],
                 ]
             ],
 
             [
-                "text" => __('labels.general'),
+                "text" => __('labels.edit_user_profile'),
                 "key" => 'general',
                 "permissions"=>[
-                    ['text' => __('labels.overwrite_state_field'), 'name' => 'overwrite_state_field', 'route' => ''],
+                    ['text' => __('labels.enable'), 'name' => 'edit_user_profile', 'route' => '','value' => 'enable','block'=>false, 'class'=>'checkboxradio'],
+                    ['text' => __('labels.disable'), 'name' => 'edit_user_profile', 'route' => '','value' => 'disable','block'=>false, 'class'=>'checkboxradio'],
                 ]
             ],
         ];

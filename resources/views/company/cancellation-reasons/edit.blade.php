@@ -23,16 +23,12 @@
                         <label for="" class="col-sm-3 col-form-label requiredAsterisk">@lang('labels.active')
                         </label>
                         <div class="col-sm-9">
-                            <div class="zinput zradio zradio-sm  zinput-inline">
-                                <input id="rightfax_server_email_enable" name="status" type="radio" required
-                                    class="form-check-input" value="1">
-                                <label for="rightfax_server_email_enable" class="form-check-label">@lang('labels.enable')</label>
-                            </div>
-                            <div class="zinput zradio  zradio-sm   zinput-inline">
-                                <input id="rightfax_server_email_disable" name="status" type="radio" required
-                                    class="form-check-input" value="0">
-                                <label for="rightfax_server_email_disable" class="form-check-label">@lang('labels.disable')</label>
-                            </div>
+                            @if($data['status'] == 1)
+                                @lang('labels.enable')
+                            @else
+                                 @lang('labels.disable')
+                            @endif
+                          
                         </div>
                     </div>
 {{--  

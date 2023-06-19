@@ -4,7 +4,6 @@
       <br>
 
       <x-form class="validation text-left" action="" method="post">
-
           <div class="row">
               <div class="col-md-12">
                   <div class="form-group">
@@ -66,11 +65,11 @@
           <div class="paymenttab d-none" data-tab="coupons">
               <x-form methode="put">
                   @method('put')
-                    <div class="form-group d-none">
+                  <div class="form-group d-none">
                       <label class="required form-label requiredAsterisk labelText">Payment Type</label>
-                     <input name="payment_method" type="hidden" value="coupons">
+                      <input name="payment_method" type="hidden" value="coupons">
                   </div>
-                
+
                   <div class="row">
                       <div class="col-sm-12">
                           <div class="form-group">
@@ -119,11 +118,11 @@
               <x-form methode="put" class="">
 
                   @method('put')
-  <div class="form-group d-none">
+                  <div class="form-group d-none">
                       <label class="required form-label requiredAsterisk labelText">Payment Type</label>
-                     <input name="payment_method" type="hidden" value="ach">
+                      <input name="payment_method" type="hidden" value="ach">
                   </div>
-                  
+
                   <div class="row">
                       <div class='col-md-12 p-0'>
                           <label class="requiredAsterisk form-label labelText col-md-3">Account Type</label>
@@ -238,14 +237,14 @@
               </x-form>
           </div>
           <div class="paymenttab d-none" data-tab="credit_card">
-              <x-form methode="put">
+              <x-form methode="put" class="creditCardForm">
                   @method('put')
 
                   <div class="form-group d-none">
                       <label class="required form-label requiredAsterisk labelText">Payment Type</label>
-                     <input name="payment_method" type="hidden" value="credit_card">
+                      <input name="payment_method" type="hidden" value="credit_card">
                   </div>
-                  
+
 
 
                   <div class="row">
@@ -285,15 +284,15 @@
                           </div>
                       </div>
                   </div>
+
+                  @if(!empty($EPS->payment_gateway) && $EPS->payment_gateway == 'square')
                   <div class="row">
                       <div class="col-md-12">
-                          <div class="form-group">
-                              <label class="requiredAsterisk form-label labelText">Cardholder Email Address</label>
-                              <x-jet-input type="email" name="cardholder_email" class="required" value="{{ $data['email'] ?? '' }}" />
-
-                          </div>
+                          <x-jet-input name="sqtoken" type="hidden"  />
+                            <div id="card-container-model" class="sqcard__payment"></div>
                       </div>
                   </div>
+                  @else
                   <div class="row">
                       <div class="col-md-5">
                           <div class="form-group">
@@ -328,6 +327,7 @@
                       </div>
                   </div>
           </div>
+          @endif
 
 
           <div class="text-center">
@@ -357,18 +357,18 @@
       <h4 class="modelTitle">Email Receipt</h4>
       <br>
 
-      <x-form class="validation text-left" action="{{ routeCheck($route.'email-receipt') }}" method="post">
+      <x-form class="validation text-left" action="{{ routeCheck($route . 'email-receipt') }}" method="post">
           <x-jet-input type="hidden" class="id" name="id" />
           <div class="row">
               <div class="col-md-12">
                   <div class="form-group">
-                      <x-select  :options="['insured'=>'Insured','agent'=>'Agent','other'=>'Other']" class="ui dropdown emailReceiptSendTo" name="send_to" placeholder="Send To" required />
+                      <x-select :options="['insured' => 'Insured', 'agent' => 'Agent', 'other' => 'Other']" class="ui dropdown emailReceiptSendTo" name="send_to" placeholder="Send To" required />
                   </div>
               </div>
               <div class="col-md-12 d-none emailBox">
                   <div class="form-group">
                       <x-jet-input type="email" name="email" placeholder="Enter Email" />
-                       
+
                   </div>
               </div>
 
@@ -383,21 +383,21 @@
 
 
   <div class="remodal" data-remodal-id="unsuspendModel" data-remodal-options="hashTracking: false, closeOnOutsideClick: false">
-      <button class="remodal-close" data-remodal-action="close"  x-on:click="open = 'account_information'"></button>
+      <button class="remodal-close" data-remodal-action="close" x-on:click="open = 'account_information'"></button>
       <h4 class="modelTitle">Unsuspend</h4>
-      
 
-      <x-form class="validation text-left" action="{{ routeCheck($route.'unsuspend-account',$data?->id) }}" method="post">
-       
-           
-             <div class="form-group row">
-                <label for="reason" class="col-form-label requiredAsterisk">@lang("labels.reason")</label>
-                <div class="col-sm-12">
-                    <textarea name="reason" id="reason" cols="30" class="form-control" rows="3" required></textarea>
-                </div>
-            </div>
 
-        
+      <x-form class="validation text-left" action="{{ routeCheck($route . 'unsuspend-account', $data?->id) }}" method="post">
+
+
+          <div class="form-group row">
+              <label for="reason" class="col-form-label requiredAsterisk">@lang('labels.reason')</label>
+              <div class="col-sm-12">
+                  <textarea name="reason" id="reason" cols="30" class="form-control" rows="3" required></textarea>
+              </div>
+          </div>
+
+
           <div class="buttons text-center">
               <button class="btn btn-primary btn-sm saveData">@lang('Send')</button>
               <button data-remodal-action="confirm" class="btn btn-sm btn-secondary" x-on:click="open = 'account_information'">@lang('Cancel')</button>

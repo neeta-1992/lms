@@ -22,13 +22,22 @@ class Payment extends Model
 
     protected $fillable = [
         'user_id','account_id','bank_account','payment_number','status','payment_method','notes','card_number','expiration_date','cvv','zip',
-        'account_holder_name','bank_name','routing_number','account_number','reference','installment_pay',
+        'account_holder_name','bank_name','routing_number','account_number','reference','installment_pay','sqtoken',
         'late_fee','cancel_fee','nsf_fee','convient_fee','stop_payment','amount','total_due','received_from','payoff_status','payment_type','installment_json',
     ];
 
-    protected $encryptable = ['account_holder_name','card_number','expiration_date','cvv','zip','bank_name','routing_number','account_number',];
+    protected $encryptable = ['account_holder_name','card_number','expiration_date','cvv','zip','bank_name','routing_number','account_number','sqtoken'];
 
 
+	 /**
+     * Get the account_data associated with the Payment
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function user()
+    {
+        return $this->hasOne(User::class, 'id', 'user_id');
+    }
 	 /**
      * Get the account_data associated with the Payment
      *
@@ -642,7 +651,7 @@ class Payment extends Model
 
 			DailyNotice::paymentNoticesSend(['paymentData'=>$paymentData,'accountData'=>$data]);
 
-            $messages ='Payment installment '.$paymentNumber.' of '.$numberOfpayment.' '.dollerFa($amountApplyInstallment+$convenienceFee).' was paid by '.$input['received'].' and entered by '.$userData?->name;
+            $messages ='Payment installment '.$paymentNumber.' of '.$numberOfpayment.' '.dollerFa($amountApplyInstallment+$convenienceFee).' was paid by '.$input['received_from'].' and entered by '.$userData?->name;
             Logs::saveLogs(['type'=>$input['activePage'],'user_id'=>$userData?->id,'type_id'=>$input['account_id'],'message'=>$messages]);
 
           //  DB::commit();

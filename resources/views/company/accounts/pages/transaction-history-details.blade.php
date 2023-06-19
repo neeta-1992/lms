@@ -28,25 +28,26 @@
 				<td width="25%">Payment Number</td>
 				<td width="25%">{{  $paymnetNumber ?? 0 }}</td>
 				<td width="25%">Installment </td>
-				<td width="25%">{{ dollerFA($data?->installment_pay ?? 0) }}</td>
+				<td width="25%">{{ dollerFA($data?->payment_data->installment_pay ?? 0) }}</td>
 			</tr>
 			<tr>
 				<td>Payment Method</td>
-				<td>{{ $data?->payment_method }}</td>
+				<td>{{ $data?->payment_data->payment_method }}</td>
 				<td>Principal </td>
 				<td>{{ dollerFA($principals ?? 0) }}</td>
 			</tr>
+			
 			<tr>
 				<td>Reference</td>
-				<td>{{ ($data?->reference ?? 0) }}</td>
+				<td>{{ ($data?->payment_data->reference ?? '') }}</td>
 				<td>Interest </td>
 				<td>{{ dollerFA($payInterest ?? 0) }}</td>
 			</tr>
 			<tr>
 				<td>Received From</td>
-				<td>{{ ($data?->received_from ?? '') }}</td>
+				<td>{{ ($data?->payment_data->received_from ?? '') }}</td>
 				<td>Convenience Fee</td>
-				<td>{{ dollerFA($data?->convient_fee ?? 0) }}</td>
+				<td>{{ dollerFA($data?->payment_data->convient_fee ?? 0) }}</td>
 			</tr>
 			
 			<tr>
@@ -55,31 +56,31 @@
 					<td></td>
 				
 				<td>Late Fee</td>
-				<td>{{ dollerFA($data?->late_fee ?? 0) }}</td>
+				<td>{{ dollerFA($data?->payment_data->late_fee ?? 0) }}</td>
 			</tr>
 			<tr>
 				<td>Notes</td>
 				<td>{{ ($data?->notes ?? '') }}</td>
 				<td>Cancel Fee</td>
-				<td>{{ dollerFA($data?->cancel_fee ?? 0) }}</td>
+				<td>{{ dollerFA($data?->payment_data->cancel_fee ?? 0) }}</td>
 			</tr>
 			<tr>
 				<td></td>
 				<td></td>
 				<td>NSF Fee</td>
-				<td>{{ dollerFA($data?->nsf_fee ?? 0) }}</td>
+				<td>{{ dollerFA($data?->payment_data->nsf_fee ?? 0) }}</td>
 			</tr>
 			<tr>
 				<td></td>
 				<td></td>
 				<td>Stop Payment</td>
-				<td>{{ dollerFA($data?->stop_payment ?? 0) }}</td>
+				<td> {{ dollerFA($data?->payment_data->stop_payment ?? 0) }}</td>
 			</tr>
 			<tr>
 				<td></td>
 				<td></td>
 				<td>Amount</td>
-				<td>{{ dollerFA($data?->amount ?? 0) }}</td>
+				<td>{{ dollerFA($data?->payment_data->amount ?? 0) }}</td>
 			</tr>
 			</tbody>
 			</table>

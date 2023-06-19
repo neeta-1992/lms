@@ -112,7 +112,7 @@ class PaymentsController extends Controller
                     $paymentData = $paymentData->whereIn('id', $allId);
                 }
                 $paymentData = $paymentData->get();
-              
+             
                 $totalDeposits = 0;
                 $view = $paymentsHistoryData = $achpaymentsHistoryId = $paymentHistoryId = null ;
                 if (!empty($paymentData)) {
@@ -130,7 +130,7 @@ class PaymentsController extends Controller
                         $totalDue = toFloat($value?->total_due ?? 0);
                         $stopPayment = toFloat($value?->stop_payment ?? 0);
                         $installmentJson = !empty($value?->installment_json) ? json_decode($value?->installment_json, true) : '';
-
+/* dd($convientFee); */
                         if (!empty($installmentJson)) {
                             $installment = array_column($installmentJson, 'installment');
                             $installment = !empty($installment) ? array_sum($installment) : 0;
@@ -151,7 +151,7 @@ class PaymentsController extends Controller
                         $totalCancelFee += $cancelFee;
                         $totalStopPayment += $stopPayment;
                         $totalOtherFee += $otherfee;
-                        
+                      /*   dd(    $totalOtherFee); */
 
                         $paymentIds[] = $paymentId;
                         $paymentArr[$paymentId] = [
@@ -222,12 +222,18 @@ class PaymentsController extends Controller
                             $accountText = $accountStatus . ' by ' . $username;
                             Logs::saveLogs(['type' => 'accounts', 'user_id' => $userData?->id, 'type_id' => $accountId, 'message' => $accountText]);
 
+                            
                             $input['payment_id'] = $value->id;
                             $input['account_id'] = $accountId;
-                            $input['transaction_type'] = 'Status';
-                            $input['description'] = $accountStatus;
-                            $input['balance'] = $balance;
-                            TransactionHistory::insertOrUpdate($input);
+                            if($quoteAccountData->status != 1){
+                                $input['transaction_type'] = 'Status';
+                                $input['description'] = $accountStatus;
+                                $input['balance'] = $balance;
+                                $input['debit'] = 0;
+                               /*  dd($input); */
+                                TransactionHistory::insertOrUpdate($input);
+                            }
+                           
                         }
 
                     }
@@ -253,7 +259,7 @@ class PaymentsController extends Controller
                             'deposit_amount' => $achTotlaAmount,
                             'totals' => json_encode($achTotalArr),
                             'payments' => json_encode($achPaymentArr),
-                            'type ' => 2,
+                            'type' => 2,
                         ];
                         $achpaymentsHistoryData =  PaymentsHistory::insertOrUpdate($achPaymentInsertArr);
                         $achpaymentsHistoryId = $achpaymentsHistoryData?->id;
@@ -281,6 +287,7 @@ class PaymentsController extends Controller
                             'deposit_amount' => $totlaAmount,
                             'totals' => json_encode($totalArr),
                             'payments' => json_encode($paymentArr),
+                            'type' => 1,
                         ];
 
                         $paymentsHistoryData = PaymentsHistory::insertOrUpdate($paymentInsertArr);
@@ -326,7 +333,7 @@ class PaymentsController extends Controller
         $totalstateDatas = $sqlData->count();
         $dataArr = [];
         $date = $sqlData->skip($offset)->take($limit)->orderBy($columnName, $columnSortOrder)->get();
-
+/* dd( $date); */
         if (!empty($date)) {
             foreach ($date as $row) {
 
@@ -463,8 +470,9 @@ class PaymentsController extends Controller
 
             $type = $request->type;
             $id = $request->id;
-
-            $data = PaymentsHistory::getData()->where('id', $id)->get();
+        
+            $data = PaymentsHistory::getData()->where('id', $id)->with('user')->get();
+         
             if (empty($data)) {
                 throw new Error("Data Empty");
             }
@@ -503,16 +511,16 @@ class PaymentsController extends Controller
                             $late_feess = dollerFA($late_feess ?? 0);
                             $nsf_feess = dollerFA($nsf_feess ?? 0);
                             $cancel_feess = dollerFA($cancel_feess ?? 0);
-                            $otherfeess = dollerFA($otherfeess ?? 0);
+                            $otherfeess = dollerFA($otherfee ?? 0);
                             $downpaymentss = dollerFA($downpaymentss ?? 0);
                             $AccountsPayabless = dollerFA($AccountsPayabless ?? 0);
-
+                         
                             $IFFdatas[] = array('', '', '', '', '', '', 'Total ' . $currentpayment_method . ' ' . $n, $totalss, $principalss, $interestss, $setup_feess, $late_feess, $nsf_feess, $cancel_feess, $otherfeess, $downpaymentss, $AccountsPayabless);
                             $n = $totalss = $principalss = $interestss = $setup_feess = $late_feess = $nsf_feess = $cancel_feess = $otherfeess = $downpaymentss = $AccountsPayabless = 0;
                             $IFFdatas[] = array();
                             $IFFdatas[] = array();
                         }
-
+   
                         $currentpayment_method = $payment_method;
                         $totalss += $total;
                         $principalss += $principal;
@@ -540,6 +548,7 @@ class PaymentsController extends Controller
                             dollerFA($late_fee ?? 0),
                             dollerFA($nsf_fee ?? 0),
                             dollerFA($cancel_fee ?? 0),
+                            dollerFA($otherfeess ?? 0),
                             dollerFA($downpayments ?? 0),
                             dollerFA($AccountsPayables ?? 0),
                         );

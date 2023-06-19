@@ -117,16 +117,25 @@
                      </div>
                  </td>
              </tr>
-             <tr class="credit_card_box  d-none">
-                 <td class="requiredAsterisk"> @lang('labels.card_number') </td>
-                 <td>
-                     <x-jet-input type="text" name="card_number" class="digitLimit cardNumber required" maxlenght="18" data-limit="18" value="" />
-                 </td>
-             </tr>
+
+             @if(!empty($EPS->payment_gateway) && $EPS->payment_gateway != 'square')
+                <tr class="credit_card_box  d-none">
+                    <td class="requiredAsterisk"> @lang('labels.card_number') </td>
+                    <td>
+                        <x-jet-input type="text" name="card_number" class="digitLimit cardNumber required" maxlenght="18" data-limit="18" value="" />
+                    </td>
+                </tr>
+             @endif
              <tr class="credit_card_box d-none">
-                 <td class="requiredAsterisk"> @lang('labels.cc_details') </td>
+                 <td class="requiredAsterisk"> @lang('labels.card_details') </td>
                  <td>
-                     <div class="row">
+                    @if(!empty($EPS->payment_gateway) && $EPS->payment_gateway == 'square')
+                        <div class="">
+                            <x-jet-input name="sqtoken" type="hidden"  />
+                            <div id="card-container" class="sqcard__payment"></div>
+                        </div>
+                    @else
+                         <div class="row">
                          <div class="col-md-3 form-group">
                              <x-select :options="monthsDropDown('shortname')" name="month" class="ui dropdown w-25 required" placeholder="Months" />
                          </div>
@@ -144,13 +153,15 @@
                              <x-jet-input type="text" name="zip" class="zip_mask required" placeholder="Zip" value="" />
                          </div>
                      </div>
+                    @endif
+                    
                  </td>
              </tr>
              <tr>
                  <td class="requiredAsterisk"> @lang('labels.received_from') </td>
                  <td class="received_from">
                      <div class="form-group w-50">
-                         <x-select class="ui dropdown w-50" name="received" required :options="['insured'=>'Insured','agent'=>'Agent']" placeholder="Select {{  __('labels.received_from') }}" />
+                         <x-select class="ui dropdown w-50" name="received_from" required :options="['insured'=>'Insured','agent'=>'Agent']" placeholder="Select {{  __('labels.received_from') }}" />
                      </div>
                  </td>
              </tr>
@@ -184,3 +195,4 @@
      </x-table>
 
  </x-form>
+
