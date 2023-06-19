@@ -25,9 +25,17 @@
 
       $totalAmountPaid        = floatval($totalAmountPaid);
       $totalAmountPay         = floatval($totalAmountPay);
+	   
+	  $pendingDataArr = array();
+		if(isset($pendingPayments) && !empty($pendingPayments)){
+			foreach($pendingPayments as $pendingPayment){
+				$qTotalDue = toRound(toFloat($pendingPayment->due_late_fee) + toFloat($pendingPayment->due_cancel_fee) + toFloat($pendingPayment->due_nsf_fee) + toFloat($pendingPayment->due_convient_fee) + toFloat($pendingPayment->due_stop_payment) + toFloat($pendingPayment->due_installment));
+				$pendingDataArr[$pendingPayment->payment_number] = $qTotalDue;
+			}
+		}
 
-      $chartStatus = [];
-      $amount_paid = toFloat($amountApplyInstallment);
+		$chartStatus = [];
+		$amount_paid = toFloat($amountApplyInstallment);
 		if(!empty($quoteAccountExposure)){
 			   foreach($quoteAccountExposure as $exposureRow){
 				   $qPaymentNumber  = $exposureRow?->payment_number ?? 0;
@@ -41,30 +49,47 @@
 				   $qConvientFee    = $exposureRow?->convient_fee ?? 0;
 				   $qStatus         = $exposureRow?->status ?? 0;
 
-				   $qTotalPayment = toRound(toFloat($qMonthlyPayment) + toFloat($qLateFee) + toFloat($qCancelFee) + toFloat($qNsfFee));
-				  if($qStatus == 0){
-					   if($paymentType == 'payoff'){
+				  $qTotalPayment = $totalPaymentAmount = toRound(toFloat($qMonthlyPayment) + toFloat($qLateFee) + toFloat($qCancelFee) + toFloat($qNsfFee));
+				  if($qStatus == 1){
+					  $chartStatus[$qPaymentNumber] = ['color'=>'#fd7e14','completed'=>'100','due'=>'0'];
+				  }else{
+					  if($paymentType == 'payoff'){
 						   $chartStatus[$qPaymentNumber] = ['color'=>'#008000','completed'=>'100','due'=>'0'];
 					   }else{
-							if($amount_paid >0){
-								if($amount_paid >= $qTotalPayment){
-									$amount_paid = $amount_paid - $qTotalPayment;
-									$chartStatus[$qPaymentNumber] = ['color'=>'#008000','completed'=>'100','due'=>'0'];
-								}else if($amount_paid < $qTotalPayment){
-									$precentamounts = ($amount_paid/$qTotalPayment * 100);
-									$precentamounts = round($precentamounts,2);
-									$duepercent = 100 - $precentamounts;
-									$chartStatus[$qPaymentNumber] = ['color'=>'#008000','completed'=>$precentamounts,'due'=>$duepercent];
-									$amount_paid = 0;
+						   if($amount_paid >0){
+							    if(isset($pendingDataArr[$qPaymentNumber])){
+									$alreadyPaid = $totalPaymentAmount - $pendingDataArr[$qPaymentNumber];
+									$paidPercentage = ($alreadyPaid/$totalPaymentAmount * 100);
+									$qTotalPayment = $totalPaymentAmount - $alreadyPaid;
+									
+									if($amount_paid >= $qTotalPayment){
+										$amount_paid = $amount_paid - $qTotalPayment;
+										$duepercent = 100 - $paidPercentage;
+										$chartStatus[$qPaymentNumber] = ['color'=>'#fd7e14','completed'=>$paidPercentage,'due'=>$duepercent,'duecolor'=>'#008000'];
+									}else if($amount_paid < $qTotalPayment){
+										$precentamounts = ($amount_paid/$totalPaymentAmount * 100);
+										$precentamounts = round($precentamounts,2);
+										$duepercent = 100 - $precentamounts;
+										$chartStatus[$qPaymentNumber] = ['color'=>'#fd7e14','completed'=>$paidPercentage,'paidcolor'=>'#008000','paid'=>$precentamounts,'due'=>$duepercent,'duecolor'=>'#ff0000'];
+										$amount_paid = 0;
+									}
+								}else{
+									if($amount_paid >= $qTotalPayment){
+										$amount_paid = $amount_paid - $qTotalPayment;
+										$chartStatus[$qPaymentNumber] = ['color'=>'#008000','completed'=>'100','due'=>'0'];
+									}else if($amount_paid < $qTotalPayment){
+										$precentamounts = ($amount_paid/$qTotalPayment * 100);
+										$precentamounts = round($precentamounts,2);
+										$duepercent = 100 - $precentamounts;
+										$chartStatus[$qPaymentNumber] = ['color'=>'#008000','completed'=>$precentamounts,'due'=>$duepercent,'duecolor'=>'#ff0000'];
+										$amount_paid = 0;
+									}
 								}
 							}else{
 								$chartStatus[$qPaymentNumber] = ['color'=>'#ff0000','completed'=>'100','due'=>'0'];
 							}
 					   }
-				   }else{
-						$chartStatus[$qPaymentNumber] = ['color'=>'#fd7e14','completed'=>'100','due'=>'0'];
-				   }
-
+				  }
 			   }
 		}
 
@@ -73,12 +98,16 @@
           for ($i = 1; $i <= $numberOfpayment; $i++) {
 				if(isset($chartStatus[$i]['completed']) && $chartStatus[$i]['completed'] == 100){
 					$styleCss  = isset($chartStatus[$i]['color']) ? "background-color:{$chartStatus[$i]['color']};" : '';
+				}else if(isset($chartStatus[$i]) && isset($chartStatus[$i]['paid'])){
+					$styleCss  = "background: {$chartStatus[$i]['color']};
+					background: -moz-linear-gradient(left,  {$chartStatus[$i]['color']} 0%, {$chartStatus[$i]['color']} {$chartStatus[$i]['completed']}%, {$chartStatus[$i]['color']} {$chartStatus[$i]['completed']}%, {$chartStatus[$i]['paidcolor']} {$chartStatus[$i]['completed']}%, {$chartStatus[$i]['paidcolor']} {$chartStatus[$i]['completed']}%, {$chartStatus[$i]['paidcolor']} {$chartStatus[$i]['paid']}%, {$chartStatus[$i]['duecolor']} {$chartStatus[$i]['paid']}%, {$chartStatus[$i]['duecolor']} 100%); 
+					background: -webkit-linear-gradient(left,  {$chartStatus[$i]['color']} 0%,{$chartStatus[$i]['color']} {$chartStatus[$i]['completed']}%,{$chartStatus[$i]['color']} {$chartStatus[$i]['completed']}%,{$chartStatus[$i]['paidcolor']} {$chartStatus[$i]['completed']}%,{$chartStatus[$i]['paidcolor']} {$chartStatus[$i]['completed']}%,{$chartStatus[$i]['paidcolor']} {$chartStatus[$i]['paid']}%,{$chartStatus[$i]['duecolor']} {$chartStatus[$i]['paid']}%,{$chartStatus[$i]['duecolor']} 100%);
+					background: linear-gradient(to right,  {$chartStatus[$i]['color']} 0%,{$chartStatus[$i]['color']} {$chartStatus[$i]['completed']}%,{$chartStatus[$i]['color']} {$chartStatus[$i]['completed']}%,{$chartStatus[$i]['paidcolor']} {$chartStatus[$i]['completed']}%,{$chartStatus[$i]['paidcolor']} {$chartStatus[$i]['completed']}%,{$chartStatus[$i]['paidcolor']} {$chartStatus[$i]['paid']}%,{$chartStatus[$i]['duecolor']} {$chartStatus[$i]['paid']}%,{$chartStatus[$i]['duecolor']} 100%);";
 				}else if(isset($chartStatus[$i])){
-					$styleCss  = "background: -webkit-linear-gradient(left, {$chartStatus[$i]['color']} {$chartStatus[$i]['completed']}%,#ff0000 100%);
-					background: -moz-linear-gradient(left, {$chartStatus[$i]['color']} {$chartStatus[$i]['completed']}%, #ff0000 {$chartStatus[$i]['due']}%);
-					background: -ms-linear-gradient(left, {$chartStatus[$i]['color']} {$chartStatus[$i]['completed']}%,#ff0000 {$chartStatus[$i]['due']}%);
-					background: -o-linear-gradient(left, {$chartStatus[$i]['color']} {$chartStatus[$i]['completed']}%,#ff0000 {$chartStatus[$i]['due']}%);
-					background: linear-gradient(to right, {$chartStatus[$i]['color']} {$chartStatus[$i]['completed']}%,#ff0000 {$chartStatus[$i]['due']}%);";
+					$styleCss  = "background: {$chartStatus[$i]['color']};
+					background: -moz-linear-gradient(left,  {$chartStatus[$i]['color']} 0%, {$chartStatus[$i]['color']} {$chartStatus[$i]['completed']}%, {$chartStatus[$i]['duecolor']} {$chartStatus[$i]['completed']}%, {$chartStatus[$i]['duecolor']} 100%); 
+					background: -webkit-linear-gradient(left,  {$chartStatus[$i]['color']} 0%,{$chartStatus[$i]['color']} {$chartStatus[$i]['completed']}%,{$chartStatus[$i]['duecolor']} {$chartStatus[$i]['completed']}%,{$chartStatus[$i]['duecolor']} 100%);
+					background: linear-gradient(to right,  {$chartStatus[$i]['color']} 0%,{$chartStatus[$i]['color']} {$chartStatus[$i]['completed']}%,{$chartStatus[$i]['duecolor']} {$chartStatus[$i]['completed']}%,{$chartStatus[$i]['duecolor']} 100%);";
 				}
             
               
@@ -91,7 +120,7 @@
       }
 
   @endphp
-
+	
   <x-table id="{{ $activePage ?? '' }}-enter-payment-proccess" class="enter-payment-table">
       <thead class="d-none">
           <tr>
