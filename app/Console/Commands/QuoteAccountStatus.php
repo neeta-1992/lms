@@ -95,15 +95,18 @@ class QuoteAccountStatus extends Command
             $accountData = $q?->account_data;
             $accountId = $accountData?->id;
             $quoteTerm = $accountData?->quote_term;
+            $stateSettings = $accountData?->state_settings;
             $numberOfPayment = $quoteTerm?->number_of_payment ?? 0;
             $accountType = $accountData?->account_type;
             $letFee      = $accountData?->latecharge ?? 0;
             $qFaLetFee   = floatval($q?->late_fee);
             $qFaCancelFee   = floatval($q?->cancel_fee);
            
+			$stateData = !empty($stateSettings) ?  (object)(json_decode($stateSettings,true)) : null;
            
-            $letFee      = empty($letFee) ? floatval($letFee) : 0;
-            $dueDate     = !empty($q?->payment_due_date) ? date('Y-m-d',strtotime($q?->payment_due_date)) : '';
+            $letFee      = empty($letFee) ? floatval($letFee) : 10;
+            $dueDate     = !empty($q?->payment_due_date) ? date('Y-m-d',strtotime($q?->payment_due_date)) : ''; 
+			//due date= 15-06-2023
             if(!empty($accountData)){
                 $accountStatus = $accountData?->status ?? 0 ;
                 $settingState  = $accountData?->quoteoriginationstate ?? 0 ;
@@ -116,74 +119,83 @@ class QuoteAccountStatus extends Command
                     if($accountStatus == 1){
 
                         $account_days_overdue = $accountStatusSetting?->account_days_overdue ?? config('custom.account_status_setting.account_days_overdue');
-                        $accountDueDate = !empty($account_days_overdue) ? date('Y-m-d',strtotime("+ {$account_days_overdue} days")) : '';
+                        $accountDueDate = !empty($account_days_overdue) ? date('Y-m-d',strtotime("+ {$account_days_overdue} days",strtotime($dueDate))) : '';
+						if($accountType  == 'commercial'){
+							$intent_to_cancel_days = $stateData->comm_due_date_intent_cancel;
+						}else if($accountType == 'personal'){
+							$intent_to_cancel_days = $stateData->due_date_intent_cancel;
+						}
+						if(!empty($intent_to_cancel_days) && $intent_to_cancel_days >0){
+							$intentToCancelDate = !empty($account_days_overdue) ? date('Y-m-d',strtotime("+ {$intent_to_cancel_days} days",strtotime($dueDate))) : '';
+						}else{
+							$intentToCancelDate =  $accountDueDate;
+						}
+                       if($intentToCancelDate <= $currentDate){
+							//Intent To Cancel Status Update Account
+							if($accountType  == 'commercial'){
+								$canceldays = $accountStatusSetting?->commercial_lines_days ? $accountStatusSetting?->commercial_lines_days : ($stateData->comm_intent_cancel ? $stateData->comm_intent_cancel : config('custom.account_status_setting.commercial_lines_days'));
+							}else if($accountType == 'personal'){
+								$canceldays = $accountStatusSetting?->personal_lines_days ? $accountStatusSetting?->personal_lines_days : ($stateData->intent_cancel ? $stateData->intent_cancel : config('custom.account_status_setting.personal_lines_days'));
+							}
 
-                       /*  if($accountDueDate <= $currentDate){ */
-                            //Intent To Cancel Status Update Account
-                            if($accountType  == 'commercial'){
-                                $canceldays = $accountStatusSetting?->commercial_lines_days ?? config('custom.account_status_setting.commercial_lines_days');
-                            }else if($accountType == 'personal'){
-                                $canceldays = $accountStatusSetting?->personal_lines_days ?? config('custom.account_status_setting.personal_lines_days');
-                            }
+							$cancelDate = !empty($canceldays) ? date('Y-m-d', strtotime("+".$canceldays." day",strtotime($currentDate))) : '';
 
-                            $cancelDate = !empty($canceldays) ? date('Y-m-d', strtotime("+".$canceldays." day",strtotime($currentDate))) : '';
+							$accountData->cancel_date = $cancelDate;
+							$accountData->status = 2;
+							$accountData->save();
 
-                            $accountData->cancel_date = $cancelDate;
-                            $accountData->status = 2;
-                            $accountData->save();
+							$msg = 'Account intent to cancel by System';
+							!empty($msg) && Logs::saveLogs(['type'=>'accounts','user_id'=> $userId,'type_id'=>$accountData?->id ,'message'=>$msg]);
 
-                            $msg = 'Account intent to cancel by System';
-                            !empty($msg) && Logs::saveLogs(['type'=>'accounts','user_id'=> $userId,'type_id'=>$accountData?->id ,'message'=>$msg]);
+							$transactionHistory = TransactionHistory::getData(['accountId'=>$accountId])->orderBy('created_at','desc')->first();
+							$balance   = floatval($transactionHistory?->balance ?? 0);
+							if(!empty($letFee) && empty($qFaLetFee)){
 
-                            $transactionHistory = TransactionHistory::getData(['accountId'=>$accountId])->orderBy('created_at','desc')->first();
-                            $balance   = floatval($transactionHistory?->balance ?? 0);
-                            if(!empty($letFee) && empty($qFaLetFee)){
+								$q->late_fee = $letFee;
+								$q?->save();
+						   
+								$totalBalance = ($balance + $letFee);
+								$transactionHistoryArr = [
+									'payment_number'    => $paymentNumber,
+									'account_id'        => $accountData->id,
+									'description'       => 'Late Fee for Installment '.$paymentNumber.' of '.$numberOfPayment,
+									'transaction_type'  => 'Late Fee',
+									'balance'           => $totalBalance,
+									'amount'            => $letFee,
+									'debit'             => $letFee,
+									'user_id'           => $userId ,
+								];
+								TransactionHistory::insertOrUpdate($transactionHistoryArr);
+							}else{
+								$letFee = 0;
+							}
 
-                                $q->late_fee = $letFee;
-                                $q?->save();
-                           
-                                $totalBalance = ($balance + $letFee);
-                                $transactionHistoryArr = [
-                                    'payment_number'    => $paymentNumber,
-                                    'account_id'        => $accountData->id,
-                                    'description'       => 'Late Fee for Installment '.$paymentNumber.' of '.$numberOfPayment,
-                                    'transaction_type'  => 'Late Fee',
-                                    'balance'           => $totalBalance,
-                                    'amount'            => $letFee,
-                                    'debit'             => $letFee,
-                                    'user_id'           => $userId ,
-                                ];
-                                TransactionHistory::insertOrUpdate($transactionHistoryArr);
-                            }else{
-                                $letFee = 0;
-                            }
-
-                            $accountbalance = (floatval($balance) + floatval($letFee));
-                            $transactionHistoryArr = [
-                                'payment_number'    => $paymentNumber,
-                                'account_id'        => $accountData->id,
-                                'transaction_type'   => 'Status',
-                                'description'       => 'Intent to cancel',
-                                'balance'           => $accountbalance,
-                                'user_id'           => $userId,
-                            ];
-                            TransactionHistory::insertOrUpdate($transactionHistoryArr);
-                            /* Daily Notice Created */
-                            DailyNotice::accountStatusNoticesSend(['accountData' =>$accountData,'action' => 'intent_to_cancel','quoteTerm'=>$quoteTerm]);
-                            $this->info($msg);
-                        //}
+							$accountbalance = (floatval($balance) + floatval($letFee));
+							$transactionHistoryArr = [
+								'payment_number'    => $paymentNumber,
+								'account_id'        => $accountData->id,
+								'transaction_type'   => 'Status',
+								'description'       => 'Intent to cancel',
+								'balance'           => $accountbalance,
+								'user_id'           => $userId,
+							];
+							TransactionHistory::insertOrUpdate($transactionHistoryArr);
+							/* Daily Notice Created */
+							DailyNotice::accountStatusNoticesSend(['accountData' =>$accountData,'action' => 'intent_to_cancel','quoteTerm'=>$quoteTerm]);
+							$this->info($msg);
+                        }
                     }elseif($accountStatus == 2){
                         //Cancel
                         $accountCancelDate = $accountData->cancel_date;
                         $fewer_days_remaining = $accountStatusSetting?->fewer_days_remaining ?? config('custom.account_status_setting.fewer_days_remaining');
                         $accountDueDate = !empty($fewer_days_remaining) ? date('Y-m-d',strtotime("+ {$fewer_days_remaining} days",strtotime($accountCancelDate))) : '';
 
-                    /*     if($accountDueDate <= $currentDate){ */
+						if($accountDueDate <= $currentDate){
                             if($accountType  == 'commercial'){
-                                $cancellationFee = $accountStatusSetting?->commercial_lines ?? config('custom.account_status_setting.commercial_lines');
+                                $cancellationFee = $accountStatusSetting?->commercial_lines ? $accountStatusSetting?->commercial_lines : ($stateData->comm_cancellation_fee ? $stateData->comm_cancellation_fee : config('custom.account_status_setting.commercial_lines'));
                                 $cancellationDay = $accountStatusSetting?->cancel_date_commercial_lines ?? config('custom.account_status_setting.cancel_date_commercial_lines');
                             }else if($accountType == 'personal'){
-                                $cancellationFee = $accountStatusSetting?->personal_lines ?? config('custom.account_status_setting.personal_lines');
+								$cancellationFee = $accountStatusSetting?->personal_lines ? $accountStatusSetting?->personal_lines : ($stateData->cancellation_fee ? $stateData->cancellation_fee : config('custom.account_status_setting.personal_lines'));
                                 $cancellationDay = $accountStatusSetting?->cancel_date_personal_lines ?? config('custom.account_status_setting.cancel_date_personal_lines');
                             }
 
@@ -235,7 +247,7 @@ class QuoteAccountStatus extends Command
                             /* Daily Notice Created */
                             DailyNotice::accountStatusNoticesSend(['accountData' =>$accountData,'action' => 'cancellation_notice','quoteTerm'=>$quoteTerm]);
                             $this->info($msg);
-                      //  }
+                      }
 
                     }elseif($accountStatus == 3){
                         $accountCancelDate = $accountData->cancel_date;
