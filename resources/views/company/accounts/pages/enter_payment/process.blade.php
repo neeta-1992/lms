@@ -164,7 +164,7 @@
           <tr class="installmentAmountShow">
               <td> <b> @lang('labels.advance_due_date_to_installment')</b> : </td>
               <td>
-                  <div class="d-flex">
+                  <div class="d-flex process_radio_buttons">
                       {!! $radioHtml ?? '' !!}
                   </div>
               </td>
