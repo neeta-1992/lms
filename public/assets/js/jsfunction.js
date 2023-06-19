@@ -271,6 +271,16 @@ const isValidation = (forms = ".validationForm", notClass = false) => {
                 });
             }
 
+            if ($(form).find(".sq-card-wrapper").length > 0) {
+                let sqvalue =  $(form).find('input[name="sqtoken"]').val();
+                if (isEmptyChack(sqvalue)) {
+                    $(form).find(".sq-card-wrapper").addClass("sq-error");
+                    isValidate = false;
+                }else {
+                    $(form).find(".sq-card-wrapper").removeClass("sq-error");
+                }
+            }
+
 
             if ($(form).find(".inputfile").length > 0) {
                 $(form).find(".inputfile ").each(function (index, element) {
@@ -1047,4 +1057,33 @@ const dollerFA = (amount) => {
       })
      /*  console.log(amount); */
     return amount;
+}
+
+
+const sqCardLoad =  async  (element) => {
+    showLoader();
+	if($(element).find(".sq-card-wrapper").length == 0){
+        if (window.Square) {
+            const payments = window.Square.payments(appId, locationId); 
+        try {
+            const card = await payments.card();
+            await card.attach(element);
+            if($(element).find(".sq-card-wrapper").length > 0){
+                HideLoader();
+            }
+          
+            return card;  
+            } catch (e) {
+                console.error('Initializing Card failed', e);
+                HideLoader();
+                return;
+              
+            }
+        }
+	
+	}else{
+        HideLoader();
+		console.log(card);
+	}
+  
 }

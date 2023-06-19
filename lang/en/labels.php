@@ -1332,7 +1332,7 @@ return [
     "note" => "Note",
     "sent_to" => "Sent To",
     "how_to_sent" => "How to Sent/How Sent",
-    "insurance_policy_coverage_type" => "Insurance Policy. Policy #/Coverage Type",
+    "insurance_policy_coverage_type" => "Policy #/Coverage Type",
     "return_premium_from" => "Return Premium From",
     "account_balance" => "Account Balance",
     "how_to_apply_payment" => "How to Apply Payment",
@@ -1433,7 +1433,8 @@ return [
 
 
     "check_number"                       => 'Check Number',
-    "print_rp_notices"                   => 'Print Rp Notices',
+    "card_details"                       => 'Card Details',
+    "print_rp_notices"                   => 'Print RP Notices',
     "agent_commission_due"               => 'Enter Agent Return Commission Due',
     "agent_return_commission_due"               => 'Agent Return Commission Due',
     "reduce_remaining_interest"          => 'Reduce Remaining Interest',

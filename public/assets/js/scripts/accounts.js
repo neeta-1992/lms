@@ -1,6 +1,7 @@
+let card = null;
 document.addEventListener("alpine:init", () => {
     Alpine.data("accountDetails", () => ({
-        open: "enter_return_premium_commission",
+        open: "account_information",
         back: null,
         tab: null,
         title: null,
@@ -245,9 +246,9 @@ document.addEventListener("alpine:init", () => {
         },
        async enterReturnPremiumCommission(id=null) {
             const response = await doAjax( `${BASE_URL}accounts/enter-peturn-premium-commission/${editId}`,  "post",{_token:this.token});
-         console.log(response);
+        // console.log(response);
             if(response.status == true){
-                console.log(response);
+          //      console.log(response);
                   $('.enterReturnPremiumCommission').html(response.view);
                   amount();
                   zipMask();
@@ -336,6 +337,29 @@ let  paymentArr  = null;
     $(document).on("click", ".saveData", async function (e) {
         let forM = $(this).parents("form");
         let isValid = isValidation(forM, (notClass = true));
+        
+        if(forM.hasClass('enterPayment') || forM.hasClass('creditCardForm')){
+            let showSqCard = false;
+            if(forM.hasClass('enterPayment')){
+                showSqCard =  forM.find('[name="payment_method"]').val() == 'Credit Card' 
+            }else if(forM.hasClass('creditCardForm') ){
+                showSqCard =  forM.find('[name="payment_method"]').val() == 'credit_card' 
+            }
+            if(showSqCard == true && $('.sqcard__payment').length > 0){
+                try {
+                    const cardResult = await card.tokenize();
+                    if(cardResult.status == 'OK'){
+                        forM.find('input[name="sqtoken"]').val(cardResult.token);
+                        forM.find(".sq-card-wrapper").removeClass("sq-error");
+                    }
+                } catch (error) {
+                    console.error(error);
+                }
+            }
+           /*  
+        if (result.status === 'OK') { */
+        }
+        
         e.preventDefault();
         e.stopPropagation();
         $(this).attr("disabled", true);
@@ -580,10 +604,17 @@ const showConvenienceFee = async () => {
 
 $(document).on('change','.payment_method select',async function (e) {
     let value = $(this).val()?.toLowerCase();
+    $(this).parents('form').find('button.saveData').attr('type','submit');
+    $("#card-container").html(null)
     $('.echeck').addClass('d-none').find('input.required,select.required,.required select').removeAttr('required');
     $('.credit_card_box').addClass('d-none').find('input.required,select.required,.required select').removeAttr('required');
     if(value == "credit card"){
-         $('.credit_card_box').removeClass('d-none').find('input.required,select.required,.required select').attr('required','required');
+        credit_card_box =  $('.credit_card_box').removeClass('d-none');
+        if($('#card-container').length > 0){
+            card = await sqCardLoad("#card-container");
+            $(this).parents('form').find('button.saveData').attr('type','button');
+        }
+        credit_card_box.find('input.required,select.required,.required select').attr('required','required');
     }else if(value == "echeck"){
         $('.echeck').removeClass('d-none').find('input.required,select.required,.required select').attr('required','required');
     }
@@ -644,6 +675,11 @@ $(document).on('click','.savePayment',async function (e) {
 
 $(document).on('change','.paymentReModel input[name="type"]',async function(){
     let payment_method = $(this).val();
+    if(payment_method ==  "credit_card" && $('#card-container-model').length > 0){
+        card = await sqCardLoad("#card-container-model");
+    } else{
+        $(".paymenttab.active").find('form #card-container-model').html(null)
+    }
     $(".paymenttab").removeClass("active").addClass("d-none");
     $(".paymenttab").find("input,select").removeAttr("required");
     $(".paymenttab[data-tab='" + payment_method + "']").addClass("active").removeClass("d-none");
@@ -661,7 +697,7 @@ $(document).on('change','.paymentReModel input[name="type"]',async function(){
             if (fieldType == "checkbox" || fieldType == "radio") {
                 $("input[name='" + fieldName + "'][value='" + valueOfElement + "']").trigger("change").prop("checked", true);
             }else if(fieldType == "text" || fieldType == "email" || fieldType == "tel"){
-                console.log(fieldName);
+               /*  console.log(fieldName); */
                 $("input[name='" + fieldName + "']").val(valueOfElement);
             }else if ($(this)[0].type == "select-one") {
                 $(this).parent(".ui.dropdown").dropdown("set selected", valueOfElement);
@@ -692,6 +728,7 @@ $(document).on("click", '.payMenthodModel', async function () {
         closeOnOutsideClick: false,
     });
     inst.open();
+   /*  console.log(payment_method); */
     $('.paymentReModel input[name="type"][value="'+payment_method+'"]').prop('checked',true).trigger('change')
 });
 

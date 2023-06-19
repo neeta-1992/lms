@@ -23,6 +23,7 @@
             }
 
         }">
+        
         <div class="container tableButtonInlineShow">
             <div class="row">
                 <div class="col-md-12 page_table_heading">
@@ -141,16 +142,21 @@
                                 @foreach ($permissions as $key => $value)
                                     <div class="form-group row">
                                         <label for="comp_name"
-                                            class="col-sm-3 col-form-label ">{{ $value['text'] ?? '' }}</label>
-                                        <div class="col-sm-9">
+                                            class="col-sm-4 col-form-label ">{{ $value['text'] ?? '' }}</label>
+                                        <div class="col-sm-8">
                                             @if (!empty($value['permissions']))
                                                 @foreach ($value['permissions'] as $pkey => $permissions)
-                                                    <x-jet-checkbox :isBlock="true" for="{{ $permissions['name'] }}"
-                                                        labelText="{{ $permissions['text'] }}"
+                                                    @php
+                                                        $block = isset($permissions['block']) ? $permissions['block'] : true;
+                                                        $chackValue = !empty($permissions['value']) ? $permissions['value'] : $permissions['name'] ;
+                                                        $chackId = !empty($permissions['value']) ? $permissions['value'].'-'.$permissions['name'] : $permissions['name'] ;
+                                                    @endphp
+                                                    <x-jet-checkbox :isBlock="$block" for="{{ $chackId ?? '' }}"
+                                                        labelText="{{ $permissions['text'] }}" 
                                                         name="permission[{{ $value['key'] ?? '' }}][]"
-                                                        class="permissionCheckBox"
-                                                        id="{{ $permissions['name'] }}"
-                                                        value="{{ $permissions['name'] }}"  data-key="{{ $value['key'] ?? '' }}"/>
+                                                        class="permissionCheckBox {{ isset($permissions['class']) ? $permissions['class'] : '' }}"
+                                                        id="{{ $chackId ?? '' }}"
+                                                        value="{{ $chackValue }}"  data-key="{{ $value['key'] ?? '' }}"/>
                                                 @endforeach
                                             @endif
 
