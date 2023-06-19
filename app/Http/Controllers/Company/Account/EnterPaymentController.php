@@ -46,13 +46,13 @@ class EnterPaymentController extends Controller
             $type           = $request->payment_method;
             $amount         = $request->amount;
             $data           = $this->model::getData()->where('id', $accountId)->firstOrFail();
-
+/* 
            if($data->suspend_status == 1){
                  return response()->json(['status' => false,'msg' => 'This Account Is Suspended'], 200);
             } 
            if($data->payment_status == -1){
                  return response()->json(['status' => false,'msg' => 'You cannot enter payment. Payment pending.'], 200);
-            } 
+            }  */
 
             $quoteData      = $data?->q_data;
             $accountType    = $quoteData?->account_type;
@@ -75,7 +75,10 @@ class EnterPaymentController extends Controller
 
             if ($request->ajax() && $request->isMethod('get')) {
                 $bankAccount = BankAccount::getData()->get()?->pluck('bank_name', 'id')?->toArray();
-                $view = view($this->viwePath . ".pages.enter_payment", ['route' => $this->route, 'activePage' => $this->activePage, 'accountId' => $accountId, 'data' => $data, 'bankAccount' => $bankAccount,'pendingPayment'=>$pendingPayment])->render();
+                $electronicPaymentSettings = Setting::getData(['type'=>'electronic-payment-setting'])->first();
+                $electronicPaymentSettings = !empty($electronicPaymentSettings->json) ? json_decode($electronicPaymentSettings->json) : null;
+        
+                $view = view($this->viwePath . ".pages.enter_payment", ['route' => $this->route, 'activePage' => $this->activePage, 'accountId' => $accountId, 'data' => $data, 'bankAccount' => $bankAccount,'pendingPayment'=>$pendingPayment,'EPS'=>$electronicPaymentSettings])->render();
                 return ['status' => true, 'view' => $view];
             } elseif ($request->isMethod('post')) {
 
@@ -154,6 +157,7 @@ class EnterPaymentController extends Controller
             $interestRefund         = 0;
             $userData               = $request->user();
             $input                  = $request->post();
+           
             $accountId              = $request->post('account_id');
 
             $paymentType            = $request->post('payment_type');

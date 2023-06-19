@@ -33,6 +33,23 @@ return [
         'most_recent_date_days'     =>'25',
         'cancel_date_commercial_lines'  =>'10',
         'cancel_date_personal_lines'    =>'10'
-    ]
+    ],
+
+
+    /* square Payment getway details */
+    'square' => [
+        'test' => [
+            'square_application_name'   => env('APP_NAME'),
+            'square_application_id'     => 'sandbox-sq0idb-Bps1Q57Qd7H6wC5T5ifU_Q',
+            'square_access_token'       => 'EAAAEDUEVvi0cJeOFvYNFbt-_pyLHWT5WEWsqAjRwGsbJ24srWjzdJ8lu7Fp5h-U',
+            'square_location_id'        => 'LKXDXZ6H6TJ2P',
+        ],
+        'live' => [
+            'square_application_name'   => env('APP_NAME'),
+            'square_application_id'     => 'sandbox-sq0idb-Bps1Q57Qd7H6wC5T5ifU_Q',
+            'square_access_token'       => 'EAAAEDUEVvi0cJeOFvYNFbt-_pyLHWT5WEWsqAjRwGsbJ24srWjzdJ8lu7Fp5h-U',
+            'square_location_id'        => 'LKXDXZ6H6TJ2P',
+        ]
+    ],  
 
 ];

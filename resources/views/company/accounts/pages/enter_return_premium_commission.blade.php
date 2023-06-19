@@ -1,6 +1,6 @@
-<div class="alert aler-white pl-0">
+{{--  <div class="alert aler-white pl-0">
     <b> Return Premium for Account # {{ $account_number ?? '' }}</b>
-</div>
+</div>  --}}
 <x-form class="validationForm enterReturnPremiumCommissionForm" novalidate method="POST" action="{{ routeCheck($route.'enter-return-premium-sava') }}">
 
       
@@ -26,7 +26,7 @@
         <div class="form-group row agent_commision_none_fields"> 
             <label for="name" class="col-sm-3 col-form-label ">@lang('labels.account_balance')</label>
             <div class="col-sm-9">
-                {{ dollerFA($balance ?? 0) }}
+               <x-jet-input class="amount"  value="{{ ($balance ?? 0) }}" disabled /> 
             </div>
         </div>
         <div class="form-group row" >
@@ -39,7 +39,8 @@
          <div class="form-group row d-none agent_return_commission_due_div" >
             <label for="name" class="col-sm-3 col-form-label ">@lang('labels.agent_return_commission_due')</label>
             <div class="col-sm-9">
-                {{ dollerFA(0) }}
+              <x-jet-input class="amount"  value="0" disabled /> 
+            
             </div>
         </div>
         <div class="form-group row"  >

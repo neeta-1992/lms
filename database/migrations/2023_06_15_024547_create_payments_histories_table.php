@@ -14,10 +14,7 @@ return new class extends Migration
     public function up()
     {
 
-       Schema::table('quote_accounts', function (Blueprint $table) {
-         $table->smallInteger('suspend_days')->nullable()->default(0)->after('suspend_status');
-      
-        });
+     
         if (!Schema::hasTable('payments_histories')) {
             Schema::create('payments_histories', function (Blueprint $table) {
                 $table->uuid('id')->primary();

@@ -1,4 +1,4 @@
-<x-app-layout :class="['dateDropdown', 'datepicker', 'inMail', 'quill', 'emoji']">
+<x-app-layout :class="['dateDropdown', 'datepicker', 'inMail', 'quill', 'emoji','square']">
     <section class="font-1 pt-5 hq-full" x-data="accountDetails" x-effect="accountDetailsEffect">
         <div class="container tableButtonInlineShow">
             <div class="row">
@@ -176,11 +176,12 @@
 
 
             {{--  Models  --}}
-           
+         
         @includeIf("company.accounts.model")
     </section>
     @push('page_script')
     @php
+
         $titleArr = [
             'account_information' => __('labels.account_information'),
             'payment_schedule_history' => __('labels.payment_schedule_history'),
@@ -205,7 +206,11 @@
         const editId = "{{ $data->id }}";
         const activePage = "{{ $activePage }}";
         const dropDownTitle = @json( $titleArr);
-
+        @if(!empty($EPS->payment_gateway) && $EPS->payment_gateway == 'square')
+            const appId = "{{  $EPS?->square_application_id ?? '' }}";
+            const locationId = "{{  $EPS?->square_location_id ?? '' }}";
+            const paymentmodel = "{{  $EPS?->square_payment_mode ?? '' }}";
+        @endif
     </script>
     @endpush
 </x-app-layout>

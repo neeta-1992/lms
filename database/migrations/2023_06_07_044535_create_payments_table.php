@@ -42,6 +42,7 @@ return new class extends Migration
                 $table->decimal('amount', 10, 4)->nullable()->default(0);
                 $table->decimal('total_due', 10, 4)->nullable()->default(0);
                 $table->string('received_from')->nullable()->default(0);
+                $table->string('sqtoken')->nullable()->default(null);
                 $table->boolean('payoff_status')->nullable()->default(false);
                 $table->smallInteger('payment_type')->nullable()->default(0)->comment('0=>regular,1=>recurring');
                 $table->text('installment_json')->nullable()->default(null);

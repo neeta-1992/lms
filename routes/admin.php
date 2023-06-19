@@ -42,7 +42,9 @@ Route::group(['middleware'=>'adminUser','as' => 'admin.','namespace' => 'App\Htt
     Route::get('entity-contact-edit/{id}',[InsuranceCompanyController::class,'entityContactEdit'])->name('insurance-company.entity-contact-edit');
     Route::get('entity-contact-list/{entityId}',[InsuranceCompanyController::class,'entityContactList'])->name('insurance-company.entity-contact-list');
 
-    Route::get('logs/{type}/{id?}',[LogsController::class,'logs'])->name('logs');
+
+
+     Route::get('logs/{type?}/{id?}/{duId?}',[LogsController::class,'logs'])->name('logs');
     Route::post('logs-details/{id?}',[LogsController::class,'logsDetails'])->name('logs-details');
 
     

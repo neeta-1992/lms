@@ -109,6 +109,11 @@
     <script src="{{ asset('assets/lib/pdf/jspdf.min.js') }}" type="text/javascript" data-turbolinks-track="reload"></script>
 {{-- End pdf --}}
 @endif
+@if(in_array("square",$class))
+{{-- square Payment getway    --}}
+    <script src="https://sandbox.web.squarecdn.com/v1/square.js" type="text/javascript" data-turbolinks-track="reload"></script>
+{{-- End square --}}
+@endif
 
 <script src="{{ asset('assets/js/core.js') }}" type="text/javascript" data-turbolinks-track="reload"></script>
 <script src="{{ asset('assets/js/main.js') }}" type="text/javascript" data-turbolinks-track="reload"></script>

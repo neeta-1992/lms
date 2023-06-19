@@ -134,7 +134,7 @@ $(document.body).on('change','#verify-entered-payments-find-payment .checkpaymen
 
 $(document.body).on('click','button[data-action-download="nacha"]',function(){
     if(!isEmptyChack(achId)){
-        window.location.href = BASE_URL+ `payments/download-iif-file?id=`+ achId
+        window.location.href = BASE_URL+ `payments/download-nacha-file?id=`+ achId
     }
 });
 $(document.body).on('click','button[data-action-download="iif"]',function(){
