@@ -17,6 +17,10 @@ use App\Models\{
 };
 use App\Helpers\DailyNotice as DNH;
 use App\Helpers\Email;
+use Square\SquareClient;
+use Square\Models\Money;
+use Square\Exceptions\ApiException;
+use Square\Environment;
 class AccountsController extends Controller
 {
     private $viwePath   = "company.accounts.";
@@ -170,9 +174,10 @@ class AccountsController extends Controller
                 return response()->json(['status'=>false,'msg'=>'something went wrong please try again'], 200);
             }
     
-        }
+    }
 
 
+        
     public function viewAccountData($id)
     {
        try {
@@ -262,10 +267,129 @@ class AccountsController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $data  = $this->model::getData()->where('id',$id)->firstOrFail();
         try {
            if ($request->ajax()) {
-                $inputs = $request->post();
-                $payment_method = $request->post('payment_method');
+                /* Get Payment Setting */
+                $customerId         = $errorMsg =null;
+                $inputs             = $request->post();
+                $payment_method     = $request->post('payment_method');
+                $mailing_address    = $request->post('mailing_address');
+                $mailing_city       = $request->post('mailing_city');
+                $mailing_state      = $request->post('mailing_state');
+                $mailing_zip        = $request->post('mailing_zip');
+                $mailing_email      = $request->post('mailing_email');
+                $card_token         = $request->post('sqtoken');
+                $cardHolderName   = $request->post('card_holder_name');
+
+                if(!empty($card_token) && $payment_method == 'credit_card'){
+                    $electronicPaymentSettings = Setting::getData(['type'=>'electronic-payment-setting'])->first();
+                    $EPS = !empty($electronicPaymentSettings->json) ? json_decode($electronicPaymentSettings->json) : null;
+                  
+                    if($EPS->payment_gateway == 'square'){
+                        list($firstName,$middleName,$lastName) = nameDivision($cardHolderName);
+                        $square_application_name    = $EPS?->square_application_name ?? '';
+                        $square_application_id      = $EPS?->square_application_id ?? '';
+                        $square_access_token        = $EPS?->square_access_token ?? '';
+                        $square_location_id         = $EPS?->square_location_id ?? '';
+                        $square_location_id         = $EPS?->square_location_id ?? '';
+                        $square_payment_mode         = $EPS?->square_payment_mode ?? '';
+
+                        try {
+                            $client = new SquareClient([
+                                'accessToken' => $square_access_token,
+                                'environment' => $square_payment_mode == 'test' ? Environment::SANDBOX : Environment::PRODUCTION,
+                                'userAgentDetail' => $square_application_name
+                            ]);
+
+                            if(!empty($data?->square_customer_id)){
+                                $customerId = $data?->square_customer_id;
+                            }else{
+
+                                $address = new \Square\Models\Address();
+                                if(!empty($mailing_address)){
+                                    $address->setAddressLine1($mailing_address);
+                                }
+
+                                if(!empty($mailing_city)){
+                                    $address->setLocality($mailing_city);
+                                }
+                                if(!empty($mailing_state)){
+                                    $address->setAdministrativeDistrictLevel1($mailing_state);
+                                }
+                                if(!empty($mailing_zip)){
+                                    $address->setPostalCode($mailing_zip);
+                                }
+                                $address->setCountry('US');
+
+
+                                $body = new \Square\Models\CreateCustomerRequest ();
+                                if (!empty($firstName)) {
+                                    $body->setGivenName($firstName);
+                                }
+                                if (!empty($lastName)) {
+                                    $body->setFamilyName($lastName);
+                                }
+                                $body->setEmailAddress($mailing_email);
+                                $body->setAddress($address);
+                                $body->setReferenceId('quote_' . $id);
+                                $body->setNote('a customer');
+
+                                $api_response = $client->getCustomersApi()->createCustomer($body);
+                               
+                                if ($api_response->isSuccess()) {
+                                    $result         = $api_response->getResult();
+                                    $res            = json_encode($result);
+                                    $response       = json_decode($res);
+                                    $customerId     = $response->customer->id;
+                                    $inputs['square_customer_id'] = $customerId;
+                                } else {
+                                    $errors = $api_response->getErrors();
+                                    $errorObj = json_encode($errors);
+                                    $errorData = json_decode($errorObj);
+                                    $errorMsg = $errorData[0]?->detail ?? '';
+                                }
+                            }
+
+                            if(!empty($customerId)){
+                                $randomString = Str::random(8).'-'.Str::random(4).'-'.Str::random(4).'-'.Str::random(4).'-'.Str::random(15);
+                                $card = new \Square\Models\Card();
+                                $card->setCardholderName($cardHolderName);
+                                $card->setCustomerId($customerId);
+                                $card->setReferenceId('quote_'.$id);
+    
+                                $body = new \Square\Models\CreateCardRequest(
+                                    $randomString,
+                                    $card_token,
+                                    $card
+                                );
+                                $api_response = $client->getCardsApi()->createCard($body);
+                        
+                                if ($api_response->isSuccess()) {
+                                    $result = $api_response->getResult();
+                                    $res = json_encode($result);
+                                    $response = json_decode($res);          
+                                    $card_id = $response->card->id;
+                                    $inputs['square_card_id'] = $card_id;
+                                } else {
+                                    $errors = $api_response->getErrors();
+                    
+                                    $errorObj = json_encode($errors);
+                                    $errorData = json_decode($errorObj);
+                                    $errorMsg .= $errorData[0]?->detail;
+                                }
+                            }
+
+
+                        } catch (\Throwable $th) {
+                          
+                            throw $th;  
+                        }
+
+
+                    }
+                }
+
                 if($payment_method == 'credit_card'){
                     $inputs['card_token'] = $request->post('sqtoken');
                 }else{
@@ -273,13 +397,12 @@ class AccountsController extends Controller
                 }
                 $inputs['id'] = $id;
                 $inputs['activePage'] = $this->activePage;
-               /*  dd($inputs); */
                 $this->model::insertOrUpdate($inputs);
                 
                 return   response()->json(['status'=>true,'msg'=>$this->pageTitle.' has been updated successfully','type'=>'account'], 200);
             }
         } catch (\Throwable $th) {
-
+            throw $th;
             return response()->json(['status'=>false,'msg'=>$th->getMessage()]);
 
 

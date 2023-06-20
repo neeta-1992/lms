@@ -257,6 +257,20 @@
                       </div>
                   </div>
                   <div class="row">
+                      <div class="col-sm-6">
+                          <div class="form-group">
+                              <label class="requiredAsterisk form-label labelText">@lang('labels.telephone')</label>
+                              <x-jet-input type="tel" name="mailing_telephone" class="required" value="" />
+                          </div>
+                      </div>
+                      <div class="col-sm-6">
+                          <div class="form-group">
+                              <label class="requiredAsterisk form-label labelText">@lang('labels.email')</label>
+                              <x-jet-input type="email" name="mailing_email" class="required" value="" />
+                          </div>
+                      </div>
+                  </div>
+                  <div class="row">
                       <div class="col-md-12">
                           <div class="form-group">
                               <label class="required form-label requiredAsterisk labelText">Billing Address</label>

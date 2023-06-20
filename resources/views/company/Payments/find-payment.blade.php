@@ -124,6 +124,10 @@
                  <div class="{{ $accountStatusArr[$accountStatus]['colorclass'] }} mt-2">
                      {{ $text }}</div>
                  @endif
+
+                 @isset($paymentError[$installmentRow->id])
+                    <div class="text-danger mt-2"> {{ $paymentError[$installmentRow->id] ?? '' }} </div> 
+                 @endisset
              </td>
              <td class="">{{ $installment_number ?? '' }}</td>
              <td class="">

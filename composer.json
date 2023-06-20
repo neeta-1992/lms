@@ -18,6 +18,7 @@
         "laravel/tinker": "^2.7",
         "livewire/livewire": "^2.10",
         "maatwebsite/excel": "^3.1",
+        "square/square": "28.0.1.20230608",
         "stevebauman/location": "^6.6"
     },
     "require-dev": {

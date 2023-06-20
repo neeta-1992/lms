@@ -102,7 +102,7 @@ class QuoteAccountStatus extends Command
             $qFaCancelFee   = floatval($q?->cancel_fee);
            
            
-            $letFee      = empty($letFee) ? floatval($letFee) : 0;
+            $letFee      = empty($letFee) ? floatval($letFee) : 10;
             $dueDate     = !empty($q?->payment_due_date) ? date('Y-m-d',strtotime($q?->payment_due_date)) : '';
             if(!empty($accountData)){
                 $accountStatus = $accountData?->status ?? 0 ;

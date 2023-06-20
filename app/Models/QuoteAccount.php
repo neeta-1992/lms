@@ -34,12 +34,12 @@ class QuoteAccount extends Model
         'mailing_state','mailing_email','payment_method_account_type',
         'mailing_zip',
         'email_notification','cancel_date','payment_status',
-        'originationstate','state_settings','late_fee','card_token',
+        'originationstate','state_settings','late_fee','card_token','square_card_id','square_customer_id',
         'effective_date','status','quoteoriginationstate','suspend_status','suspend_date','unsuspend_date','suspend_reason','suspend_user'
     ];
 
     protected $encryptable = ['account_name','card_holder_name','card_number','end_date','cvv',
-    'cardholder_email','mailing_address','mailing_city','mailing_state','card_token',
+    'cardholder_email','mailing_address','mailing_city','mailing_state','card_token','square_card_id','square_customer_id',
     'mailing_zip',];
 
 

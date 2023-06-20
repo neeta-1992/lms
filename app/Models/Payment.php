@@ -22,11 +22,11 @@ class Payment extends Model
 
     protected $fillable = [
         'user_id','account_id','bank_account','payment_number','status','payment_method','notes','card_number','expiration_date','cvv','zip',
-        'account_holder_name','bank_name','routing_number','account_number','reference','installment_pay','sqtoken',
+        'account_holder_name','bank_name','routing_number','account_number','reference','installment_pay','sqtoken','square_payment_id',
         'late_fee','cancel_fee','nsf_fee','convient_fee','stop_payment','amount','total_due','received_from','payoff_status','payment_type','installment_json',
     ];
 
-    protected $encryptable = ['account_holder_name','card_number','expiration_date','cvv','zip','bank_name','routing_number','account_number','sqtoken'];
+    protected $encryptable = ['account_holder_name','card_number','expiration_date','cvv','zip','bank_name','routing_number','account_number','sqtoken','square_payment_id'];
 
 
 	 /**
@@ -346,15 +346,17 @@ class Payment extends Model
     public static function installmentPay($data,$numberOfpayment=null,$accountType=null,$nextPayment=null,$request=null,$newArr=[]){
 
         $input                  = $request->post();
-        $paymentType            = $request->post('payment_type');
-        $payment_number            = $request->post('payment_number');
-        $paymentMethod          = $request->post('payment_method');
-        $convenienceFee         = floatval($request->post('convenience_fee'));
-		$amountApplyInstallment = floatval($request->post('amount_apply_installment'));
+        $paymentType            = $request->payment_type;
+        $payment_number         = $request->payment_number;
+        $paymentMethod          = $request->payment_method;
+        $payType          		= $request->payType;
+		$payType                = $payType == 'cron' ? 1 : 0 ;
+        $convenienceFee         = floatval($request->convenience_fee);
+		$amountApplyInstallment = floatval($request->amount_apply_installment);
 		if(!empty($newArr)){
 			$amountApplyInstallment = $newArr['amount'];
 		}
-		$installmentsArr     = isset($newArr['installmentsArr']) ? $newArr['installmentsArr'] : array();
+		$installmentsArr     = isset($newArr['installmentsArr']) ? $newArr['installmentsArr'] : [];
 		
         $paymentThershold       = $request?->payment_thershold;
         $paymentProcessingOrder = $request?->payment_processing_order;
@@ -506,13 +508,16 @@ class Payment extends Model
 				if(!empty($paymentThershold)){
 					$amountCheck = ($totalAmountPaid/$totalAmountPay)*100;
 					if($amountCheck >= $paymentThershold){
+						$nextPayment->payment_type = $payType;
 						$nextPayment->status = 1;
 						$nextPayment->save();
 					}else{
+						$nextPayment->payment_type = $payType;
 						$nextPayment->status = 3;
 						$nextPayment->save();
 					}
 				}else{
+					$nextPayment->payment_type = $payType;
 					$nextPayment->status = 3;
 					$nextPayment->save();
 				}
@@ -525,6 +530,7 @@ class Payment extends Model
 				$input['payment_processing_order']    = $paymentProcessingOrder;
 				PendingPayment::insertOrUpdate($input);
 			}else{
+				$nextPayment->payment_type = $payType;
 				$nextPayment->status = 1;
 				$nextPayment->save();
 				$nextPayment =  QuoteAccountExposure::getData(['accountId'=>$data?->id])->whereStatus(0)->first(); // Next Payment Data
@@ -549,14 +555,15 @@ class Payment extends Model
             //code...
             $interestRefund         = $extraAmount  = $peadingAmount = $paymentThershold = $payoffStatus = 0;
             $isPeding               = false;
-            $userData               = $request->user();
-            $activePage             = $request->activePage;
-            $input                  = $request->post();
-            $paymentType            = $request->post('payment_type');
-            $paymentMethod          = $request->post('payment_method');
-            $duePayment             = $request->post('due_payment');
-            $convenienceFee         = floatval($request->post('convenience_fee'));
-            $amountApplyInstallment = floatval($request->post('amount_apply_installment'));
+            $userData               = !empty($request['userData'])  ? $request['userData'] : $request->user();
+            $activePage             = !empty($request['activePage'])  ? $request['activePage'] : $request->activePage;
+          
+			$input                  = $request->all();
+            $paymentType            = $request->payment_type;
+            $paymentMethod          = $request->payment_method;
+            $duePayment             = $request->due_payment;
+            $convenienceFee         = floatval($request->convenience_fee);
+            $amountApplyInstallment = floatval($request->amount_apply_installment);
 			if ($paymentType == 'payoff') {
 				$amountApplyInstallment = $nextPayment?->payoff_balance;
 			}
@@ -664,6 +671,10 @@ class Payment extends Model
 
     }
 
+	/* reversePaymentInstallment */
+	public static function reversePaymentInstallment($paymentData=null,$errorMsg=null){
+
+	}
 
     public static function getData(array $array=null){
 

@@ -63,7 +63,7 @@ document.addEventListener('alpine:init', () => {
                     
                     } else{
                         textAlertModel(true,res.msg);
-                        this.open = 'isForm';
+                        this.open = 'findData'; 
                     }
              }  else{
                 this.open = 'findData'; 
