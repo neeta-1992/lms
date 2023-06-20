@@ -3,7 +3,7 @@
   <input type="hidden" name="entity_id" value="{{ $id ?? '' }}">
   <input type="hidden" name="logsArr">
      <div class="form-group row">
-         <label for="name" class="col-sm-3 col-form-label requiredAsterisk">General Agency Name</label>
+         <label for="name" class="col-sm-3 col-form-label requiredAsterisk">@lang('labels.general_agency_name') </label>
          <div class="col-sm-9">
              <x-jet-input type="text" class="fw-600" name="name"  readonly :value="($data['entity']['name'] ?? '')" />
 
@@ -11,14 +11,14 @@
      </div>
 
      <div class="form-group row">
-         <label for="name" class="col-sm-3 col-form-label">d/b/a </label>
+         <label for="name" class="col-sm-3 col-form-label">@lang('labels.d_b_a')</label>
          <div class="col-sm-9">
              <x-jet-input type="text" name="legal_name" readonly :value="($data['entity']['legal_name'] ?? '')" />
 
          </div>
      </div>
      <div class="form-group row">
-         <label for="name" class="col-sm-3 col-form-label requiredAsterisk">Remittance Paid</label>
+         <label for="name" class="col-sm-3 col-form-label requiredAsterisk">@lang('labels.remittance_paid')</label>
          <div class="col-sm-3">
 
              {!! form_dropdown(
@@ -34,27 +34,27 @@
 
      <div class="d-none remittance_paid_select_box">
          <div class="form-group row">
-             <label for="name" class="col-sm-3 col-form-label requiredAsterisk">Name of Financial
-                 Institution</label>
+             <label for="name" class="col-sm-3 col-form-label requiredAsterisk">@lang('labels.name_of_financial_institution')</label>
+              
              <div class="col-sm-9">
                  <x-jet-input type="text" name="financial_institution_name" :value="($data['financial_institution_name'] ?? '')"/>
              </div>
          </div>
          <div class="form-group row">
-             <label for="state" class="col-sm-3 col-form-label requiredAsterisk">Bank Routing Number</label>
+             <label for="state" class="col-sm-3 col-form-label requiredAsterisk">@lang('labels.bank_routing_number')</label>
              <div class="col-sm-9">
                  <x-jet-input type="text" name="routing_number" class="onlyNumber" :value="($data['routing_number'] ?? '')"/>
              </div>
          </div>
          <div class="form-group row">
-             <label for="state" class="col-sm-3 col-form-label requiredAsterisk">Bank Account Number</label>
+             <label for="state" class="col-sm-3 col-form-label requiredAsterisk">@lang('labels.bank_account_number') </label>
              <div class="col-sm-9">
                  <x-jet-input type="text" name="account_number" class="onlyNumber" :value="($data['account_number'] ?? '')"/>
              </div>
          </div>
      </div>
      <div class="form-group row ">
-         <label for="" class="col-sm-3 col-form-label requiredAsterisk">Remittance Schedule
+         <label for="" class="col-sm-3 col-form-label requiredAsterisk"> @lang('labels.remittance_schedule')
          </label>
          <div class="col-sm-9">
              <div class="zinput zradio zradio-sm pb-0">
@@ -64,7 +64,7 @@
                      class="ingnorTitleCase form-check-label d-flex align-items-center">
                      <x-jet-input type="text" name="days_after_policy_inception_text"
                          style="width: 10% !important;" :value="($data['days_after_policy_inception_text'] ?? '')"/>
-                     <span class="pl-3">Days After Policy Inception</span>
+                     <span class="pl-3">@lang('labels.days_after_policy_inception')    </span>
                  </label>
              </div>
              <div class="zinput zradio  zradio-sm pb-0">
@@ -72,7 +72,7 @@
                      class="form-check-input" @checked(($data['remittance_schedule'] ?? '') == '15 Days After the End of The Month of Policy Inception') value="15 Days After the End of The Month of Policy Inception">
                  <label for="Remittance_schedule_option_Month"
                      class="ingnorTitleCase form-check-label d-flex align-items-center">
-                     15 Days After the End of The Month of Policy Inception
+                  @lang('labels.15_days_after_the_end_of_the_month_of_policy_inception')  
                  </label>
              </div>
              <div class="zinput zradio zradio-sm pb-0">
@@ -82,7 +82,7 @@
                      class="ingnorTitleCase form-check-label d-flex align-items-center">
                      <x-jet-input type="text" name="days_after_1st_payment_due_date_text"
                          style="width: 10% !important;" :value="($data['days_after_1st_payment_due_date_text'] ?? '')"/>
-                     <span class="pl-3">Days After 1st Payment Due Date</span>
+                     <span class="pl-3">@lang('labels.days_after_1st_payment_due_date')</span>
                  </label>
              </div>
 
@@ -91,7 +91,7 @@
 
 
      <div class="form-group row">
-         <label for="license_state" class="col-sm-3 col-form-label ">Funding Address</label>
+         <label for="license_state" class="col-sm-3 col-form-label ">@lang('labels.funding_address')  </label>
          <div class="col-sm-9">
              <x-jet-checkbox for="funding_address_checkbox"
                  @change="FundingAddress = $event.target.checked ? true : '';" :checked="(($data['funding_address_checkbox'] ?? 1) == 1 ? true : false)"
@@ -133,7 +133,7 @@
          </div>
      </div>
      <div class="form-group row">
-         <label for="license_state" class="col-sm-3 col-form-label ">Hold All Payables</label>
+         <label for="license_state" class="col-sm-3 col-form-label ">@lang('labels.hold_all_payables')  </label>
          <div class="col-sm-9">
              <x-jet-checkbox for="hold_all_payables"  class="changesetup setup_fees" name="hold_all_payables"
                  id="hold_all_payables" value="true" :checked="(($data['hold_all_payables'] ?? '') == true ? 'checked' : '')"/>
@@ -146,9 +146,9 @@
                  <table class="table">
                      <thead>
                          <tr>
-                             <th>GL Accounts</th>
-                             <th>Default Bank Account</th>
-                             <th>Details</th>
+                             <th>@lang('labels.gl_account') </th>
+                             <th>@lang('labels.default_bank_account')   </th>
+                             <th>@lang('labels.details') </th>
 
                          </tr>
                      </thead>

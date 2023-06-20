@@ -16,7 +16,7 @@
 
 
             <div class="form-group row">
-                <label for="comp_name" class="col-sm-3 col-form-label ">Search</label>
+                <label for="comp_name" class="col-sm-3 col-form-label ">@lang('labels.search') </label>
                 <div class="col-sm-9">
                     <input type="text" name="search" class="form-control input-sm" id="search"
                         placeholder="Search by agency name, agent, city, state, zip">
@@ -27,19 +27,19 @@
                 <div class="col-sm-9">
                     <div class="zinput zcheckbox zcheckbox-sm zinput-inline p-0">
                         <input class="" name="status[]" type="checkbox" id="open_status" value="1">
-                        <label class=" " for="open_status">All</label>
+                        <label class=" " for="open_status">@lang('labels.all') </label>
                     </div>
                     <div class="zinput zcheckbox zcheckbox-sm zinput-inline p-0">
                         <input class="" name="status[]" type="checkbox" id="locked_status" value="2">
-                        <label class="" for="locked_status">Agents with Active Accounts</label>
+                        <label class="" for="locked_status">@lang('labels.agents_with_active_accounts')</label>
                     </div>
                     <div class="zinput zcheckbox zcheckbox-sm zinput-inline p-0">
                         <input class="" name="status[]" type="checkbox" id="draft_status" value="3">
-                        <label class="" for="draft_status">Agents with Open Quotes</label>
+                        <label class="" for="draft_status">@lang('labels.agents_with_open_quotes')</label>
                     </div>
                     <div class="zinput zcheckbox zcheckbox-sm zinput-inline p-0">
                         <input class="" name="status[]" type="checkbox" id="all_activation_status" value="4">
-                        <label class="" for="all_activation_status">Assigned Agents</label>
+                        <label class="" for="all_activation_status">@lang('labels.assigned_agents')</label>
                     </div>
 
                 </div>
@@ -63,11 +63,11 @@
                     <thead>
                         <tr>
                             <th class=""></th>
-                            <th class="" data-sortable="true" data-field="created_at">Agency Name</th>
-                            <th class="" data-sortable="true" data-field="created_at">Contact</th>
-                            <th class="align-middle" data-sortable="true"  data-field="name">City</th>
-                            <th class="align-middle" data-sortable="true" data-field="state">State</th>
-                            <th class="align-middle" data-sortable="true" data-field="zip">Zip</th>
+                            <th class="" data-sortable="true" data-field="created_at">@lang('labels.agency_name') </th>
+                            <th class="" data-sortable="true" data-field="created_at">@lang('labels.contact') </th>
+                            <th class="align-middle" data-sortable="true"  data-field="name">@lang('labels.city') </th>
+                            <th class="align-middle" data-sortable="true" data-field="state">@lang('labels.state') </th>
+                            <th class="align-middle" data-sortable="true" data-field="zip">@lang('labels.zip') </th>
                         </tr>
                     </thead>
                 </x-bootstrap-table>

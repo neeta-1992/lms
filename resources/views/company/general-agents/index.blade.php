@@ -14,13 +14,13 @@
                 ]">
                     <thead>
                         <tr>
-                            <th class="align-middle" data-sortable="false" data-width="170" data-field="created_at">Created Date
+                            <th class="align-middle" data-sortable="false" data-width="170" data-field="created_at">@lang('labels.created_date')
                             </th>
-                            <th class="align-middle" data-sortable="false" data-width="170" data-field="updated_at">Last
-                                Modified </th>
-                            <th class="align-middle" data-sortable="false" data-width="660" data-field="name">General Agent
-                                Name</th>
-                            <th class="align-middle" data-sortable="false" data-width="100" data-field="account_type">d/b/a
+                            <th class="align-middle" data-sortable="false" data-width="170" data-field="updated_at">
+                              @lang('labels.last_modified')   </th>
+                            <th class="align-middle" data-sortable="false" data-width="660" data-field="name">@lang('labels.general_agent')
+                                </th>
+                            <th class="align-middle" data-sortable="false" data-width="100" data-field="account_type">@lang('labels.d_b_a') 
                             </th>
 
                         </tr>

@@ -8,8 +8,8 @@
                 <x-table id="{{ $activePage ?? '' }}" :pagination="false">
                     <thead>
                         <tr>
-                            <th class="align-middle" data-sortable="false" data-width="170">Notice Type</th>
-                            <th class="align-middle" data-sortable="false" data-width="170">Number of Open Notices</th>
+                            <th class="align-middle" data-sortable="false" data-width="170">@lang('labels.notice_type')</th>
+                            <th class="align-middle" data-sortable="false" data-width="170">@lang('labels.number_of_open_notices')</th>
                         </tr>
                     </thead>
                     <tbody>

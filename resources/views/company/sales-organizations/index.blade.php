@@ -6,7 +6,7 @@
                 <h4>
                     <h4>{{ dynamicPageTitle('page') ?? '' }}</h4>
                 </h4>
-              
+
                 <div class="row  align-items-center ">
                     <div class="col-lg-6">
                         <div class="ui selection dropdown table-head-dropdown">
@@ -14,7 +14,7 @@
                             <div class="text">{{ dynamicPageTitle('page') ?? '' }}</div>
                             <div class="menu">
                                 <div class="item" @click="open = 'Action'">{{ dynamicPageTitle('page') ?? '' }}</div>
-                                <div class="item" @click="open = 'Logs'">Logs</div>
+                                <div class="item" @click="open = 'Logs'">@lang('labels.logs')</div>
                             </div>
                         </div>
                     </div>
@@ -22,7 +22,7 @@
                 <div x-show="open == 'Action'">
                     <div class="table-responsive-sm">
                         <x-bootstrap-table :data="[
-                           
+
                             'cookieid'  =>true,
                             'sortorder' =>'desc',
                             'sortname'  =>'created_at',
@@ -34,21 +34,21 @@
                             <thead>
                                 <tr>
                                     <th class="align-middle" data-sortable="false" data-width="170"
-                                        data-field="created_at">Created Date</th>
+                                        data-field="created_at">@lang('labels.created_date')  </th>
                                     <th class="align-middle" data-sortable="false" data-width="170"
-                                        data-field="updated_at">Last modified </th>
-                                    <th class="align-middle" data-sortable="false" data-width="660" data-field="name">Name</th>
-                                    <th class="align-middle" data-sortable="false" data-width="100" data-field="account_type">Amount financed</th>
-                                    <th class="align-middle" data-sortable="false" data-width="100" data-field="account_type">Balance due</th>
-                                    <th class="align-middle" data-sortable="false" data-width="100" data-field="account_active"># of PFA</th>
-                                    <th class="align-middle" data-sortable="false" data-width="100" data-field="account_active">Action</th>
+                                        data-field="updated_at">@lang('labels.last_modified')  </th>
+                                    <th class="align-middle" data-sortable="false" data-width="660" data-field="name">@lang('labels.name') </th>
+                                    <th class="align-middle" data-sortable="false" data-width="100" data-field="account_type">@lang('labels.amount_financed') </th>
+                                    <th class="align-middle" data-sortable="false" data-width="100" data-field="account_type">@lang('labels.balance_due') </th>
+                                    <th class="align-middle" data-sortable="false" data-width="100" data-field="account_active">@lang('labels.of_pfa')</th>
+                                    <th class="align-middle" data-sortable="false" data-width="100" data-field="account_active">@lang('labels.action') </th>
                                 </tr>
                             </thead>
                         </x-bootstrap-table>
                     </div>
                 </div>
                 <div x-show="open == 'Logs'">
-                
+
                     <div class="table-responsive-sm">
                         <x-bootstrap-table :data="[
                                         'table'     =>'logs',
@@ -60,21 +60,21 @@
                                         'ajaxUrl'   => (Route::has('company.logs') ? route('company.logs',['type'=>'coverage-type']) : ''),
                                         'addUrl'    => (Route::has($route.'create') ? route($route.'create') : '')
                                         ]">
-                
+
                             <thead>
                                 <tr>
-                                                   <th class="" data-sortable="true" data-field="created_at" data-width="170">Created Date</th>
-                
-                
-                                    <th class="" data-sortable="true" data-field="username" data-width="200">User Name
+                                                   <th class="" data-sortable="true" data-field="created_at" data-width="170">@lang('labels.created_date')  </th>
+
+
+                                    <th class="" data-sortable="true" data-field="username" data-width="200">@lang('labels.user_name')
                                     </th>
-                                    <th class="" data-sortable="true" data-field="message">Description</th>
+                                    <th class="" data-sortable="true" data-field="message">@lang('labels.description')</th>
                                 </tr>
                             </thead>
                         </x-bootstrap-table>
                     </div>
-                
-                
+
+
                 </div>
             </div>
         </div>

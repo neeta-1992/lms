@@ -64,7 +64,7 @@
                     class="form-check-input" value="false">
                 <label for="inmail_service_disable_1" class="form-check-label">@lang('labels.no')</label>
             </div>
-            <small class="ml-2">**must have an email address</small>
+            <small class="ml-2">@lang('labels.must_have_an_email_address') </small>
         </div>
     </div>
 

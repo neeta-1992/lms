@@ -1,12 +1,12 @@
 <x-app-layout :class="['inMail', 'quill', 'emoji']">
     @can('isAdminCompany')
-    @php
-    $type = "financeCompanieAdmin"
-    @endphp
+        @php
+            $type = 'financeCompanieAdmin';
+        @endphp
     @elsecan('companyUser')
-    @php
-    $type = "financeCompanieAdmin"
-    @endphp
+        @php
+            $type = 'financeCompanieAdmin';
+        @endphp
     @endcan
     <section class="font-1 pt-5 hq-full">
         <div class="container tableButtonInlineShow">

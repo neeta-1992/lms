@@ -2,7 +2,7 @@
     <div class="col-md-12 page_table_menu">
         <div class="columns d-flex justify-content-end ">
             <button class="btn btn-default" type="button" name="Add"
-                x-on:click="ruleTable = 'table'">@lang("labels.exit")</button>
+                x-on:click="ruleTable = 'table'">@lang('labels.exit')</button>
         </div>
     </div>
 </div>
@@ -136,8 +136,8 @@
         </div>
     </div>
     <div class="col-md-6">
-        <x-jet-checkbox for="round_down_paymen_1" name="round_down_payment_2" class="permissionCheckBox" id="round_down_paymen_1"  
-         value="yes" :checked="( !empty($data['round_down_payment']) && $data['round_down_payment'] == 'yes' ? true : false )" />
+        <x-jet-checkbox for="round_down_paymen_1" name="round_down_payment_2" class="permissionCheckBox"
+            id="round_down_paymen_1" value="yes" :checked="!empty($data['round_down_payment']) && $data['round_down_payment'] == 'yes' ? true : false" />
     </div>
 </div>
 <div class="row">
@@ -150,10 +150,12 @@
             <label for="override_minimum_earned" class="col-sm-12 col-form-label">@lang('labels.override_minimum_earned')</label>
         </div>
     </div>
-   
+
     <div class="col-md-6">
-        <x-jet-checkbox for="override_minimum_earned" name="override_minimum_earned_2"  class="permissionCheckBox" id="override_minimum_earned"
-            value="yes" :checked="( !empty($data['override_minimum_earned']) && $data['override_minimum_earned'] == 'yes' ? true : false )" />
+        <x-jet-checkbox for="override_minimum_earned" name="override_minimum_earned_2" class="permissionCheckBox"
+            id="override_minimum_earned" value="yes" :checked="!empty($data['override_minimum_earned']) && $data['override_minimum_earned'] == 'yes'
+                ? true
+                : false" />
     </div>
 </div>
 <div class="row">
@@ -169,8 +171,8 @@
     <div class="col-md-6">
         <div class="form-group row">
             <div class="col-sm-4">
-                <x-jet-input type="text" class="digitLimit" maxlength="2" name="down_payment_increase" placeholder="%"
-                    value="{{ $data['down_payment_increase'] ?? '' }}" />
+                <x-jet-input type="text" class="digitLimit" maxlength="2" name="down_payment_increase"
+                    placeholder="%" value="{{ $data['down_payment_increase'] ?? '' }}" />
 
             </div>
         </div>

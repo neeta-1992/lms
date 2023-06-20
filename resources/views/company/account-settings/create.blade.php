@@ -11,7 +11,7 @@
 
 
                         <div class="mb-3">
-                            <p class="fw-600">Minimums/Maximums</p>
+                            <p class="fw-600">@lang('labels.minimums_maximums')</p>
                         </div>
 
                         <div class="tab-one">
@@ -73,7 +73,7 @@
                             </div>
 
                             <div class="mb-3">
-                                <p class="fw-600">Account Status</p>
+                                <p class="fw-600">@lang("labels.account_status")</p>
                             </div>
 
 
@@ -163,7 +163,7 @@
 
 
                             <div class="mb-3">
-                                <p class="fw-600">Defaults</p>
+                                <p class="fw-600">@lang('labels.defaults')</p>
                             </div>
 
                             <div class="form-group row">

@@ -136,13 +136,13 @@
             ]">
                 <thead>
                     <tr>
-                        <th class="" data-sortable="true" data-field="created_at" data-width="170">Created Date
+                        <th class="" data-sortable="true" data-field="created_at" data-width="170">@lang('labels.created_date')
                         </th>
 
                         <th class="" data-sortable="true" data-field="username" data-width="200">
-                            User Name
+                           @lang('labels.user_name')
                         </th>
-                        <th class="" data-sortable="true" data-field="message">Description</th>
+                        <th class="" data-sortable="true" data-field="message">@lang('labels.description')</th>
                     </tr>
                 </thead>
             </x-bootstrap-table>

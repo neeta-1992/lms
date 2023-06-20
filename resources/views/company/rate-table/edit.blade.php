@@ -42,21 +42,24 @@
     @endpush
     <x-jet-form-section :buttonGroup="[
         'logs',
-        'other' => [['text' => 'Assign to Agents', 'url' => routeCheck($route . 'assignToAgents', $id)],['text' => __('labels.cancel'), 'url' => routeCheck($route . 'index') ]],
+        'other' => [
+            ['text' => 'Assign to Agents', 'url' => routeCheck($route . 'assignToAgents', $id)],
+            ['text' => __('labels.cancel'), 'url' => routeCheck($route . 'index')],
+        ],
     ]" class="validationForm editForm" novalidate
         action="{{ routeCheck($route . 'update', $id) }}" method="post">
         @slot('form')
             @method('put')
             <input type="hidden" name="logsArr">
             <div class="form-group row">
-                <label for="name" class="col-sm-3 col-form-label requiredAsterisk">Name</label>
+                <label for="name" class="col-sm-3 col-form-label requiredAsterisk">@lang('labels.name') </label>
                 <div class="col-sm-9">
                     <input type="text" name="name" class="form-control input-sm" id="name" placeholder="" required>
                 </div>
             </div>
 
             <div class="form-group row">
-                <label for="type" class="col-sm-3 col-form-label requiredAsterisk">Rate table type</label>
+                <label for="type" class="col-sm-3 col-form-label requiredAsterisk">@lang('labels.rate_table_type') </label>
                 <div class="col-sm-9">
                     {!! form_dropdown(
                         'type',
@@ -72,7 +75,7 @@
                 </div>
             </div>
             <div class="form-group row">
-                <label for="account_type" class="col-sm-3 col-form-label requiredAsterisk">Account types</label>
+                <label for="account_type" class="col-sm-3 col-form-label requiredAsterisk">@lang('labels.account_types') </label>
                 <div class="col-sm-9">
                     {!! form_dropdown(
                         'account_type',
@@ -87,7 +90,7 @@
                 </div>
             </div>
             <div class="form-group row">
-                <label for="state" class="col-sm-3 col-form-label requiredAsterisk">State</label>
+                <label for="state" class="col-sm-3 col-form-label requiredAsterisk">@lang('labels.state') </label>
                 <div class="col-sm-9">
                     {!! form_dropdown('state', stateDropDown(['addKey' => ['All' => 'All States']]), '', [
                         'class' => 'ui dropdown w-100',
@@ -98,7 +101,7 @@
                 </div>
             </div>
             <div class="form-group row">
-                <label for="coverage_type" class="col-sm-3 col-form-label requiredAsterisk">Coverage type</label>
+                <label for="coverage_type" class="col-sm-3 col-form-label requiredAsterisk">@lang('labels.coverage_type') </label>
                 <div class="col-sm-9">
                     {!! form_dropdown('coverage_type', coverageTypeDropDown(['addOption' => ['0' => 'All']]), '', [
                         'class' => 'ui dropdown input-sm w-100',
@@ -110,7 +113,7 @@
             </div>
 
             <div class="form-group row">
-                <label for="description" class="col-sm-3 col-form-label ">Description</label>
+                <label for="description" class="col-sm-3 col-form-label ">@lang('labels.description')</label>
                 <div class="col-sm-9">
                     <textarea name="description" id="description" cols="30" class="form-control" rows="3"
                         placeholder="{{ __('Rule of 78 (Fixed rate) This is company wide default rate') }}"></textarea>
@@ -146,10 +149,10 @@
                                         {{-- <x-jet-checkbox for="allFeeAmount" id="allFeeAmount"  class="allFeeAmount"
                                             value="" /> --}}
                                     </th>
-                                    <th>Form</th>
-                                    <th>To</th>
-                                    <th>Rate</th>
-                                    <th>Setup Fee</th>
+                                    <th>@lang('labels.from') </th>
+                                    <th>@lang('labels.to') </th>
+                                    <th>@lang('labels.rate') </th>
+                                    <th>@lang('labels.setup_fee') </th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -161,7 +164,8 @@
                                                 value="{{ encryptData($feeRow['id']) ?? '' }}" class="feeTableRowId">
                                             <td>
                                                 <x-jet-checkbox for="fee_amount_row_{{ $loop->iteration }}"
-                                                    id="fee_amount_row_{{ $loop->iteration }}" class="fee_amount_row deleteCheckBoxFee" />
+                                                    id="fee_amount_row_{{ $loop->iteration }}"
+                                                    class="fee_amount_row deleteCheckBoxFee" />
                                             </td>
                                             <td>
                                                 <x-jet-input type="text" class="amount from_amount"
@@ -179,10 +183,10 @@
                                             <td class="addRateTableSetupfee">
                                                 <div class="row align-items-center">
                                                     <div class="col-sm-7">
-                                                        <label for="">Use State Maximun</label>
+                                                        <label for="">@lang('labels.use_state_maximun')</label>
                                                         <x-jet-checkbox for="changesetup_{{ $loop->iteration }}"
-                                                            class="changesetup setup_fees deleteCheckBoxFee" :checked="$feeRow['is_state_maximun'] == 1 ? true : false"
-                                                            name="rateTable[setup_fee][]"
+                                                            class="changesetup setup_fees deleteCheckBoxFee"
+                                                            :checked="$feeRow['is_state_maximun'] == 1 ? true : false" name="rateTable[setup_fee][]"
                                                             id="changesetup_{{ $loop->iteration }}" value="true" />
                                                     </div>
                                                     <div class="col-sm-1">
@@ -190,7 +194,7 @@
                                                     </div>
                                                     <div class="col-sm-4">
                                                         <x-jet-input type="text" class="amount changesetup setup_fee"
-                                                            name="rateTable[setup_fee_amount][]" id="changesetup" 
+                                                            name="rateTable[setup_fee_amount][]" id="changesetup"
                                                             placeholder="$" :value="$feeRow['setup_fee']" />
                                                     </div>
 
@@ -219,8 +223,9 @@
                                         <td class="addRateTableSetupfee">
                                             <div class="row align-items-center">
                                                 <div class="col-sm-7">
-                                                    <label for="">Use State Maximun</label>
-                                                    <x-jet-checkbox for="changesetup_1" class="changesetup setup_fees deleteCheckBoxFee"
+                                                    <label for="">@lang('labels.use_state_maximun')</label>
+                                                    <x-jet-checkbox for="changesetup_1"
+                                                        class="changesetup setup_fees deleteCheckBoxFee"
                                                         name="rateTable[setup_fee][]" id="changesetup_1"
                                                         value="true" />
                                                 </div>
@@ -229,7 +234,7 @@
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <x-jet-input type="text" class="amount changesetup setup_fee"
-                                                        name="rateTable[setup_fee_amount][]" id="changesetup" 
+                                                        name="rateTable[setup_fee_amount][]" id="changesetup"
                                                         placeholder="$" />
                                                 </div>
 
@@ -245,7 +250,7 @@
             </div>
 
 
-             <x-button-group :cancel="routeCheck($route . 'index')" :isDelete="true"/>
+            <x-button-group :cancel="routeCheck($route . 'index')" :isDelete="true" />
 
         @endslot
 
@@ -260,12 +265,12 @@
             ]">
                 <thead>
                     <tr>
-                        <th class="" data-sortable="true" data-field="created_at" data-width="170">Created Date
+                        <th class="" data-sortable="true" data-field="created_at" data-width="170">@lang('labels.created_date')
                         </th>
 
-                        <th class="" data-sortable="true" data-field="username" data-width="200">User Name
+                        <th class="" data-sortable="true" data-field="username" data-width="200">@lang('labels.user_name')
                         </th>
-                        <th class="" data-sortable="true" data-field="message">Description</th>
+                        <th class="" data-sortable="true" data-field="message">@lang('labels.description')</th>
                     </tr>
                 </thead>
             </x-bootstrap-table>

@@ -3,7 +3,7 @@
         method="post">
         @slot('form')
             <div class="form-group row">
-                <label for="name" class="col-sm-3 col-form-label">Broker General Information</label>
+                <label for="name" class="col-sm-3 col-form-label">@lang('labels.broker_general_information')</label>
             </div>
 
             <div class="form-group row">
@@ -114,7 +114,7 @@
             </div>
 
             <div class="row mailing_address_box">
-                <label for="mailing_address" class="col-sm-3 col-form-label ">Mailing Address </label>
+                <label for="mailing_address" class="col-sm-3 col-form-label ">@lang('labels.mailing_address')</label>
                 <div class="col-sm-9">
                     <div class="form-group row">
                         <div class="col-md-12 mb-1">
@@ -141,7 +141,7 @@
             </div>
 
             <div class="mb-3">
-                <h6 class="fw-600">Broker Contacts</h6>
+                <h6 class="fw-600">@lang('labels.broker_contacts')</h6>
                 <small>We often work with many individuals within a single agency. Based on your business operation you may
                     have multiple contacts should you need to. For example, controller, accountant, CSR, etc...</small>
             </div>

@@ -9,34 +9,34 @@
                     @csrf
                     <div class="tab-one"  x-show="open == 'one'">
                         <div class="form-group row">
-                            <label for="name" class="col-sm-3 col-form-label requiredAsterisk">Compensation table name</label>
+                            <label for="name" class="col-sm-3 col-form-label requiredAsterisk">@lang('labels.compensation_table_name')</label>
                             <div class="col-sm-9">
                                 <input type="text" class="form-control input-sm" name="name" id="name" required
                                     placeholder="">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="state" class="col-sm-3 col-form-label requiredAsterisk">Status</label>
+                            <label for="state" class="col-sm-3 col-form-label requiredAsterisk">@lang('labels.status')</label>
                             <div class="col-sm-9">
                                 {!! form_dropdown('status', ['1'=>'Enable','0'=>'Disable'], '', ["class"=>"w-100","required"=>true]) !!}
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="state" class="col-sm-3 col-form-label requiredAsterisk">Compensation</label>
+                            <label for="state" class="col-sm-3 col-form-label requiredAsterisk">@lang('labels.compensation')</label>
                             <div class="col-sm-9">
                                {!!  form_dropdown('compensation',['Agent compensation'=>'Agent compensation','Sales executive compensation'=>'Sales executive compensation','General agent compensation'=>'General agent compensation'],'', ["class"=>"ui dropdown input-sm w-100","required"=>true]) !!}
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="description" class="col-sm-3 col-form-label">Description</label>
+                            <label for="description" class="col-sm-3 col-form-label">@lang('labels.description')</label>
                             <div class="col-sm-9">
                                 <textarea name="description" id="description" cols="30" class="form-control"
                                     rows="3"></textarea>
                             </div>
                         </div>
-                        
-                       
-                    
+
+
+
                         <div class="form-group row">
                             <div class="col-sm-3"></div>
                             <div class="col-sm-9">

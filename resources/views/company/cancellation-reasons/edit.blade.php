@@ -8,7 +8,7 @@
                     <div class="form-group row">
                         <label for="name" class="col-sm-3 col-form-label requiredAsterisk">@lang('labels.name')</label>
                         <div class="col-sm-9">
-                            <x-jet-input type="text"  disabled value="{{ $data['name'] ?? '' }}" />
+                            <x-jet-input type="text" name="name" required />
                         </div>
                     </div>
 
@@ -23,15 +23,19 @@
                         <label for="" class="col-sm-3 col-form-label requiredAsterisk">@lang('labels.active')
                         </label>
                         <div class="col-sm-9">
-                            @if($data['status'] == 1)
-                                @lang('labels.enable')
-                            @else
-                                 @lang('labels.disable')
-                            @endif
-                          
+                            <div class="zinput zradio zradio-sm  zinput-inline">
+                                <input id="rightfax_server_email_enable" name="status" type="radio" required
+                                    class="form-check-input" value="1">
+                                <label for="rightfax_server_email_enable" class="form-check-label">@lang('labels.enable')</label>
+                            </div>
+                            <div class="zinput zradio  zradio-sm   zinput-inline">
+                                <input id="rightfax_server_email_disable" name="status" type="radio" required
+                                    class="form-check-input" value="0">
+                                <label for="rightfax_server_email_disable" class="form-check-label">@lang('labels.disable')</label>
+                            </div>
                         </div>
                     </div>
-{{--  
+
                     <div class="form-group row">
                         <label for="name" class="col-sm-3 col-form-label requiredAsterisk">@lang('labels.status_id')</label>
                         <div class="col-sm-9">
@@ -39,7 +43,7 @@
 
                         </div>
                     </div>
-  --}}
+
 
 
                <x-button-group :cancel="routeCheck($route . 'index')" :isDelete="true"/>
@@ -57,13 +61,13 @@
                 ]">
                     <thead>
                         <tr>
-                            <th class="" data-sortable="true" data-field="created_at" data-width="170">Created Date
+                            <th class="" data-sortable="true" data-field="created_at" data-width="170">@lang('labels.created_date')
                             </th>
 
                             <th class="" data-sortable="true" data-field="username" data-width="200">
-                                User Name
+                                @lang('labels.user_name')
                             </th>
-                            <th class="" data-sortable="true" data-field="message">Description</th>
+                            <th class="" data-sortable="true" data-field="message">@lang('labels.description')</th>
                         </tr>
                     </thead>
                 </x-bootstrap-table>

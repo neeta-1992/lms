@@ -11,18 +11,17 @@
          <tr>
 
              <th class="align-middle" data-sortable="false" data-field="created_at">
-                 Created Date
+                 @lang('labels.created_date')
              </th>
              <th class="align-middle" data-sortable="false" data-field="updated_at">
-                 Last
-                 Modified </th>
-             <th class="align-middle" data-sortable="false" data-field="name">User Name
+                @lang('labels.last_modified')</th>
+             <th class="align-middle" data-sortable="false" data-field="name">@lang('labels.user_name')
              </th>
-             <th class="align-middle" data-sortable="false" data-field="name"> Subject
+             <th class="align-middle" data-sortable="false" data-field="name"> @lang('labels.subject')
              </th>
-             <th class="align-middle" data-sortable="false" data-field="name">Description
+             <th class="align-middle" data-sortable="false" data-field="name">@lang('labels.description')
              </th>
-             <th class="align-middle" data-sortable="false" data-field="name"> Action
+             <th class="align-middle" data-sortable="false" data-field="name"> @lang('labels.action')
              </th>
 
          </tr>

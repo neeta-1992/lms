@@ -187,30 +187,30 @@
             </div>
         </div>
     </div>
-      <div class="form-group row align-items-center">
-                    <label for="" class="col-sm-3 col-form-label requiredAsterisk">
-                        @lang('labels.send_email_password_reset_to_user')</label>
-                    <div class="col-sm-9">
-                        <div class="zinput zradio zradio-sm  zinput-inline">
-                            <input id="reset_password_enable" name="reset_password" type="radio" required
-                                class="form-check-input" value="yes"
-                                @change="resetPassword = $event.target.checked ? 'yes' : '';">
-                            <label for="reset_password_enable" class="form-check-label">@lang('labels.yes')</label>
-                        </div>
-                        <div class="zinput zradio  zradio-sm   zinput-inline">
-                            <input id="reset_password_disable" name="reset_password" type="radio" required
-                                class="form-check-input" value="no"
-                                @change="resetPassword = $event.target.checked ? 'no' : '';">
-                            <label for="reset_password_disable" class="form-check-label">@lang('labels.no')</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group row" x-show='resetPassword == "no"'>
-                    <label for="licence_no_1" class="col-sm-3 col-form-label ">@lang('labels.password')</label>
-                    <div class="col-sm-9">
-                        <x-jet-input type="password" name="password" placeholder="Password" />
-                    </div>
-                </div>
+    <div class="form-group row align-items-center">
+        <label for="" class="col-sm-3 col-form-label requiredAsterisk">
+            @lang('labels.send_email_password_reset_to_user')</label>
+        <div class="col-sm-9">
+            <div class="zinput zradio zradio-sm  zinput-inline">
+                <input id="reset_password_enable" name="reset_password" type="radio" required
+                    class="form-check-input" value="yes"
+                    @change="resetPassword = $event.target.checked ? 'yes' : '';">
+                <label for="reset_password_enable" class="form-check-label">@lang('labels.yes')</label>
+            </div>
+            <div class="zinput zradio  zradio-sm   zinput-inline">
+                <input id="reset_password_disable" name="reset_password" type="radio" required
+                    class="form-check-input" value="no"
+                    @change="resetPassword = $event.target.checked ? 'no' : '';">
+                <label for="reset_password_disable" class="form-check-label">@lang('labels.no')</label>
+            </div>
+        </div>
+    </div>
+    <div class="form-group row" x-show='resetPassword == "no"'>
+        <label for="licence_no_1" class="col-sm-3 col-form-label ">@lang('labels.password')</label>
+        <div class="col-sm-9">
+            <x-jet-input type="password" name="password" placeholder="Password" />
+        </div>
+    </div>
     <div class="form-group row">
         <label for="notes" class="col-sm-3 col-form-label">@lang('labels.notes')</label>
         <div class="col-sm-9">

@@ -14,11 +14,11 @@
                 ]">
                     <thead>
                         <tr>
-                            <th class="align-middle" data-sortable="true" data-width="170" data-field="created_at">Created Date</th>
-                            <th class="align-middle" data-sortable="true" data-width="170" data-field="updated_at">Last Update Date</th>
-                            <th class="align-middle" data-sortable="true" data-width="400" data-field="bank_name">Bank name</th>
-                            <th class="align-middle" data-sortable="true" data-width=""    data-field="account_number">Account number</th>
-                            <th class="align-middle" data-sortable="true" data-width=""    data-field="gl_account">GL account #</th>
+                            <th class="align-middle" data-sortable="true" data-width="170" data-field="created_at">@lang('labels.created_date') </th>
+                            <th class="align-middle" data-sortable="true" data-width="170" data-field="updated_at">@lang('labels.last_update_date')</th>
+                            <th class="align-middle" data-sortable="true" data-width="400" data-field="bank_name">@lang('labels.bank_name')</th>
+                            <th class="align-middle" data-sortable="true" data-width=""    data-field="account_number">@lang('labels.account_number')</th>
+                            <th class="align-middle" data-sortable="true" data-width=""    data-field="gl_account">@lang('labels.gl_account')</th>
                         </tr>
                     </thead>
                 </x-bootstrap-table>

@@ -65,16 +65,16 @@
                             <div class="columns">
                                 <div class="ui selection dropdown table-head-dropdown">
                                     <input type="hidden" x-bind:value=open /><i class="dropdown icon"></i>
-                                    <div class="text" x-text="title">General Information</div>
+                                    <div class="text" x-text="title">@lang('labels.general_information')</div>
                                     <div class="menu">
-                                        <div class="item" @click="open = 'general-information'" x-show="open != 'general-information'">General Information
+                                        <div class="item" @click="open = 'general-information'" x-show="open != 'general-information'">@lang('labels.general_information')
                                         </div>
-                                        <div class="item" @click="open = 'funding-settings'" x-show="open != 'funding-settings'">Funding Settings</div>
-                                        <div class="item" @click="open = 'notice-settings'" x-show="open != 'notice-settings'">Notice Settings</div>
+                                        <div class="item" @click="open = 'funding-settings'" x-show="open != 'funding-settings'">@lang('labels.funding_settings')  </div>
+                                        <div class="item" @click="open = 'notice-settings'" x-show="open != 'notice-settings'">@lang('labels.notice_settings')  </div>
                                         {{--   <div class="item" @click="open = 'contacts'">Contacts</div> --}}
-                                        <div class="item" @click="open = 'attachments'" x-show="open != 'attachments'"> Attachments</div>
-                                        <div class="item" @click="open = 'quotes'" x-show="open != 'quotes'">Quotes</div>
-                                        <div class="item" @click="open = 'accounts'" x-show="open != 'accounts'">Accounts</div>
+                                        <div class="item" @click="open = 'attachments'" x-show="open != 'attachments'">@lang('labels.attachments') </div>
+                                        <div class="item" @click="open = 'quotes'" x-show="open != 'quotes'">@lang('labels.quotes') </div>
+                                        <div class="item" @click="open = 'accounts'" x-show="open != 'accounts'">@lang('labels.accounts') </div>
                                         {{--  <div class="item" @click="open = 'logs';">Logs</div> --}}
                                     </div>
                                 </div>
@@ -105,20 +105,20 @@
 
                         <input type="hidden" name="logsArr">
                         <div class="form-group row">
-                            <label for="name" class="col-sm-3 col-form-label requiredAsterisk">Name</label>
+                            <label for="name" class="col-sm-3 col-form-label requiredAsterisk">@lang('labels.name')</label>
                             <div class="col-sm-9">
                                 <x-jet-input type="text" name="name" required />
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="tax_id" class="col-sm-3 col-form-label ingnorTitleCase">FEIN #</label>
+                            <label for="tax_id" class="col-sm-3 col-form-label ingnorTitleCase">@lang('labels.fein')</label>
                             <div class="col-sm-9">
                                 <x-jet-input type="text" class="taxId w-25" name="tax_id" />
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="telephone" class="col-sm-3 col-form-label requiredAsterisk">
-                                Telephone</label>
+                                @lang('labels.telephone')</label>
                             <div class="col-sm-9">
                                 <x-jet-input type="tel" class="telephone  w-25" name="telephone" required
                                     placeholder="(000) 000-000" />
@@ -126,14 +126,14 @@
                         </div>
                         <div class="form-group row">
                             <label for="fax" class="col-sm-3 col-form-label ">
-                                Fax</label>
+                                @lang('labels.fax')</label>
                             <div class="col-sm-9">
                                 <x-jet-input type="text" class="fax w-25" name="fax" />
                             </div>
                         </div>
                         <div class="row">
-                            <label for="address" class="col-sm-3 col-form-label requiredAsterisk">Mailing
-                                Address</label>
+                            <label for="address" class="col-sm-3 col-form-label requiredAsterisk">
+                                @lang('labels.mailing_address')</label>
                             <div class="col-sm-9">
                                 <div class="form-group row">
                                     <div class="col-md-12 mb-1">
@@ -160,27 +160,27 @@
                             </div>
                         </div>
                         <div class="form-group row align-items-center">
-                            <label for="mailing_address_yes" class="col-sm-3 col-form-label requiredAsterisk">Additional
-                                Address
-                                Information?</label>
+                            <label for="mailing_address_yes" class="col-sm-3 col-form-label requiredAsterisk">@lang('labels.additional_address_information')</label>
+
+
                             <div class="col-sm-9">
                                 <div class="zinput zradio zradio-sm  zinput-inline  p-0">
                                     <input id="mailing_address_yes" @change="domiciliary = 'yes'"
                                         name="mailing_address_radio" type="radio" required class="form-check-input"
                                         value="yes">
-                                    <label for="mailing_address_yes" class="form-check-label">Yes</label>
+                                    <label for="mailing_address_yes" class="form-check-label">@lang('labels.yes')</label>
                                 </div>
                                 <div class="zinput zradio  zradio-sm   zinput-inline  p-0">
                                     <input id="mailing_address_no" @change="domiciliary = 'no'"
                                         name="mailing_address_radio" type="radio" required class="form-check-input"
                                         value="no">
-                                    <label for="mailing_address_no" class="form-check-label">No</label>
+                                    <label for="mailing_address_no" class="form-check-label">@lang('labels.no')</label>
                                 </div>
                             </div>
                         </div>
                         <div class="row " x-show="domiciliary == 'yes'">
-                            <label for="mailing_address" class="col-sm-3 col-form-label ">Domiciliary
-                                Address</label>
+                            <label for="mailing_address" class="col-sm-3 col-form-label ">@lang('labels.domiciliary_address')</label>
+
                             <div class="col-sm-9 ">
                                 <div class="form-group row">
                                     <div class="col-md-12 mb-1">
@@ -207,17 +207,17 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="current_aggregate_outstandings" class="col-sm-3 col-form-label">Current
-                                Aggregate Outstandings</label>
+                            <label for="current_aggregate_outstandings" class="col-sm-3 col-form-label">@lang('labels.current_aggregate_outstandings')</label>
+
                             <div class="col-sm-9">
                                 <x-jet-input type="text" disabled class="w-25 amount"
                                     name="current_aggregate_outstandings" placeholder="$" />
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="limit_of_aggregate_outstandings" class="col-sm-3 col-form-label">Limit
-                                Of
-                                Aggregate Outstandings</label>
+                            <label for="limit_of_aggregate_outstandings" class="col-sm-3 col-form-label">@lang('labels.limit_of_aggregate_outstandings')</label>
+
+
                             <div class="col-sm-9">
                                 <x-jet-input type="text" class="w-25 amount" name="aggregate_limit"
                                     placeholder="$" />
@@ -240,72 +240,72 @@
                 </div> --}}
 
                         <div class="form-group row">
-                            <label for="AM_best_rating" class="col-sm-3 col-form-label ">A.M. Best
-                                Rating</label>
+                            <label for="AM_best_rating" class="col-sm-3 col-form-label ">@lang('labels.a_m_best_rating')</label>
+
                             <div class="col-sm-9">
                                 <x-jet-input type="text" class="" name="am_best[rating]" />
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="NAIC_number" class="col-sm-3 col-form-label ">NAIC Number</label>
+                            <label for="NAIC_number" class="col-sm-3 col-form-label ">@lang('labels.naic_number')</label>
                             <div class="col-sm-9">
                                 <x-jet-input type="text" class="" name="am_best[naic_number]" />
 
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="AM_best_financial_size" class="col-sm-3 col-form-label ">A.M. Best
-                                Financial Size</label>
+                            <label for="AM_best_financial_size" class="col-sm-3 col-form-label ">@lang('labels.a_m_best_financial_size')</label>
+
                             <div class="col-sm-9">
                                 <x-jet-input type="text" class="" name="am_best[financial_size]" />
                             </div>
                         </div>
                         <div class="form-group row ">
-                            <label for="AM_best_rating_date" class="col-sm-3 col-form-label ">A.M. Best Rating
-                                Date</label>
+                            <label for="AM_best_rating_date" class="col-sm-3 col-form-label ">@lang('labels.a_m_best_rating_date')</label>
+
                             <div class="col-sm-9">
                                 <x-jet-input type="text" class=" singleDatePicker" name="am_best[rating_date]" />
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="AM_best_number" class="col-sm-3 col-form-label ">A.M. Best
-                                Number</label>
+                            <label for="AM_best_number" class="col-sm-3 col-form-label ">@lang('labels.a_m_best_number')</label>
+
                             <div class="col-sm-9">
                                 <x-jet-input type="text" class=" am_best_number" name="am_best[number]" />
 
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="AM_best_group_number" class="col-sm-3 col-form-label ">A.M. Best Group
-                                Number</label>
+                            <label for="AM_best_group_number" class="col-sm-3 col-form-label ">
+                                @lang('labels.a_m_best_group_number')</label>
                             <div class="col-sm-9">
                                 <x-jet-input type="text" class="" name="am_best[group_number]" />
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="AM_best_group_name" class="col-sm-3 col-form-label ">A.M. Best Group
-                                Name</label>
+                            <label for="AM_best_group_name" class="col-sm-3 col-form-label ">
+                                @lang('labels.a_m_best_group_name')</label>
                             <div class="col-sm-9">
                                 <x-jet-input type="text" class="" name="am_best[group_name]" />
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="aggregation_code" class="col-sm-3 col-form-label ">Aggregation
-                                Code</label>
+                            <label for="aggregation_code" class="col-sm-3 col-form-label ">
+                              @lang('labels.aggregation_code')  </label>
                             <div class="col-sm-9">
                                 <x-jet-input type="text" class="" name="am_best[aggregation_code]" />
 
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="AM_best_url" class="col-sm-3 col-form-label ">A.M. Best URL</label>
+                            <label for="AM_best_url" class="col-sm-3 col-form-label ">@lang('labels.a_m_best_url')</label>
                             <div class="col-sm-9">
                                 <x-jet-input type="url" name="am_best[url]" class="am_best_url"
                                     readonly="readonly" />
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="notes" class="col-sm-3 col-form-label">Notes</label>
+                            <label for="notes" class="col-sm-3 col-form-label">@lang('labels.notes')</label>
                             <div class="col-sm-9">
                                 <textarea name="notes" id="notes" cols="30" class="form-control" rows="4"></textarea>
                             </div>
@@ -369,14 +369,13 @@
                         <thead>
                             <tr>
                                 <th class="" data-sortable="true" data-field="created_at" data-width="170">
-                                    Created
-                                    Date
+                                  @lang('labels.created_date')
                                 </th>
 
-                                <th class="" data-sortable="true" data-field="username" data-width="200">User
-                                    Name
+                                <th class="" data-sortable="true" data-field="username" data-width="200">
+                                    @lang('labels.user_name')
                                 </th>
-                                <th class="" data-sortable="true" data-field="message">Description</th>
+                                <th class="" data-sortable="true" data-field="message">@lang('labels.description')</th>
                             </tr>
                         </thead>
                     </x-bootstrap-table>

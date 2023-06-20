@@ -113,7 +113,7 @@
                                 </label>
                                 <div class="col-sm-9">
                                     <div class="zinput zcheckbox zcheckbox-sm zinput-inline p-0">
-										
+
                                         <input id="rightfax_server_email_enable" name="payable_to[]"
                                             type="checkbox" required class="form-check-input" value="true">
                                         <label for="rightfax_server_email_enable">
@@ -151,7 +151,7 @@
                                             <input type="checkbox" class=" input-sm "
                                                 name="personal_maximum_finance_amount"
                                                 id="personal_maximum_finance_amount" placeholder="From">
-                                            <span class="custom-control-label align-baseline">All</span>
+                                            <span class="custom-control-label align-baseline">@lang('labels.all') </span>
                                         </div>
                                         <div class="col-sm-6">
 											<x-select :options="stateDropDown(['keyType' => 'state'])"

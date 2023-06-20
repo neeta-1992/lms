@@ -40,8 +40,8 @@
                                                 x-show="(open != 'append' && open != 'logs')">
                                                 @lang('labels.append')</button>
                                         @else
-                                            <button class="btn btn-default reopenTask" type="button" x-show="open != 'logs'"
-                                                data-id="{{ $id }}">
+                                            <button class="btn btn-default reopenTask" type="button"
+                                                x-show="open != 'logs'" data-id="{{ $id }}">
                                                 @lang('labels.reopen')</button>
                                         @endif
 
@@ -53,7 +53,9 @@
                                                 href="{{ routeCheck($route . 'index') }}" data-turbolinks="false"
                                                 x-show="(open != 'logs' && open != 'append')">
                                                 @lang('labels.cancel')</a></button>
-                                        <button class="btn btn-default " type="button"  x-on:click="open = 'general-information'"  x-show="(open != 'logs' && open == 'append')">@lang('labels.cancel')</button>
+                                        <button class="btn btn-default " type="button"
+                                            x-on:click="open = 'general-information'"
+                                            x-show="(open != 'logs' && open == 'append')">@lang('labels.cancel')</button>
                                     </div>
                                 </div>
                             </div>
@@ -88,11 +90,11 @@
                             </tr>
                             <tr>
                                 <td>@lang('labels.subject')</td>
-                                <td> {!!  $data->subject ?? '' !!}</td>
+                                <td> {!! $data->subject ?? '' !!}</td>
                             </tr>
                             <tr>
                                 <td>@lang('labels.notes')</td>
-                                <td> {!!  $data->notes ?? '' !!}</td>
+                                <td> {!! $data->notes ?? '' !!}</td>
                             </tr>
 
                         </tbody>
@@ -157,10 +159,10 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="gl_account"
-                                class="col-sm-3 col-form-label ">@lang('labels.assign_task')</label>
+                            <label for="gl_account" class="col-sm-3 col-form-label ">@lang('labels.assign_task')</label>
                             <div class="col-sm-3">
-                                <x-select :options="$userData ?? []" name="assign_task" class="ui dropdown" placeholder="Select"/>
+                                <x-select :options="$userData ?? []" name="assign_task" class="ui dropdown"
+                                    placeholder="Select" />
                             </div>
                         </div>
                         <x-button-group :cancel="routeCheck($route . 'index')" xclick="open = 'general-information'" />
@@ -216,18 +218,18 @@
                         <thead>
                             <tr>
                                 <th class="" data-sortable="true" data-field="created_at" data-width="170">
-                                    Created Date
+                                    @lang('labels.created_date')
                                 </th>
-                                <th class="" data-sortable="true" data-field="username" data-width="200"> User
-                                    Name</th>
-                                <th class="" data-sortable="true" data-field="message">Description</th>
+                                <th class="" data-sortable="true" data-field="username" data-width="200">
+                                    @lang('labels.user_name')</th>
+                                <th class="" data-sortable="true" data-field="message">@lang('labels.description')</th>
                             </tr>
                         </thead>
                     </x-table>
                     <div class="remodal" id="closeTaskModel"
                         data-remodal-options="hashTracking: false, closeOnOutsideClick: false">
                         <button data-remodal-action="close" class="remodal-close"></button>
-                        <h5>Close Task</h5>
+                        <h5>@lang('labels.close_task') </h5>
                         <form action="{{ routeCheck($route . 'cloes-task') }}" class="reloadForm">
                             <div class="form-group text-left ">
                                 <x-jet-input type="hidden" name="id" value="{{ $id }}" />
@@ -246,7 +248,7 @@
                     <div class="remodal" id="reopenTaskModel"
                         data-remodal-options="hashTracking: false, closeOnOutsideClick: false">
                         <button data-remodal-action="close" class="remodal-close"></button>
-                        <h5>Reopen Task</h5>
+                        <h5>@lang('labels.reopen_task') </h5>
                         <form action="{{ routeCheck($route . 'reopen-task') }}" class="reloadForm">
                             <div class="form-group text-left ">
                                 <x-jet-input type="hidden" name="id" value="{{ $id }}" />

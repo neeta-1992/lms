@@ -3,7 +3,7 @@
         method="post">
         @slot('form')
             <div class="form-group row">
-                <label for="name" class="col-sm-3 col-form-label"> General Information</label>
+                <label for="name" class="col-sm-3 col-form-label">@lang('labels.general_information') </label>
             </div>
 
             <div class="form-group row">
@@ -151,7 +151,7 @@
                 </div>
             </div>
             <div class="mb-3">
-                <p>Contacts</p>
+                <p>@lang('labels.contacts') </p>
             </div>
 
 

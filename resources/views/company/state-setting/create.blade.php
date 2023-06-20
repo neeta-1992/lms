@@ -129,8 +129,8 @@
             <div class="col-sm-3"></div>
             <div class="col-sm-9">
                 <div class="row">
-                    <div class="col-sm-6"><label>Personal Account</label></div>
-                    <div class="col-sm-6"><label>Commercial Account</label></div>
+                    <div class="col-sm-6"><label> @lang('labels.personal_account')</label></div>
+                    <div class="col-sm-6"><label> @lang('labels.commercial_account')</label></div>
                 </div>
             </div>
         </div>
@@ -153,7 +153,7 @@
                 </div>
             </div>
         </div>
-           <div class="form-group row">
+        <div class="form-group row">
             <label for="maximum_rate" class="col-sm-3 col-form-label">@lang("labels.maximum_interest_rate")</label>
             <div class="col-sm-9">
                 <div class="row">
@@ -180,9 +180,9 @@
                                         <thead>
                                             <tr>
                                                 <th width="9"></th>
-                                                <th>Form</th>
-                                                <th>To</th>
-                                                <th>Rate</th>
+                                                <th> @lang('labels.from')</th>
+                                                <th> @lang('labels.to')</th>
+                                                <th> @lang('labels.rate')</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -232,9 +232,9 @@
                                         <thead>
                                             <tr>
                                                 <th width="9"></th>
-                                                <th>Form</th>
-                                                <th>To</th>
-                                                <th>Rate</th>
+                                                <th> @lang('labels.from')</th>
+                                                <th> @lang('labels.to')</th>
+                                                <th> @lang('labels.rate')</th>
                                             </tr>
                                         </thead>
                                         <tbody>

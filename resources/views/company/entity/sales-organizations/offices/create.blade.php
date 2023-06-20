@@ -53,7 +53,7 @@
          </div>
      </div>
       <div class="form-group row">
-         <label for="state" class="col-sm-3 col-form-label ">Notes</label>
+         <label for="state" class="col-sm-3 col-form-label ">@lang('labels.notes') </label>
          <div class="col-sm-9">
               <textarea name="notes" class="form-control" id="notes" cols="30" rows="5"></textarea>
          </div>

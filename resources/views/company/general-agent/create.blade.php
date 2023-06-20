@@ -3,7 +3,7 @@
         @slot('form')
 		<input type="hidden" name="type" value="1" />
         <div class="mb-3">
-            <p class="fw-600">Company General Information</p>
+            <p class="fw-600">@lang('labels.company_general_information')</p>
         </div>
 
 
@@ -22,7 +22,7 @@
             </div>
         </div>
 		<div class="form-group row">
-            <label for="agency_name" class="col-sm-3 col-form-label requiredAsterisk">General Agency Name</label>
+            <label for="agency_name" class="col-sm-3 col-form-label requiredAsterisk">@lang('labels.general_agency_name')</label>
             <div class="col-sm-9">
                 <input type="text" name="agency_name" class="form-control input-sm" id="agency_name" placeholder=""
                     required>
@@ -401,17 +401,17 @@
             <hr class="color-10 my-5">
         </div>
         <div>
-            <p class="fw-600">Email Settings</p>
+            <p class="fw-600">@lang('labels.email_settings')</p>
         </div>
         <div class="row">
-			<label for="administrator_email" class="col-sm-3 col-form-label requiredAsterisk">Administrator
-				Email</label>
+			<label for="administrator_email" class="col-sm-3 col-form-label requiredAsterisk">
+				@lang('labels.administrator_email')</label>
 			<div class="col-sm-9">
 				<div class="row">
 					<div class="col-sm-4">
 						<div class="row form-group">
-							<label for="administrator_email" class="col-sm-12 col-form-label">Email
-								Address</label>
+							<label for="administrator_email" class="col-sm-12 col-form-label">
+								@lang('labels.email_address')</label>
 							<div class="col-sm-12">
 								<input type="email" class="form-control input-sm"
 									name="email_setting[administrator][email]" id="administrator_email" required>
@@ -421,7 +421,7 @@
 					<div class="col-sm-4">
 						<div class="row form-group">
 							<label for="administrator_email_outgoing_server"
-								class="col-sm-12 col-form-label">Outgoing Server</label>
+								class="col-sm-12 col-form-label">  @lang('labels.outgoing_server')</label>
 							<div class="col-sm-12">
 								<input type="text" class="form-control input-sm"
 									name="email_setting[administrator][server]"
@@ -432,26 +432,26 @@
 					<div class="col-sm-4">
 						<div class="row form-group">
 							<div class="col-sm-6">
-								<label for="" class="col-sm-12 col-form-label">Authentication</label>
+								<label for="" class="col-sm-12 col-form-label">@lang('labels.authentication')</label>
 								<div class="col-sm-12">
 									<div class="zinput zradio zradio-sm  zinput-inline p-0">
 										<input id="administrator_email_authentication_yes" class="form-check-input"
 											name="email_setting[administrator][authentication]" type="radio" required
 											value="yes">
 										<label for="administrator_email_authentication_yes"
-											class="form-check-label">Yes</label>
+											class="form-check-label">@lang('labels.yes')</label>
 									</div>
 									<div class="zinput zradio  zradio-sm   zinput-inline  p-0">
 										<input id="administrator_email_authentication_no" class="form-check-input"
 											name="email_setting[administrator][authentication]" type="radio" required
 											value="no">
 										<label for="administrator_email_authentication_no"
-											class="form-check-label">No</label>
+											class="form-check-label">@lang('labels.no')</label>
 									</div>
 								</div>
 							</div>
 							<div class="col-sm-6">
-								<label for="" class="col-sm-12 col-form-label">Secure Type</label>
+								<label for="" class="col-sm-12 col-form-label"> @lang('labels.secure_type')</label>
 								<div class="col-sm-12">
 									<?=  form_dropdown('email_setting[administrator][encryption]', encryptionTypeDropDown(), '', ["class"=>"form-control input-sm"]); ?>
 								</div>
@@ -463,7 +463,7 @@
 					<div class="col-sm-4">
 						<div class="row form-group">
 							<label for="administrator_email_username"
-								class="col-sm-12 col-form-label">Username</label>
+								class="col-sm-12 col-form-label">@lang('labels.username')</label>
 							<div class="col-sm-12">
 								<input type="text" class="form-control input-sm"
 									name="email_setting[administrator][username]" id="administrator_email_username">
@@ -473,7 +473,7 @@
 					<div class="col-sm-4">
 						<div class="row form-group">
 							<label for="administrator_email_passward"
-								class="col-sm-12 col-form-label">Password</label>
+								class="col-sm-12 col-form-label">@lang('labels.password')</label>
 							<div class="col-sm-12">
 								<input type="password" class="form-control input-sm"
 									name="email_setting[administrator][password]" id="administrator_email_passward">
@@ -483,13 +483,13 @@
 					<div class="col-sm-4">
 						<div class="row form-group">
 							<div class="col-sm-6">
-								<label for="" class="col-sm-12 col-form-label">Protocol</label>
+								<label for="" class="col-sm-12 col-form-label">@lang('labels.protocol')</label>
 								<div class="col-sm-12">
 									<?=  form_dropdown('email_setting[administrator][imap]', emailImapDropDown(), '', ["class"=>"form-control input-sm"]); ?>
 								</div>
 							</div>
 							<div class="col-sm-6">
-								<label for="" class="col-sm-12 col-form-label">Port</label>
+								<label for="" class="col-sm-12 col-form-label">@lang('labels.port')</label>
 								<div class="col-sm-12">
 									<?=  form_dropdown('email_setting[administrator][port]', emailPortDropDown(), '', ["class"=>"form-control input-sm"]); ?>
 								</div>
@@ -500,14 +500,14 @@
 			</div>
 		</div>
 		<div class="row">
-			<label for="officelocation" class="col-sm-3 col-form-label requiredAsterisk">Quote
-				Activation Email</label>
+			<label for="officelocation" class="col-sm-3 col-form-label requiredAsterisk">
+				@lang('labels.quote_activation_email')</label>
 			<div class="col-sm-9">
 				<div class="row">
 					<div class="col-sm-4">
 						<div class="row form-group">
-							<label for="quote_activation_email" class="col-sm-12 col-form-label">Email
-								Address</label>
+							<label for="quote_activation_email" class="col-sm-12 col-form-label">
+								@lang('labels.email_address')</label>
 							<div class="col-sm-12">
 								<input type="email" class="form-control input-sm" name="email_setting[quote][email]"
 									id="quote_activation_email" required>
@@ -516,8 +516,8 @@
 					</div>
 					<div class="col-sm-4">
 						<div class="row form-group">
-							<label for="quote_activation_outgoing_server" class="col-sm-12 col-form-label">Outgoing
-								Server</label>
+							<label for="quote_activation_outgoing_server" class="col-sm-12 col-form-label">
+								@lang('labels.outgoing_server')</label>
 							<div class="col-sm-12">
 								<input type="text" class="form-control input-sm" name="email_setting[quote][server]"
 									id="quote_activation_outgoing_server">
@@ -527,26 +527,26 @@
 					<div class="col-sm-4">
 						<div class="row form-group">
 							<div class="col-sm-6">
-								<label for="" class="col-sm-12 col-form-label">Authentication</label>
+								<label for="" class="col-sm-12 col-form-label">@lang('labels.authentication')</label>
 								<div class="col-sm-12">
 									<div class="zinput zradio zradio-sm  zinput-inline p-0">
 										<input id="quote_activation_authentication_yes" class="form-check-input"
 											name="email_setting[quote][authentication]" type="radio" required
 											value="yes">
 										<label for="quote_activation_authentication_yes"
-											class="form-check-label">Yes</label>
+											class="form-check-label">@lang('labels.yes')</label>
 									</div>
 									<div class="zinput zradio  zradio-sm   zinput-inline  p-0">
 										<input id="quote_activation_authentication_no" class="form-check-input"
 											name="email_setting[quote][authentication]" type="radio" required
 											value="no">
 										<label for="quote_activation_authentication_no"
-											class="form-check-label">No</label>
+											class="form-check-label">@lang('labels.no')</label>
 									</div>
 								</div>
 							</div>
 							<div class="col-sm-6">
-								<label for="" class="col-sm-12 col-form-label">Secure Type</label>
+								<label for="" class="col-sm-12 col-form-label"> @lang('labels.secure_type')</label>
 								<div class="col-sm-12">
 									<?=  form_dropdown('email_setting[quote][encryption]', encryptionTypeDropDown(), '', ["class"=>"form-control input-sm","required"=>null]); ?>
 								</div>
@@ -557,7 +557,7 @@
 				<div class="row">
 					<div class="col-sm-4">
 						<div class="row form-group">
-							<label for="quote_activation_username" class="col-sm-12 col-form-label">Username</label>
+							<label for="quote_activation_username" class="col-sm-12 col-form-label">@lang('labels.username')</label>
 							<div class="col-sm-12">
 								<input type="text" class="form-control input-sm"
 									name="email_setting[quote][username]" id="quote_activation_username">
@@ -566,7 +566,7 @@
 					</div>
 					<div class="col-sm-4">
 						<div class="row form-group">
-							<label for="quote_activation_passward" class="col-sm-12 col-form-label">Password</label>
+							<label for="quote_activation_passward" class="col-sm-12 col-form-label">@lang('labels.password')</label>
 							<div class="col-sm-12">
 								<input type="password" class="form-control input-sm"
 									name="email_setting[quote][password]" id="quote_activation_passward">
@@ -576,13 +576,13 @@
 					<div class="col-sm-4">
 						<div class="row form-group">
 							<div class="col-sm-6">
-								<label for="" class="col-sm-12 col-form-label">Protocol</label>
+								<label for="" class="col-sm-12 col-form-label">@lang('labels.protocol')</label>
 								<div class="col-sm-12">
 									<?=  form_dropdown('email_setting[quote][imap]', emailImapDropDown(), '', ["class"=>"form-control input-sm","required"=>null]); ?>
 								</div>
 							</div>
 							<div class="col-sm-6">
-								<label for="" class="col-sm-12 col-form-label">Port</label>
+								<label for="" class="col-sm-12 col-form-label">@lang('labels.port')</label>
 								<div class="col-sm-12">
 									<?=  form_dropdown('email_setting[quote][port]', emailPortDropDown(), '', ["class"=>"form-control input-sm","required"=>null]); ?>
 								</div>
@@ -594,14 +594,14 @@
 		</div>
 
 		<div class="row">
-			<label for="officelocation" class="col-sm-3 col-form-label requiredAsterisk">Esignature
-				Email</label>
+			<label for="officelocation" class="col-sm-3 col-form-label requiredAsterisk">
+				@lang('labels.esignature_email')</label>
 			<div class="col-sm-9">
 				<div class="row">
 					<div class="col-sm-4">
 						<div class="row form-group">
-							<label for="esignature_email" class="col-sm-12 col-form-label">Email
-								Address</label>
+							<label for="esignature_email" class="col-sm-12 col-form-label">
+								@lang('labels.email_address')</label>
 							<div class="col-sm-12">
 								<input type="email" class="form-control input-sm"
 									name="email_setting[esignature][email]" id="esignature_email" required>
@@ -610,8 +610,8 @@
 					</div>
 					<div class="col-sm-4">
 						<div class="row form-group">
-							<label for="esignature_outgoing_server" class="col-sm-12 col-form-label">Outgoing
-								Server</label>
+							<label for="esignature_outgoing_server" class="col-sm-12 col-form-label">
+								@lang('labels.outgoing_server')</label>
 							<div class="col-sm-12">
 								<input type="text" class="form-control input-sm"
 									name="email_setting[esignature][server]" id="esignature_outgoing_server">
@@ -621,24 +621,24 @@
 					<div class="col-sm-4">
 						<div class="row form-group">
 							<div class="col-sm-6">
-								<label for="" class="col-sm-12 col-form-label">Authentication</label>
+								<label for="" class="col-sm-12 col-form-label">@lang('labels.authentication')</label>
 								<div class="col-sm-12">
 									<div class="zinput zradio zradio-sm  zinput-inline p-0">
 										<input id="esignature_authentication_yes" class="form-check-input"
 											name="email_setting[esignature][authentication]" type="radio" required
 											value="yes">
-										<label for="esignature_authentication_yes" class="form-check-label">Yes</label>
+										<label for="esignature_authentication_yes" class="form-check-label">@lang('labels.yes')</label>
 									</div>
 									<div class="zinput zradio  zradio-sm   zinput-inline  p-0">
 										<input id="esignature_authentication_no" class="form-check-input"
 											name="email_setting[esignature][authentication]" type="radio" required
 											value="no">
-										<label for="esignature_authentication_no" class="form-check-label">No</label>
+										<label for="esignature_authentication_no" class="form-check-label">@lang('labels.no')</label>
 									</div>
 								</div>
 							</div>
 							<div class="col-sm-6">
-								<label for="" class="col-sm-12 col-form-label">Secure Type</label>
+								<label for="" class="col-sm-12 col-form-label"> @lang('labels.secure_type')</label>
 								<div class="col-sm-12">
 									<?=  form_dropdown('email_setting[esignature][encryption]', encryptionTypeDropDown(), '', ["class"=>"form-control input-sm"]); ?>
 								</div>
@@ -649,7 +649,7 @@
 				<div class="row">
 					<div class="col-sm-4">
 						<div class="row form-group">
-							<label for="esignature_username" class="col-sm-12 col-form-label">Username</label>
+							<label for="esignature_username" class="col-sm-12 col-form-label">@lang('labels.username')</label>
 							<div class="col-sm-12">
 								<input type="text" class="form-control input-sm"
 									name="email_setting[esignature][username]" id="esignature_username">
@@ -658,7 +658,7 @@
 					</div>
 					<div class="col-sm-4">
 						<div class="row form-group">
-							<label for="esignature_passward" class="col-sm-12 col-form-label">Password</label>
+							<label for="esignature_passward" class="col-sm-12 col-form-label">@lang('labels.password')</label>
 							<div class="col-sm-12">
 								<input type="password" class="form-control input-sm"
 									name="email_setting[esignature][password]" id="esignature_passward">
@@ -668,13 +668,13 @@
 					<div class="col-sm-4">
 						<div class="row form-group">
 							<div class="col-sm-6">
-								<label for="" class="col-sm-12 col-form-label">Protocol</label>
+								<label for="" class="col-sm-12 col-form-label">@lang('labels.protocol')</label>
 								<div class="col-sm-12">
 									<?=  form_dropdown('email_setting[esignature][imap]', emailImapDropDown(), '', ["class"=>"form-control input-sm"]); ?>
 								</div>
 							</div>
 							<div class="col-sm-6">
-								<label for="" class="col-sm-12 col-form-label">Port</label>
+								<label for="" class="col-sm-12 col-form-label">@lang('labels.port')</label>
 								<div class="col-sm-12">
 									<?=  form_dropdown('email_setting[esignature][port]', emailPortDropDown(), '', ["class"=>"form-control input-sm"]); ?>
 								</div>
@@ -685,14 +685,14 @@
 			</div>
 		</div>
 		<div class="row">
-			<label for="officelocation" class="col-sm-3 col-form-label requiredAsterisk">From System
-				Email</label>
+			<label for="officelocation" class="col-sm-3 col-form-label requiredAsterisk">
+				 @lang('labels.from_system_email')</label>
 			<div class="col-sm-9">
 				<div class="row">
 					<div class="col-sm-4">
 						<div class="row form-group">
-							<label for="from_system_email" class="col-sm-12 col-form-label">Email
-								Address</label>
+							<label for="from_system_email" class="col-sm-12 col-form-label">
+								@lang('labels.email_address')</label>
 							<div class="col-sm-12">
 								<input type="email" class="form-control input-sm"
 									name="email_setting[from_system][email]" id="from_system_email" required>
@@ -701,8 +701,8 @@
 					</div>
 					<div class="col-sm-4">
 						<div class="row form-group">
-							<label for="from_system_outgoing_server" class="col-sm-12 col-form-label">Outgoing
-								Server</label>
+							<label for="from_system_outgoing_server" class="col-sm-12 col-form-label">
+								@lang('labels.outgoing_server')</label>
 							<div class="col-sm-12">
 								<input type="text" class="form-control input-sm"
 									name="email_setting[from_system][server]" id="from_system_outgoing_server">
@@ -712,24 +712,24 @@
 					<div class="col-sm-4">
 						<div class="row form-group">
 							<div class="col-sm-6">
-								<label for="" class="col-sm-12 col-form-label">Authentication</label>
+								<label for="" class="col-sm-12 col-form-label">@lang('labels.authentication')</label>
 								<div class="col-sm-12">
 									<div class="zinput zradio zradio-sm  zinput-inline p-0">
 										<input id="from_system_authentication_yes" class="form-check-input"
 											name="email_setting[from_system][authentication]" type="radio" required
 											value="yes">
-										<label for="from_system_authentication_yes" class="form-check-label">Yes</label>
+										<label for="from_system_authentication_yes" class="form-check-label">@lang('labels.yes')</label>
 									</div>
 									<div class="zinput zradio  zradio-sm   zinput-inline  p-0">
 										<input id="from_system_authentication_no" class="form-check-input"
 											name="email_setting[from_system][authentication]" type="radio" required
 											value="no">
-										<label for="from_system_authentication_no" class="form-check-label">No</label>
+										<label for="from_system_authentication_no" class="form-check-label">@lang('labels.no')</label>
 									</div>
 								</div>
 							</div>
 							<div class="col-sm-6">
-								<label for="" class="col-sm-12 col-form-label">Secure Type</label>
+								<label for="" class="col-sm-12 col-form-label"> @lang('labels.secure_type')</label>
 								<div class="col-sm-12">
 									<?=  form_dropdown('email_setting[from_system][encryption]', encryptionTypeDropDown(), '', ["class"=>"form-control input-sm"]); ?>
 								</div>
@@ -740,7 +740,7 @@
 				<div class="row">
 					<div class="col-sm-4">
 						<div class="row form-group">
-							<label for="from_system_username" class="col-sm-12 col-form-label">Username</label>
+							<label for="from_system_username" class="col-sm-12 col-form-label">@lang('labels.username')</label>
 							<div class="col-sm-12">
 								<input type="text" class="form-control input-sm"
 									name="email_setting[from_system][username]" id="from_system_username">
@@ -749,7 +749,7 @@
 					</div>
 					<div class="col-sm-4">
 						<div class="row form-group">
-							<label for="from_system_passward" class="col-sm-12 col-form-label">Password</label>
+							<label for="from_system_passward" class="col-sm-12 col-form-label">@lang('labels.password')</label>
 							<div class="col-sm-12">
 								<input type="password" class="form-control input-sm"
 									name="email_setting[from_system][password]" id="from_system_passward">
@@ -759,13 +759,13 @@
 					<div class="col-sm-4">
 						<div class="row form-group">
 							<div class="col-sm-6">
-								<label for="" class="col-sm-12 col-form-label">Protocol</label>
+								<label for="" class="col-sm-12 col-form-label">@lang('labels.protocol')</label>
 								<div class="col-sm-12">
 									<?=  form_dropdown('email_setting[from_system][imap]', emailImapDropDown(), '', ["class"=>"form-control input-sm"]); ?>
 								</div>
 							</div>
 							<div class="col-sm-6">
-								<label for="" class="col-sm-12 col-form-label">Port</label>
+								<label for="" class="col-sm-12 col-form-label">@lang('labels.port')</label>
 								<div class="col-sm-12">
 									<?=  form_dropdown('email_setting[from_system][port]', emailPortDropDown(), '', ["class"=>"form-control input-sm",]); ?>
 								</div>
@@ -776,14 +776,14 @@
 			</div>
 		</div>
 		<div class="row">
-			<label for="officelocation" class="col-sm-3 col-form-label requiredAsterisk">Reply-to
-				Email</label>
+			<label for="officelocation" class="col-sm-3 col-form-label requiredAsterisk">
+				@lang('labels.reply_to_email')</label>
 			<div class="col-sm-9">
 				<div class="row">
 					<div class="col-sm-4">
 						<div class="row form-group">
-							<label for="reply_to_email" class="col-sm-12 col-form-label">Email
-								Address</label>
+							<label for="reply_to_email" class="col-sm-12 col-form-label">
+								@lang('labels.email_address')</label>
 							<div class="col-sm-12">
 								<input type="email" class="form-control input-sm"
 									name="email_setting[reply_to][email]" id="reply_to_email" required>
@@ -792,8 +792,8 @@
 					</div>
 					<div class="col-sm-4">
 						<div class="row form-group">
-							<label for="reply_to_outgoing_server" class="col-sm-12 col-form-label">Outgoing
-								Server</label>
+							<label for="reply_to_outgoing_server" class="col-sm-12 col-form-label">
+								@lang('labels.outgoing_server')</label>
 							<div class="col-sm-12">
 								<input type="text" class="form-control input-sm"
 									name="email_setting[reply_to][server]" id="reply_to_outgoing_server">
@@ -803,24 +803,24 @@
 					<div class="col-sm-4">
 						<div class="row form-group">
 							<div class="col-sm-6">
-								<label for="" class="col-sm-12 col-form-label">Authentication</label>
+								<label for="" class="col-sm-12 col-form-label">@lang('labels.authentication')</label>
 								<div class="col-sm-12">
 									<div class="zinput zradio zradio-sm  zinput-inline p-0">
 										<input id="reply_to_authentication_yes" class="form-check-input"
 											name="email_setting[reply_to][authentication]" type="radio" required
 											value="yes">
-										<label for="reply_to_authentication_yes" class="form-check-label">Yes</label>
+										<label for="reply_to_authentication_yes" class="form-check-label">@lang('labels.yes')</label>
 									</div>
 									<div class="zinput zradio  zradio-sm   zinput-inline  p-0">
 										<input id="reply_to_authentication_no" class="form-check-input"
 											name="email_setting[reply_to][authentication]" type="radio" required
 											value="no">
-										<label for="reply_to_authentication_no" class="form-check-label">No</label>
+										<label for="reply_to_authentication_no" class="form-check-label">@lang('labels.no')</label>
 									</div>
 								</div>
 							</div>
 							<div class="col-sm-6">
-								<label for="" class="col-sm-12 col-form-label">Secure Type</label>
+								<label for="" class="col-sm-12 col-form-label"> @lang('labels.secure_type')</label>
 								<div class="col-sm-12">
 									<?=  form_dropdown('email_setting[reply_to][encryption]', encryptionTypeDropDown(), '', ["class"=>"form-control input-sm"]); ?>
 								</div>
@@ -831,7 +831,7 @@
 				<div class="row">
 					<div class="col-sm-4">
 						<div class="row form-group">
-							<label for="reply_to_username" class="col-sm-12 col-form-label">Username</label>
+							<label for="reply_to_username" class="col-sm-12 col-form-label">@lang('labels.username')</label>
 							<div class="col-sm-12">
 								<input type="text" class="form-control input-sm"
 									name="email_setting[reply_to][username]" id="reply_to_username">
@@ -840,7 +840,7 @@
 					</div>
 					<div class="col-sm-4">
 						<div class="row form-group">
-							<label for="reply_to_passward" class="col-sm-12 col-form-label">Password</label>
+							<label for="reply_to_passward" class="col-sm-12 col-form-label">@lang('labels.password')</label>
 							<div class="col-sm-12">
 								<input type="password" class="form-control input-sm"
 									name="email_setting[reply_to][password]" id="reply_to_passward">
@@ -850,13 +850,13 @@
 					<div class="col-sm-4">
 						<div class="row form-group">
 							<div class="col-sm-6">
-								<label for="" class="col-sm-12 col-form-label">Protocol</label>
+								<label for="" class="col-sm-12 col-form-label">@lang('labels.protocol')</label>
 								<div class="col-sm-12">
 									<?=  form_dropdown('email_setting[reply_to][imap]', emailImapDropDown(), '', ["class"=>"form-control input-sm"]); ?>
 								</div>
 							</div>
 							<div class="col-sm-6">
-								<label for="" class="col-sm-12 col-form-label">Port</label>
+								<label for="" class="col-sm-12 col-form-label">@lang('labels.port')</label>
 								<div class="col-sm-12">
 									 <?=  form_dropdown('email_setting[reply_to][port]', emailPortDropDown(), '', ["class"=>"form-control input-sm"]); ?>
 								</div>
@@ -867,14 +867,14 @@
 			</div>
 		</div>
 		<div class="row">
-			<label for="officelocation" class="col-sm-3 col-form-label requiredAsterisk">Notices
-				Email</label>
+			<label for="officelocation" class="col-sm-3 col-form-label requiredAsterisk">
+				@lang('labels.notices_email')</label>
 			<div class="col-sm-9">
 				<div class="row">
 					<div class="col-sm-4">
 						<div class="row form-group">
-							<label for="notices_email_email" class="col-sm-12 col-form-label">Email
-								Address</label>
+							<label for="notices_email_email" class="col-sm-12 col-form-label">
+								@lang('labels.email_address')</label>
 							<div class="col-sm-12">
 								<input type="email" class="form-control input-sm"
 									name="email_setting[notices][email]" id="notices_email_email" required>
@@ -883,8 +883,8 @@
 					</div>
 					<div class="col-sm-4">
 						<div class="row form-group">
-							<label for="notices_email_outgoing_server" class="col-sm-12 col-form-label">Outgoing
-								Server</label>
+							<label for="notices_email_outgoing_server" class="col-sm-12 col-form-label">
+								@lang('labels.outgoing_server')</label>
 							<div class="col-sm-12">
 								<input type="text" class="form-control input-sm"
 									name="email_setting[notices][server]" id="notices_email_outgoing_server">
@@ -894,25 +894,25 @@
 					<div class="col-sm-4">
 						<div class="row form-group">
 							<div class="col-sm-6">
-								<label for="" class="col-sm-12 col-form-label">Authentication</label>
+								<label for="" class="col-sm-12 col-form-label">@lang('labels.authentication')</label>
 								<div class="col-sm-12">
 									<div class="zinput zradio zradio-sm  zinput-inline p-0">
 										<input id="notices_email_authentication_yes" class="form-check-input"
 											name="email_setting[notices][authentication]" type="radio" required
 											value="yes">
 										<label for="notices_email_authentication_yes"
-											class="form-check-label">Yes</label>
+											class="form-check-label">@lang('labels.yes')</label>
 									</div>
 									<div class="zinput zradio  zradio-sm   zinput-inline  p-0">
 										<input id="notices_email_authentication_no" class="form-check-input"
 											name="email_setting[notices][authentication]" type="radio" required
 											value="no">
-										<label for="notices_email_authentication_no" class="form-check-label">No</label>
+										<label for="notices_email_authentication_no" class="form-check-label">@lang('labels.no')</label>
 									</div>
 								</div>
 							</div>
 							<div class="col-sm-6">
-								<label for="" class="col-sm-12 col-form-label">Secure Type</label>
+								<label for="" class="col-sm-12 col-form-label"> @lang('labels.secure_type')</label>
 								<div class="col-sm-12">
 									<?=  form_dropdown('email_setting[notices][encryption]', encryptionTypeDropDown(), '', ["class"=>"form-control input-sm"]); ?>
 								</div>
@@ -923,7 +923,7 @@
 				<div class="row">
 					<div class="col-sm-4">
 						<div class="row form-group">
-							<label for="notices_email_username" class="col-sm-12 col-form-label">Username</label>
+							<label for="notices_email_username" class="col-sm-12 col-form-label">@lang('labels.username')</label>
 							<div class="col-sm-12">
 								<input type="text" class="form-control input-sm"
 									name="email_setting[notices][username]" id="notices_email_username">
@@ -932,7 +932,7 @@
 					</div>
 					<div class="col-sm-4">
 						<div class="row form-group">
-							<label for="notices_email_passward" class="col-sm-12 col-form-label">Password</label>
+							<label for="notices_email_passward" class="col-sm-12 col-form-label">@lang('labels.password')</label>
 							<div class="col-sm-12">
 								<input type="password" class="form-control input-sm"
 									name="email_setting[notices][password]" id="notices_email_passward">
@@ -942,13 +942,13 @@
 					<div class="col-sm-4">
 						<div class="row form-group">
 							<div class="col-sm-6">
-								<label for="" class="col-sm-12 col-form-label">Protocol</label>
+								<label for="" class="col-sm-12 col-form-label">@lang('labels.protocol')</label>
 								<div class="col-sm-12">
 									<?=  form_dropdown('email_setting[notices][imap]', emailImapDropDown(), '', ["class"=>"form-control input-sm"]); ?>
 								</div>
 							</div>
 							<div class="col-sm-6">
-								<label for="" class="col-sm-12 col-form-label">Port</label>
+								<label for="" class="col-sm-12 col-form-label">@lang('labels.port')</label>
 								<div class="col-sm-12">
 									<?=  form_dropdown('email_setting[notices][port]', emailPortDropDown(), '', ["class"=>"form-control input-sm"]); ?>
 								</div>
@@ -959,14 +959,14 @@
 			</div>
 		</div>
 		<div class="row">
-			<label for="officelocation" class="col-sm-3 col-form-label requiredAsterisk">Tasks
-				Email</label>
+			<label for="officelocation" class="col-sm-3 col-form-label requiredAsterisk">
+				@lang('labels.tasks_email')</label>
 			<div class="col-sm-9">
 				<div class="row">
 					<div class="col-sm-4">
 						<div class="row form-group">
-							<label for="tasks_email" class="col-sm-12 col-form-label">Email
-								Address</label>
+							<label for="tasks_email" class="col-sm-12 col-form-label">
+								@lang('labels.email_address')</label>
 							<div class="col-sm-12">
 								<input type="email" class="form-control input-sm" name="email_setting[tasks][email]"
 									id="tasks_email" required>
@@ -975,8 +975,8 @@
 					</div>
 					<div class="col-sm-4">
 						<div class="row form-group">
-							<label for="tasks_outgoing_server" class="col-sm-12 col-form-label">Outgoing
-								Server</label>
+							<label for="tasks_outgoing_server" class="col-sm-12 col-form-label">
+								@lang('labels.outgoing_server')</label>
 							<div class="col-sm-12">
 								<input type="text" class="form-control input-sm" name="email_setting[tasks][server]"
 									id="tasks_outgoing_server">
@@ -986,24 +986,24 @@
 					<div class="col-sm-4">
 						<div class="row form-group">
 							<div class="col-sm-6">
-								<label for="" class="col-sm-12 col-form-label">Authentication</label>
+								<label for="" class="col-sm-12 col-form-label">@lang('labels.authentication')</label>
 								<div class="col-sm-12">
 									<div class="zinput zradio zradio-sm  zinput-inline p-0">
 										<input id="tasks_authentication_yes" class="form-check-input"
 											name="email_setting[tasks][authentication]" type="radio" required
 											value="yes">
-										<label for="tasks_authentication_yes" class="form-check-label">Yes</label>
+										<label for="tasks_authentication_yes" class="form-check-label">@lang('labels.yes')</label>
 									</div>
 									<div class="zinput zradio  zradio-sm   zinput-inline  p-0">
 										<input id="tasks_authentication_no" class="form-check-input"
 											name="email_setting[tasks][authentication]" type="radio" required
 											value="no">
-										<label for="tasks_authentication_no" class="form-check-label">No</label>
+										<label for="tasks_authentication_no" class="form-check-label">@lang('labels.no')</label>
 									</div>
 								</div>
 							</div>
 							<div class="col-sm-6">
-								<label for="" class="col-sm-12 col-form-label">Secure Type</label>
+								<label for="" class="col-sm-12 col-form-label"> @lang('labels.secure_type')</label>
 								<div class="col-sm-12">
 									<?=  form_dropdown('email_setting[tasks][encryption]', encryptionTypeDropDown(), '', ["class"=>"form-control input-sm"]); ?>
 								</div>
@@ -1014,7 +1014,7 @@
 				<div class="row">
 					<div class="col-sm-4">
 						<div class="row form-group">
-							<label for="tasks_username" class="col-sm-12 col-form-label">Username</label>
+							<label for="tasks_username" class="col-sm-12 col-form-label">@lang('labels.username')</label>
 							<div class="col-sm-12">
 								<input type="text" class="form-control input-sm"
 									name="email_setting[tasks][username]" id="tasks_username">
@@ -1023,7 +1023,7 @@
 					</div>
 					<div class="col-sm-4">
 						<div class="row form-group">
-							<label for="tasks_passward" class="col-sm-12 col-form-label">Password</label>
+							<label for="tasks_passward" class="col-sm-12 col-form-label">@lang('labels.password')</label>
 							<div class="col-sm-12">
 								<input type="password" class="form-control input-sm"
 									name="email_setting[tasks][password]" id="tasks_passward">
@@ -1033,13 +1033,13 @@
 					<div class="col-sm-4">
 						<div class="row form-group">
 							<div class="col-sm-6">
-								<label for="" class="col-sm-12 col-form-label">Protocol</label>
+								<label for="" class="col-sm-12 col-form-label">@lang('labels.protocol')</label>
 								<div class="col-sm-12">
 									<?=  form_dropdown('email_setting[tasks][imap]', emailImapDropDown(), '', ["class"=>"form-control input-sm"]); ?>
 								</div>
 							</div>
 							<div class="col-sm-6">
-								<label for="" class="col-sm-12 col-form-label">Port</label>
+								<label for="" class="col-sm-12 col-form-label">@lang('labels.port')</label>
 								<div class="col-sm-12">
 									<?=  form_dropdown('email_setting[tasks][port]', emailPortDropDown(), '', ["class"=>"form-control input-sm"]); ?>
 								</div>
@@ -1050,14 +1050,14 @@
 			</div>
 		</div>
 		<div class="row">
-			<label for="officelocation" class="col-sm-3 col-form-label requiredAsterisk">Attachments
-				Email</label>
+			<label for="officelocation" class="col-sm-3 col-form-label requiredAsterisk">
+				@lang('labels.attachments_email')</label>
 			<div class="col-sm-9">
 				<div class="row">
 					<div class="col-sm-4">
 						<div class="row form-group">
-							<label for="attachments_email" class="col-sm-12 col-form-label">Email
-								Address</label>
+							<label for="attachments_email" class="col-sm-12 col-form-label">
+								@lang('labels.email_address')</label>
 							<div class="col-sm-12">
 								<input type="email" class="form-control input-sm"
 									name="email_setting[attachments][email]" id="attachments_email" required>
@@ -1066,8 +1066,8 @@
 					</div>
 					<div class="col-sm-4">
 						<div class="row form-group">
-							<label for="attachments_outgoing_server" class="col-sm-12 col-form-label">Outgoing
-								Server</label>
+							<label for="attachments_outgoing_server" class="col-sm-12 col-form-label">
+								@lang('labels.outgoing_server')</label>
 							<div class="col-sm-12">
 								<input type="text" class="form-control input-sm"
 									name="email_setting[attachments][server]" id="attachments_outgoing_server">
@@ -1077,24 +1077,24 @@
 					<div class="col-sm-4">
 						<div class="row form-group">
 							<div class="col-sm-6">
-								<label for="" class="col-sm-12 col-form-label">Authentication</label>
+								<label for="" class="col-sm-12 col-form-label">@lang('labels.authentication')</label>
 								<div class="col-sm-12">
 									<div class="zinput zradio zradio-sm  zinput-inline p-0">
 										<input id="attachments_authentication_yes" class="form-check-input"
 											name="email_setting[attachments][authentication]" type="radio" required
 											value="yes">
-										<label for="attachments_authentication_yes" class="form-check-label">Yes</label>
+										<label for="attachments_authentication_yes" class="form-check-label">@lang('labels.yes')</label>
 									</div>
 									<div class="zinput zradio  zradio-sm   zinput-inline  p-0">
 										<input id="attachments_authentication_no" class="form-check-input"
 											name="email_setting[attachments][authentication]" type="radio" required
 											value="no">
-										<label for="attachments_authentication_no" class="form-check-label">No</label>
+										<label for="attachments_authentication_no" class="form-check-label">@lang('labels.no')</label>
 									</div>
 								</div>
 							</div>
 							<div class="col-sm-6">
-								<label for="" class="col-sm-12 col-form-label">Secure Type</label>
+								<label for="" class="col-sm-12 col-form-label"> @lang('labels.secure_type')</label>
 								<div class="col-sm-12">
 									<?=  form_dropdown('email_setting[attachments][encryption]', encryptionTypeDropDown(), '', ["class"=>"form-control input-sm"]); ?>
 								</div>
@@ -1105,7 +1105,7 @@
 				<div class="row">
 					<div class="col-sm-4">
 						<div class="row form-group">
-							<label for="attachments_username" class="col-sm-12 col-form-label">Username</label>
+							<label for="attachments_username" class="col-sm-12 col-form-label">@lang('labels.username')</label>
 							<div class="col-sm-12">
 								<input type="text" class="form-control input-sm"
 									name="email_setting[attachments][username]" id="attachments_username">
@@ -1114,7 +1114,7 @@
 					</div>
 					<div class="col-sm-4">
 						<div class="row form-group">
-							<label for="attachments_passward" class="col-sm-12 col-form-label">Password</label>
+							<label for="attachments_passward" class="col-sm-12 col-form-label">@lang('labels.password')</label>
 							<div class="col-sm-12">
 								<input type="password" class="form-control input-sm"
 									name="email_setting[attachments][password]" id="attachments_passward">
@@ -1124,13 +1124,13 @@
 					<div class="col-sm-4">
 						<div class="row form-group">
 							<div class="col-sm-6">
-								<label for="" class="col-sm-12 col-form-label">Protocol</label>
+								<label for="" class="col-sm-12 col-form-label">@lang('labels.protocol')</label>
 								<div class="col-sm-12">
 									<?=  form_dropdown('email_setting[attachments][imap]', emailImapDropDown(), '', ["class"=>"form-control input-sm"]); ?>
 								</div>
 							</div>
 							<div class="col-sm-6">
-								<label for="" class="col-sm-12 col-form-label">Port</label>
+								<label for="" class="col-sm-12 col-form-label">@lang('labels.port')</label>
 								<div class="col-sm-12">
 									<?=  form_dropdown('email_setting[attachments][port]', emailPortDropDown(), '', ["class"=>"form-control input-sm"]); ?>
 								</div>
@@ -1141,14 +1141,14 @@
 			</div>
 		</div>
 		<div class="row">
-			<label for="officelocation" class="col-sm-3 col-form-label requiredAsterisk">Messages
-				Email</label>
+			<label for="officelocation" class="col-sm-3 col-form-label requiredAsterisk">
+				 @lang('labels.messages_email')</label>
 			<div class="col-sm-9">
 				<div class="row">
 					<div class="col-sm-4">
 						<div class="row form-group">
-							<label for="messages_email_email" class="col-sm-12 col-form-label">Email
-								Address</label>
+							<label for="messages_email_email" class="col-sm-12 col-form-label">
+								@lang('labels.email_address')</label>
 							<div class="col-sm-12">
 								<input type="email" class="form-control input-sm"
 									name="email_setting[messages][email]" id="messages_email_email" required>
@@ -1157,8 +1157,8 @@
 					</div>
 					<div class="col-sm-4">
 						<div class="row form-group">
-							<label for="messages_email_outgoing_server" class="col-sm-12 col-form-label">Outgoing
-								Server</label>
+							<label for="messages_email_outgoing_server" class="col-sm-12 col-form-label">
+								@lang('labels.outgoing_server')</label>
 							<div class="col-sm-12">
 								<input type="text" class="form-control input-sm"
 									name="email_setting[messages][server]" id="messages_email_outgoing_server">
@@ -1168,26 +1168,26 @@
 					<div class="col-sm-4">
 						<div class="row form-group">
 							<div class="col-sm-6">
-								<label for="" class="col-sm-12 col-form-label">Authentication</label>
+								<label for="" class="col-sm-12 col-form-label">@lang('labels.authentication')</label>
 								<div class="col-sm-12">
 									<div class="zinput zradio zradio-sm  zinput-inline p-0">
 										<input id="messages_email_authentication_yes" class="form-check-input"
 											name="email_setting[messages][authentication]" type="radio" required
 											value="yes">
 										<label for="messages_email_authentication_yes"
-											class="form-check-label">Yes</label>
+											class="form-check-label">@lang('labels.yes')</label>
 									</div>
 									<div class="zinput zradio  zradio-sm   zinput-inline  p-0">
 										<input id="messages_email_authentication_no" class="form-check-input"
 											name="email_setting[messages][authentication]" type="radio" required
 											value="no">
 										<label for="messages_email_authentication_no"
-											class="form-check-label">No</label>
+											class="form-check-label">@lang('labels.no')</label>
 									</div>
 								</div>
 							</div>
 							<div class="col-sm-6">
-								<label for="" class="col-sm-12 col-form-label">Secure Type</label>
+								<label for="" class="col-sm-12 col-form-label"> @lang('labels.secure_type')</label>
 								<div class="col-sm-12">
 									<?=  form_dropdown('email_setting[messages][encryption]', encryptionTypeDropDown(), '', ["class"=>"form-control input-sm"]); ?>
 								</div>
@@ -1198,7 +1198,7 @@
 				<div class="row">
 					<div class="col-sm-4">
 						<div class="row form-group">
-							<label for="messages_email_username" class="col-sm-12 col-form-label">Username</label>
+							<label for="messages_email_username" class="col-sm-12 col-form-label">@lang('labels.username')</label>
 							<div class="col-sm-12">
 								<input type="text" class="form-control input-sm"
 									name="email_setting[messages][username]" id="messages_email_username">
@@ -1207,7 +1207,7 @@
 					</div>
 					<div class="col-sm-4">
 						<div class="row form-group">
-							<label for="messages_email_passward" class="col-sm-12 col-form-label">Password</label>
+							<label for="messages_email_passward" class="col-sm-12 col-form-label">@lang('labels.password')</label>
 							<div class="col-sm-12">
 								<input type="password" class="form-control input-sm"
 									name="email_setting[messages][password]" id="messages_email_passward">
@@ -1217,13 +1217,13 @@
 					<div class="col-sm-4">
 						<div class="row form-group">
 							<div class="col-sm-6">
-								<label for="" class="col-sm-12 col-form-label">Protocol</label>
+								<label for="" class="col-sm-12 col-form-label">@lang('labels.protocol')</label>
 								<div class="col-sm-12">
 									<?=  form_dropdown('email_setting[messages][imap]', emailImapDropDown(), '', ["class"=>"form-control input-sm"]); ?>
 								</div>
 							</div>
 							<div class="col-sm-6">
-								<label for="" class="col-sm-12 col-form-label">Port</label>
+								<label for="" class="col-sm-12 col-form-label">@lang('labels.port')</label>
 								<div class="col-sm-12">
 									<?=  form_dropdown('email_setting[messages][port]', emailPortDropDown(), '', ["class"=>"form-control input-sm"]); ?>
 								</div>
@@ -1234,14 +1234,14 @@
 			</div>
 		</div>
 		<div class="row">
-			<label for="officelocation" class="col-sm-3 col-form-label requiredAsterisk">Sales
-				Organization</label>
+			<label for="officelocation" class="col-sm-3 col-form-label requiredAsterisk">
+				@lang('labels.sales_organization')</label>
 			<div class="col-sm-9">
 				<div class="row">
 					<div class="col-sm-4">
 						<div class="row form-group">
-							<label for="sales_email_email" class="col-sm-12 col-form-label">Email
-								Address</label>
+							<label for="sales_email_email" class="col-sm-12 col-form-label">
+								@lang('labels.email_address')</label>
 							<div class="col-sm-12">
 								<input type="email" class="form-control input-sm" name="email_setting[sales][email]"
 									id="sales_email_email" required>
@@ -1250,8 +1250,8 @@
 					</div>
 					<div class="col-sm-4">
 						<div class="row form-group">
-							<label for="sales_email_outgoing_server" class="col-sm-12 col-form-label">Outgoing
-								Server</label>
+							<label for="sales_email_outgoing_server" class="col-sm-12 col-form-label">
+								@lang('labels.outgoing_server')</label>
 							<div class="col-sm-12">
 								<input type="text" class="form-control input-sm" name="email_setting[sales][server]"
 									id="sales_email_outgoing_server">
@@ -1261,24 +1261,24 @@
 					<div class="col-sm-4">
 						<div class="row form-group">
 							<div class="col-sm-6">
-								<label for="" class="col-sm-12 col-form-label">Authentication</label>
+								<label for="" class="col-sm-12 col-form-label">@lang('labels.authentication')</label>
 								<div class="col-sm-12">
 									<div class="zinput zradio zradio-sm  zinput-inline p-0">
 										<input id="sales_email_authentication_yes" class="form-check-input"
 											name="email_setting[sales][authentication]" type="radio" required
 											value="yes">
-										<label for="sales_email_authentication_yes" class="form-check-label">Yes</label>
+										<label for="sales_email_authentication_yes" class="form-check-label">@lang('labels.yes')</label>
 									</div>
 									<div class="zinput zradio  zradio-sm   zinput-inline  p-0">
 										<input id="sales_email_authentication_no" class="form-check-input"
 											name="email_setting[sales][authentication]" type="radio" required
 											value="no">
-										<label for="sales_email_authentication_no" class="form-check-label">No</label>
+										<label for="sales_email_authentication_no" class="form-check-label">@lang('labels.no')</label>
 									</div>
 								</div>
 							</div>
 							<div class="col-sm-6">
-								<label for="" class="col-sm-12 col-form-label">Secure Type</label>
+								<label for="" class="col-sm-12 col-form-label"> @lang('labels.secure_type')</label>
 								<div class="col-sm-12">
 									<?=  form_dropdown('email_setting[sales][encryption]', encryptionTypeDropDown(), '', ["class"=>"form-control input-sm"]); ?>
 								</div>
@@ -1289,7 +1289,7 @@
 				<div class="row">
 					<div class="col-sm-4">
 						<div class="row form-group">
-							<label for="sales_email_username" class="col-sm-12 col-form-label">Username</label>
+							<label for="sales_email_username" class="col-sm-12 col-form-label">@lang('labels.username')</label>
 							<div class="col-sm-12">
 								<input type="text" class="form-control input-sm"
 									name="email_setting[sales][username]" id="sales_email_username">
@@ -1298,7 +1298,7 @@
 					</div>
 					<div class="col-sm-4">
 						<div class="row form-group">
-							<label for="sales_email_passward" class="col-sm-12 col-form-label">Password</label>
+							<label for="sales_email_passward" class="col-sm-12 col-form-label">@lang('labels.password')</label>
 							<div class="col-sm-12">
 								<input type="password" class="form-control input-sm"
 									name="email_setting[sales][password]" id="sales_email_passward">
@@ -1308,13 +1308,13 @@
 					<div class="col-sm-4">
 						<div class="row form-group">
 							<div class="col-sm-6">
-								<label for="" class="col-sm-12 col-form-label">Protocol</label>
+								<label for="" class="col-sm-12 col-form-label">@lang('labels.protocol')</label>
 								<div class="col-sm-12">
 									<?=  form_dropdown('email_setting[sales][imap]', emailImapDropDown(), '', ["class"=>"form-control input-sm"]); ?>
 								</div>
 							</div>
 							<div class="col-sm-6">
-								<label for="" class="col-sm-12 col-form-label">Port</label>
+								<label for="" class="col-sm-12 col-form-label">@lang('labels.port')</label>
 								<div class="col-sm-12">
 									<?=  form_dropdown('email_setting[sales][port]', emailPortDropDown(), '', ["class"=>"form-control input-sm"]); ?>
 								</div>
@@ -1325,14 +1325,14 @@
 			</div>
 		</div>
 		<div class="row">
-			<label for="officelocation" class="col-sm-3 col-form-label  requiredAsterisk">Email 2
-				Fax</label>
+			<label for="officelocation" class="col-sm-3 col-form-label  requiredAsterisk">
+				@lang('labels.email_2_fax')</label>
 			<div class="col-sm-9">
 				<div class="row">
 					<div class="col-sm-4">
 						<div class="row form-group">
-							<label for="faxl_email" class="col-sm-12 col-form-label">Email
-								Address</label>
+							<label for="faxl_email" class="col-sm-12 col-form-label">
+								@lang('labels.email_address')</label>
 							<div class="col-sm-12">
 								<input type="email" class="form-control input-sm " name="email_setting[fax][email]"
 									id="faxl_email" required>
@@ -1341,8 +1341,8 @@
 					</div>
 					<div class="col-sm-4">
 						<div class="row form-group">
-							<label for="faxl_outgoing_server" class="col-sm-12 col-form-label">Outgoing
-								Server</label>
+							<label for="faxl_outgoing_server" class="col-sm-12 col-form-label">
+								@lang('labels.outgoing_server')</label>
 							<div class="col-sm-12">
 								<input type="text" class="form-control input-sm" name="email_setting[fax][server]"
 									id="faxl_outgoing_server">
@@ -1352,24 +1352,24 @@
 					<div class="col-sm-4">
 						<div class="row form-group">
 							<div class="col-sm-6">
-								<label for="" class="col-sm-12 col-form-label">Authentication</label>
+								<label for="" class="col-sm-12 col-form-label">@lang('labels.authentication')</label>
 								<div class="col-sm-12">
 									<div class="zinput zradio zradio-sm  zinput-inline p-0">
 										<input id="faxl_authentication_yes" class="form-check-input"
 											class="form-check-input" name="email_setting[fax][authentication]"
 											type="radio" required value="yes">
-										<label for="faxl_authentication_yes" class="form-check-label">Yes</label>
+										<label for="faxl_authentication_yes" class="form-check-label">@lang('labels.yes')</label>
 									</div>
 									<div class="zinput zradio  zradio-sm   zinput-inline  p-0">
 										<input id="faxl_authentication_no" class="form-check-input"
 											class="form-check-input" name="email_setting[fax][authentication]"
 											type="radio" required value="no">
-										<label for="faxl_authentication_no" class="form-check-label">No</label>
+										<label for="faxl_authentication_no" class="form-check-label">@lang('labels.no')</label>
 									</div>
 								</div>
 							</div>
 							<div class="col-sm-6">
-								<label for="" class="col-sm-12 col-form-label">Secure Type</label>
+								<label for="" class="col-sm-12 col-form-label"> @lang('labels.secure_type')</label>
 								<div class="col-sm-12">
 									<?=  form_dropdown('email_setting[fax][encryption]', encryptionTypeDropDown(), '', ["class"=>"form-control input-sm"]); ?>
 								</div>
@@ -1380,7 +1380,7 @@
 				<div class="row">
 					<div class="col-sm-4">
 						<div class="row form-group">
-							<label for="faxl_username" class="col-sm-12 col-form-label">Username</label>
+							<label for="faxl_username" class="col-sm-12 col-form-label">@lang('labels.username')</label>
 							<div class="col-sm-12">
 								<input type="text" class="form-control input-sm" name="email_setting[fax][username]"
 									id="faxl_username">
@@ -1389,7 +1389,7 @@
 					</div>
 					<div class="col-sm-4">
 						<div class="row form-group">
-							<label for="faxl_passward" class="col-sm-12 col-form-label">Password</label>
+							<label for="faxl_passward" class="col-sm-12 col-form-label">@lang('labels.password')</label>
 							<div class="col-sm-12">
 								<input type="password" class="form-control input-sm" name="email_setting[fax][password]"
 									id="faxl_passward">
@@ -1399,13 +1399,13 @@
 					<div class="col-sm-4">
 						<div class="row form-group">
 							<div class="col-sm-6">
-								<label for="" class="col-sm-12 col-form-label">Protocol</label>
+								<label for="" class="col-sm-12 col-form-label">@lang('labels.protocol')</label>
 								<div class="col-sm-12">
 									<?=  form_dropdown('email_setting[fax][imap]', emailImapDropDown(), '', ["class"=>"form-control input-sm"]); ?>
 								</div>
 							</div>
 							<div class="col-sm-6">
-								<label for="" class="col-sm-12 col-form-label">Port</label>
+								<label for="" class="col-sm-12 col-form-label">@lang('labels.port')</label>
 								<div class="col-sm-12">
 									<?=  form_dropdown('email_setting[fax][port]', emailPortDropDown(), '', ["class"=>"form-control input-sm"]); ?>
 								</div>
@@ -1419,7 +1419,7 @@
             <hr class="color-10 my-5">
         </div>
         <div>
-            <p class="fw-600">Outgoing Fax Settings</p>
+            <p class="fw-600"> @lang('labels.outgoing_fax_settings') </p>
         </div>
         <div class="form-group row">
             <label for="from_fax_email" class="col-sm-3 col-form-label">@lang("labels.from_fax_email")</label>
@@ -1452,7 +1452,7 @@
         </div>
         <div class="form-group row">
             <label for="fax_server_domain_name" class="col-sm-3 col-form-label ">@lang("labels.fax_server_domain_name")
-                Name</label>
+                </label>
             <div class="col-sm-9">
                 <input type="text" name="server_email_domain" class="form-control input-sm" id="server_email_domain"
                     placeholder="">
@@ -1462,7 +1462,7 @@
             <hr class="color-10 my-5">
         </div>
         <div>
-            <p class="fw-600">Incoming Fax</p>
+            <p class="fw-600"> @lang('labels.incoming_fax')</p>
         </div>
         <div class="form-group row">
             <label for="ccpa_privacy_notice" class="col-sm-3 col-form-label requiredAsterisk">@lang("labels.signed_agreement_fax")</label>

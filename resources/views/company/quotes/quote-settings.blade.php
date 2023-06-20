@@ -1,9 +1,10 @@
 <x-app-layout>
-    <x-jet-form-section  :buttonGroup="['logs']" :activePageName="$activePage" class="validationForm editForm" :title="$pageTitle" novalidate action="{{ routeCheck($route . 'quotes-settings') }}" method="post">
+    <x-jet-form-section :buttonGroup="['logs']" :activePageName="$activePage" class="validationForm editForm" :title="$pageTitle" novalidate
+        action="{{ routeCheck($route . 'quotes-settings') }}" method="post">
         @slot('form')
             <input type="hidden" name="logsArr">
             <div class="">
-                <p class="fw-600">Defaults</p>
+                <p class="fw-600"> Defaults</p>
             </div>
             <div class="row">
                 <label for="" class="col-sm-4 col-form-label requiredAsterisk">@lang('labels.loan_origination_state')</label>
@@ -62,26 +63,27 @@
             <div class="form-group row">
                 <label for="comp_name" class="col-sm-4 col-form-label requiredAsterisk">@lang('labels.number_until_first_payment')</label>
                 <div class="col-sm-8">
-                    <x-jet-input type="text" name="until_first_payment" required class="digitLimit" data-limit="3"/>
+                    <x-jet-input type="text" name="until_first_payment" required class="digitLimit" data-limit="3" />
                 </div>
             </div>
             <div class="form-group row">
                 <label for="comp_name" class="col-sm-4 col-form-label requiredAsterisk">@lang('labels.number_first_due_date')</label>
                 <div class="col-sm-8">
-                    <x-jet-input type="text" name="first_due_date" required class="digitLimit" data-limit="3"/>
+                    <x-jet-input type="text" name="first_due_date" required class="digitLimit" data-limit="3" />
                 </div>
             </div>
 
             <div class="form-group row">
                 <label for="comp_name" class="col-sm-4 col-form-label requiredAsterisk">@lang('labels.number_new_quote_expiration')</label>
                 <div class="col-sm-8">
-                    <x-jet-input type="text" name="new_quote_expiration" required class="digitLimit" data-limit="3"/>
+                    <x-jet-input type="text" name="new_quote_expiration" required class="digitLimit" data-limit="3" />
                 </div>
             </div>
             <div class="form-group row">
                 <label for="comp_name" class="col-sm-4 col-form-label requiredAsterisk">@lang('labels.renewal_quote_expiration')</label>
                 <div class="col-sm-8">
-                    <x-jet-input type="text" name="renewal_quote_expiration" required class="digitLimit" data-limit="3"/>
+                    <x-jet-input type="text" name="renewal_quote_expiration" required class="digitLimit"
+                        data-limit="3" />
                 </div>
             </div>
             <div class="form-group row">
@@ -111,7 +113,7 @@
             <div class="form-group row">
                 <label for="comp_name" class="col-sm-4 col-form-label ">@lang('labels.company_stamp_fees')</label>
                 <div class="col-sm-8">
-                    {!! form_dropdown('stamp_fees', [], '', ['class' => 'w-100',], 1) !!}
+                    {!! form_dropdown('stamp_fees', [], '', ['class' => 'w-100'], 1) !!}
                 </div>
             </div>
             <div class="form-group row">
@@ -196,7 +198,7 @@
                 </div>
             </div>
             <div class="mb-3">
-                <p class="fw-600">Required Fields Options</p>
+                <p class="fw-600">@lang('labels.required_fields_options')</p>
             </div>
 
             <div class="form-group row">
@@ -295,7 +297,7 @@
                 </div>
             </div>
             <div class="mb-3">
-                <p class="fw-600">Enable/Disable Options</p>
+                <p class="fw-600">@lang('labels.enable_disable_options')</p>
             </div>
 
             <div class="form-group row">
@@ -653,14 +655,14 @@
                 <label for="comp_name" class="col-sm-4 col-form-label ">@lang('labels.first_due_dates')</label>
                 <div class="col-sm-8">
                     <div class="zinput zradio zradio-sm zinput-inline p-0 form-group ">
-                        <input id="first_due_dates_enable"  name="first_due_dates" type="radio"
+                        <input id="first_due_dates_enable" name="first_due_dates" type="radio"
                             class="form-check-input" value="1">
                         <label for="first_due_dates_enable" class="form-check-label ml-0">
                             @lang('labels.enable')
                         </label>
                     </div>
                     <div class="zinput zradio zradio-sm zinput-inline p-0 form-group ">
-                        <input id="first_due_dates_included_down_payment"  name="first_due_dates" type="radio"
+                        <input id="first_due_dates_included_down_payment" name="first_due_dates" type="radio"
                             class="form-check-input" value="0">
                         <label for="first_due_dates_included_down_payment" class="form-check-label ml-0">
                             @lang('labels.disable')
@@ -673,15 +675,15 @@
                 <label for="comp_name" class="col-sm-4 col-form-label ">@lang('labels.bank_risk_rating')</label>
                 <div class="col-sm-8">
                     <div class="zinput zradio zradio-sm zinput-inline p-0 form-group ">
-                        <input id="bank_risk_rating_enable"  name="bank_risk_rating" type="radio"
+                        <input id="bank_risk_rating_enable" name="bank_risk_rating" type="radio"
                             class="form-check-input" value="1">
                         <label for="bank_risk_rating_enable" class="form-check-label ml-0">
                             @lang('labels.enable')
                         </label>
                     </div>
                     <div class="zinput zradio zradio-sm zinput-inline p-0 form-group ">
-                        <input id="bank_risk_rating_disable"  name="bank_risk_rating"
-                            type="radio" class="form-check-input" value="0">
+                        <input id="bank_risk_rating_disable" name="bank_risk_rating" type="radio"
+                            class="form-check-input" value="0">
                         <label for="bank_risk_rating_disable" class="form-check-label ml-0">
                             @lang('labels.disable')
                         </label>
@@ -713,14 +715,14 @@
                 <label for="comp_name" class="col-sm-4 col-form-label ">@lang('labels.recourse_amount')</label>
                 <div class="col-sm-8">
                     <div class="zinput zradio zradio-sm zinput-inline p-0 form-group ">
-                        <input id="recourse_amount_enable"  name="recourse_amount" type="radio"
+                        <input id="recourse_amount_enable" name="recourse_amount" type="radio"
                             class="form-check-input" value="1">
                         <label for="recourse_amount_enable" class="form-check-label ml-0">
                             @lang('labels.enable')
                         </label>
                     </div>
                     <div class="zinput zradio zradio-sm zinput-inline p-0 form-group ">
-                        <input id="recourse_amount_disable"  name="recourse_amount" type="radio"
+                        <input id="recourse_amount_disable" name="recourse_amount" type="radio"
                             class="form-check-input" value="0">
                         <label for="recourse_amount_disable" class="form-check-label ml-0">
                             @lang('labels.disable')
@@ -733,15 +735,15 @@
                 <label for="comp_name" class="col-sm-4 col-form-label ">@lang('labels.ap_interest_starts_fixed_days')</label>
                 <div class="col-sm-8">
                     <div class="zinput zradio zradio-sm zinput-inline p-0 form-group ">
-                        <input id="ap_interest_enable"  name="ap_interest" type="radio"
-                            class="form-check-input" value="1">
+                        <input id="ap_interest_enable" name="ap_interest" type="radio" class="form-check-input"
+                            value="1">
                         <label for="ap_interest_enable" class="form-check-label ml-0">
                             @lang('labels.enable')
                         </label>
                     </div>
                     <div class="zinput zradio zradio-sm zinput-inline p-0 form-group ">
-                        <input id="ap_interest_disable"  name="ap_interest" type="radio"
-                            class="form-check-input" value="0">
+                        <input id="ap_interest_disable" name="ap_interest" type="radio" class="form-check-input"
+                            value="0">
                         <label for="ap_interest_disable" class="form-check-label ml-0">
                             @lang('labels.disable')
                         </label>
@@ -755,15 +757,15 @@
                 <label for="comp_name" class="col-sm-4 col-form-label ">@lang('labels.ap_endorsement_default_expiration_to_original_policy')</label>
                 <div class="col-sm-8">
                     <div class="zinput zradio zradio-sm zinput-inline p-0 form-group ">
-                        <input id="ap_endorsement_enable"  name="ap_endorsement" type="radio"
-                            class="form-check-input" value="1">
+                        <input id="ap_endorsement_enable" name="ap_endorsement" type="radio" class="form-check-input"
+                            value="1">
                         <label for="ap_endorsement_enable" class="form-check-label ml-0">
                             @lang('labels.enable')
                         </label>
                     </div>
                     <div class="zinput zradio zradio-sm zinput-inline p-0 form-group ">
-                        <input id="ap_endorsement_disable"  name="ap_endorsement" type="radio"
-                            class="form-check-input" value="0">
+                        <input id="ap_endorsement_disable" name="ap_endorsement" type="radio" class="form-check-input"
+                            value="0">
                         <label for="ap_endorsement_disable" class="form-check-label ml-0">
                             @lang('labels.disable')
                         </label>
@@ -781,8 +783,8 @@
                         </label>
                     </div>
                     <div class="zinput zradio zradio-sm zinput-inline p-0 form-group ">
-                        <input id="endorsement_setup_fee_disable" required name="endorsement_setup_fee"
-                            type="radio" class="form-check-input" value="0">
+                        <input id="endorsement_setup_fee_disable" required name="endorsement_setup_fee" type="radio"
+                            class="form-check-input" value="0">
                         <label for="endorsement_setup_fee_disable" class="form-check-label ml-0">
                             @lang('labels.disable')
                         </label>
@@ -796,14 +798,14 @@
                 <label for="comp_name" class="col-sm-4 col-form-label ">@lang('labels.agency_name_e_signature')</label>
                 <div class="col-sm-8">
                     <div class="zinput zradio zradio-sm zinput-inline p-0 form-group ">
-                        <input id="agency_name_sig_enable"  name="agency_name_sig" type="radio"
+                        <input id="agency_name_sig_enable" name="agency_name_sig" type="radio"
                             class="form-check-input" value="1">
                         <label for="agency_name_sig_enable" class="form-check-label ml-0">
                             @lang('labels.enable')
                         </label>
                     </div>
                     <div class="zinput zradio zradio-sm zinput-inline p-0 form-group ">
-                        <input id="agency_name_sig_disable"  name="agency_name_sig" type="radio"
+                        <input id="agency_name_sig_disable" name="agency_name_sig" type="radio"
                             class="form-check-input" value="0">
                         <label for="agency_name_sig_disable" class="form-check-label ml-0">
                             @lang('labels.disable')
@@ -816,15 +818,15 @@
                 <label for="comp_name" class="col-sm-4 col-form-label ">@lang('labels.include_sales_organizations_user_on_request_authorization')</label>
                 <div class="col-sm-8">
                     <div class="zinput zradio zradio-sm zinput-inline p-0 form-group ">
-                        <input id="salesexecs_enable"  name="salesexecs" type="radio" class="form-check-input"
+                        <input id="salesexecs_enable" name="salesexecs" type="radio" class="form-check-input"
                             value="1">
                         <label for="salesexecs_enable" class="form-check-label ml-0">
                             @lang('labels.enable')
                         </label>
                     </div>
                     <div class="zinput zradio zradio-sm zinput-inline p-0 form-group ">
-                        <input id="salesexecs_disable"  name="salesexecs" type="radio"
-                            class="form-check-input" value="0">
+                        <input id="salesexecs_disable" name="salesexecs" type="radio" class="form-check-input"
+                            value="0">
                         <label for="salesexecs_disable" class="form-check-label ml-0">
                             @lang('labels.disable')
                         </label>
@@ -836,15 +838,15 @@
                 <label for="comp_name" class="col-sm-4 col-form-label ">@lang('labels.include_ach_option_down_payment_receipt_method')</label>
                 <div class="col-sm-8">
                     <div class="zinput zradio zradio-sm zinput-inline p-0 form-group ">
-                        <input id="ach_receipt_enable"  name="ach_receipt" type="radio"
-                            class="form-check-input" value="1">
+                        <input id="ach_receipt_enable" name="ach_receipt" type="radio" class="form-check-input"
+                            value="1">
                         <label for="ach_receipt_enable" class="form-check-label ml-0">
                             @lang('labels.enable')
                         </label>
                     </div>
                     <div class="zinput zradio zradio-sm zinput-inline p-0 form-group ">
-                        <input id="ach_receipt_disable"  name="ach_receipt" type="radio"
-                            class="form-check-input" value="0">
+                        <input id="ach_receipt_disable" name="ach_receipt" type="radio" class="form-check-input"
+                            value="0">
                         <label for="ach_receipt_disable" class="form-check-label ml-0">
                             @lang('labels.disable')
                         </label>
@@ -855,15 +857,15 @@
                 <label for="comp_name" class="col-sm-4 col-form-label ">@lang('labels.distribute_setup_payment_schedule_and_down_payment')</label>
                 <div class="col-sm-8">
                     <div class="zinput zradio zradio-sm zinput-inline p-0 form-group ">
-                        <input id="payment_schedule_enable"  name="payment_schedule" type="radio"
+                        <input id="payment_schedule_enable" name="payment_schedule" type="radio"
                             class="form-check-input" value="1">
                         <label for="payment_schedule_enable" class="form-check-label ml-0">
                             @lang('labels.enable')
                         </label>
                     </div>
                     <div class="zinput zradio zradio-sm zinput-inline p-0 form-group ">
-                        <input id="payment_schedule_disable"  name="payment_schedule"
-                            type="radio" class="form-check-input" value="0">
+                        <input id="payment_schedule_disable" name="payment_schedule" type="radio"
+                            class="form-check-input" value="0">
                         <label for="payment_schedule_disable" class="form-check-label ml-0">
                             @lang('labels.disable')
                         </label>
@@ -876,15 +878,15 @@
                 <label for="comp_name" class="col-sm-4 col-form-label ">@lang('labels.add_products')</label>
                 <div class="col-sm-8">
                     <div class="zinput zradio zradio-sm zinput-inline p-0 form-group ">
-                        <input id="add_products_enable"  name="add_products" type="radio"
-                            class="form-check-input" value="1">
+                        <input id="add_products_enable" name="add_products" type="radio" class="form-check-input"
+                            value="1">
                         <label for="add_products_enable" class="form-check-label ml-0">
                             @lang('labels.enable')
                         </label>
                     </div>
                     <div class="zinput zradio zradio-sm zinput-inline p-0 form-group ">
-                        <input id="add_products_disable"  name="add_products" type="radio"
-                            class="form-check-input" value="0">
+                        <input id="add_products_disable" name="add_products" type="radio" class="form-check-input"
+                            value="0">
                         <label for="add_products_disable" class="form-check-label ml-0">
                             @lang('labels.disable')
                         </label>
@@ -904,8 +906,8 @@
                         </label>
                     </div>
                     <div class="zinput zradio zradio-sm zinput-inline p-0 form-group ">
-                        <input id="company_tax_validation_disable" required name="company_tax_validation"
-                            type="radio" class="form-check-input" value="0">
+                        <input id="company_tax_validation_disable" required name="company_tax_validation" type="radio"
+                            class="form-check-input" value="0">
                         <label for="company_tax_validation_disable" class="form-check-label ml-0">
                             @lang('labels.disable')
                         </label>
@@ -924,8 +926,8 @@
                         </label>
                     </div>
                     <div class="zinput zradio zradio-sm zinput-inline p-0 form-group ">
-                        <input id="agent_rate_table_disable" required name="agent_rate_table"
-                            type="radio" class="form-check-input" value="0">
+                        <input id="agent_rate_table_disable" required name="agent_rate_table" type="radio"
+                            class="form-check-input" value="0">
                         <label for="agent_rate_table_disable" class="form-check-label ml-0">
                             @lang('labels.disable')
                         </label>
@@ -944,8 +946,8 @@
                         </label>
                     </div>
                     <div class="zinput zradio zradio-sm zinput-inline p-0 form-group ">
-                        <input id="view_quote_exposure_disable" required name="view_quote_exposure"
-                            type="radio" class="form-check-input" value="0">
+                        <input id="view_quote_exposure_disable" required name="view_quote_exposure" type="radio"
+                            class="form-check-input" value="0">
                         <label for="view_quote_exposure_disable" class="form-check-label ml-0">
                             @lang('labels.disable')
                         </label>
@@ -957,15 +959,15 @@
                 <label for="comp_name" class="col-sm-4 col-form-label requiredAsterisk">@lang('labels.view_agent_compensation')</label>
                 <div class="col-sm-8">
                     <div class="zinput zradio zradio-sm zinput-inline p-0 form-group ">
-                        <input id="view_agent_compensation_enable" required name="view_agent_compensation"
-                            type="radio" class="form-check-input" value="1">
+                        <input id="view_agent_compensation_enable" required name="view_agent_compensation" type="radio"
+                            class="form-check-input" value="1">
                         <label for="view_agent_compensation_enable" class="form-check-label ml-0">
                             @lang('labels.enable')
                         </label>
                     </div>
                     <div class="zinput zradio zradio-sm zinput-inline p-0 form-group ">
-                        <input id="view_agent_compensation_disable" required
-                            name="view_agent_compensation" type="radio" class="form-check-input" value="0">
+                        <input id="view_agent_compensation_disable" required name="view_agent_compensation"
+                            type="radio" class="form-check-input" value="0">
                         <label for="view_agent_compensation_disable" class="form-check-label ml-0">
                             @lang('labels.disable')
                         </label>
@@ -976,79 +978,76 @@
             <div class="form-group row">
                 <label for="comp_name" class="col-sm-4 col-form-label ">@lang('labels.patriot_message')</label>
                 <div class="col-sm-8">
-                    <textarea name="patriot_message" id="patriot_message" cols="30" class="form-control"
-                    rows="3"></textarea>
+                    <textarea name="patriot_message" id="patriot_message" cols="30" class="form-control" rows="3"></textarea>
                 </div>
             </div>
             <div class="form-group row">
                 <label for="comp_name" class="col-sm-4 col-form-label ">@lang('labels.e_signature')</label>
                 <div class="col-sm-8">
-                    <textarea name="e_signature" id="e_signature" cols="30" class="form-control"
-                    rows="3"></textarea>
+                    <textarea name="e_signature" id="e_signature" cols="30" class="form-control" rows="3"></textarea>
                 </div>
             </div>
-             <div class="mb-3">
-                <p class="fw-600">OFAC Compliance</p>
+            <div class="mb-3">
+                <p class="fw-600">@lang('labels.ofac_compliance')</p>
             </div>
             <div class="form-group row">
                 <label for="comp_name" class="col-sm-4 col-form-label ">@lang('labels.ofac_url')</label>
                 <div class="col-sm-8">
-                    <x-jet-input type="url" name="ofac_url"/>
+                    <x-jet-input type="url" name="ofac_url" />
                 </div>
             </div>
             <div class="form-group row">
                 <label for="comp_name" class="col-sm-4 col-form-label ">@lang('labels.accuity_client')</label>
                 <div class="col-sm-8">
-                    <x-jet-input type="text" class="nonactive" name="accuity_client"/>
+                    <x-jet-input type="text" class="nonactive" name="accuity_client" />
                 </div>
             </div>
             <div class="form-group row">
                 <label for="comp_name" class="col-sm-4 col-form-label ">@lang('labels.accuity_service_url')</label>
                 <div class="col-sm-8">
-                    <x-jet-input type="url" name="accuity_service_url"/>
+                    <x-jet-input type="url" name="accuity_service_url" />
                 </div>
             </div>
-             <div class="mb-3">
-                <p class="fw-600">Other Options</p>
+            <div class="mb-3">
+                <p class="fw-600">@lang('labels.other_options')</p>
             </div>
             <div class="form-group row">
                 <label for="comp_name" class="col-sm-4 col-form-label ">@lang('labels.warning_inception_date')</label>
                 <div class="col-sm-8">
-                    <x-jet-input type="text" name="warning_inception_date" class="nonactive"/>
+                    <x-jet-input type="text" name="warning_inception_date" class="nonactive" />
                 </div>
             </div>
             <div class="form-group row">
                 <label for="comp_name" class="col-sm-4 col-form-label ">@lang('labels.warning_first_due_date')</label>
                 <div class="col-sm-8">
-                    <x-jet-input type="text" name="warning_first_due_date" class="nonactive"/>
+                    <x-jet-input type="text" name="warning_first_due_date" class="nonactive" />
                 </div>
             </div>
             <div class="form-group row">
                 <label for="comp_name" class="col-sm-4 col-form-label ">@lang('labels.warning_first_due_date_number')</label>
                 <div class="col-sm-8">
-                    <x-jet-input type="text" name="warning_first_due_date_number" class="nonactive"/>
+                    <x-jet-input type="text" name="warning_first_due_date_number" class="nonactive" />
                 </div>
             </div>
             <div class="form-group row">
                 <label for="comp_name" class="col-sm-4 col-form-label ">@lang('labels.allow_inception_date')</label>
                 <div class="col-sm-8">
-                    <x-jet-input type="text" name="allow_inception_date" class="nonactive"/>
+                    <x-jet-input type="text" name="allow_inception_date" class="nonactive" />
                 </div>
             </div>
             <div class="form-group row">
                 <label for="comp_name" class="col-sm-4 col-form-label ">@lang('labels.text_signature')</label>
                 <div class="col-sm-8">
-                    <textarea name="text_signature" id="text_signature" cols="30" class="form-control"
-                    rows="3"></textarea>
+                    <textarea name="text_signature" id="text_signature" cols="30" class="form-control" rows="3"></textarea>
                 </div>
             </div>
-                    <x-button-group cancel='{{ routeCheck("company.dashboard") }}'/>
+            <x-button-group cancel='{{ routeCheck('company.dashboard') }}' />
         @endslot
         @slot('logContent')
             <x-bootstrap-table :data="[
                 'table' => 'logs',
                 'cookieid' => true,
-                 'id' => $activePage.'-logs',
+                'id' => $activePage . '-logs',
                 'sortorder' => 'desc',
                 'sortname' => 'created_at',
                 'type' => 'serversides',
@@ -1056,13 +1055,14 @@
             ]">
                 <thead>
                     <tr>
-                        <th class="" data-sortable="true" data-field="created_at" data-width="170">Created Date
+                        <th class="" data-sortable="true" data-field="created_at" data-width="170">
+                            @lang('labels.created_date')
                         </th>
 
                         <th class="" data-sortable="true" data-field="username" data-width="200">
-                            User Name
+                            @lang('labels.user_name')
                         </th>
-                        <th class="" data-sortable="true" data-field="message">Description</th>
+                        <th class="" data-sortable="true" data-field="message">@lang('labels.description')</th>
                     </tr>
                 </thead>
             </x-bootstrap-table>

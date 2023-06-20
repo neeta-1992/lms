@@ -47,12 +47,12 @@
                     <div class="zinput zradio zradio-sm  zinput-inline  p-0">
                         <input id="status_yes" name="status" type="radio" required class="form-check-input"
                             value="1">
-                        <label for="status_yes" class="form-check-label">Yes</label>
+                        <label for="status_yes" class="form-check-label">@lang('labels.yes')</label>
                     </div>
                     <div class="zinput zradio zradio-sm  zinput-inline  p-0">
                         <input id="status_no" name="status" type="radio" required class="form-check-input"
                             value="0">
-                        <label for="status_no" class="form-check-label">No</label>
+                        <label for="status_no" class="form-check-label">@lang('labels.no')</label>
                     </div>
                 </div>
             </div>
@@ -216,7 +216,7 @@
             </div>
 		</div>
 		<hr>
-       
+
 
         <div style="position: relative" class="down_payment_table mt-5" x-show="tableShow == 'table'">
                 <x-bootstrap-without-pagination-table :data="[
@@ -260,13 +260,13 @@
             ]">
                 <thead>
                     <tr>
-                        <th class="" data-sortable="true" data-field="created_at" data-width="170">Created Date
+                        <th class="" data-sortable="true" data-field="created_at" data-width="170">@lang('labels.created_date')
                         </th>
 
                         <th class="" data-sortable="true" data-field="username" data-width="200">
-                            User Name
+                           @lang('labels.user_name')
                         </th>
-                        <th class="" data-sortable="true" data-field="message">Description</th>
+                        <th class="" data-sortable="true" data-field="message">@lang('labels.description')</th>
                     </tr>
                 </thead>
             </x-bootstrap-table>

@@ -62,7 +62,7 @@
                         <input type="hidden" name="agency" @change="agency = $el.value;entityId =$el.value">
                         <i class="dropdown icon"></i>
                         <input type="text" class="search">
-                        <div class="default text">Search Agency</div>
+                        <div class="default text">@lang('labels.search_agency')  </div>
                     </div>
                 </div>
               </div>

@@ -23,15 +23,15 @@
             <div class="columns">
                 <div class="ui selection dropdown table-head-dropdown">
                     <input type="hidden" x-bind:value=open /><i class="dropdown icon"></i>
-                    <div class="text" x-text="title">{{$userTypeText}} Information</div>
+                    <div class="text" x-text="title">{{$userTypeText}} @lang('labels.information') </div>
                     <div class="menu">
-                        <div class="item" @click="open = 'isForm'" x-show="open !== 'isForm'">User Information</div>
-                        <div class="item" @click="open = 'user-settings'" x-show="open !== 'user-settings'">Settings
+                        <div class="item" @click="open = 'isForm'" x-show="open !== 'isForm'">@lang('labels.user_information')</div>
+                        <div class="item" @click="open = 'user-settings'" x-show="open !== 'user-settings'">@lang('labels.settings')
                         </div>
-                        <div class="item" @click="open = 'user-permissions'" x-show="open !== 'user-permissions'">Permissions</div>
+                        <div class="item" @click="open = 'user-permissions'" x-show="open !== 'user-permissions'">@lang('labels.permissions') </div>
                         <div class="item" @click="open = 'user-reports'"
-                            x-show="open !== 'user-reports';title == 'User Reports'">Reports</div>
-                        <div class="item" @click="open = 'logs';" x-show="open != 'logs'">Logs</div>
+                            x-show="open !== 'user-reports';title == 'User Reports'">@lang('labels.reports') </div>
+                        <div class="item" @click="open = 'logs';" x-show="open != 'logs'">@lang('labels.logs')</div>
                     </div>
                 </div>
             </div>
@@ -53,7 +53,7 @@
                 <div x-show="open == 'user-settings'">
 
                     <div class="mb-3">
-                        <p class="fw-600">Default values used when creating new users</p>
+                        <p class="fw-600">@lang('labels.default_values_used_when_creating_new_users')</p>
                     </div>
                     <div class="form-group row">
                         <label for="name" class="col-sm-3 col-form-label">@lang('labels.days_allowed_to_modify_due_date')</label>
@@ -175,12 +175,12 @@
 
                 <thead>
                     <tr>
-                        <th class="" data-sortable="true" data-field="created_at" data-width="170">Created Date
+                        <th class="" data-sortable="true" data-field="created_at" data-width="170">@lang('labels.created_date')
                         </th>
 
-                        <th class="" data-sortable="false" data-field="username" data-width="200">User Name
+                        <th class="" data-sortable="false" data-field="username" data-width="200">@lang('labels.user_name')
                         </th>
-                        <th class="" data-sortable="true" data-field="message">Description</th>
+                        <th class="" data-sortable="true" data-field="message">@lang('labels.description')</th>
                     </tr>
                 </thead>
                 </x-bootstrap-table>

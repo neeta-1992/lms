@@ -7,13 +7,13 @@
             <input type="hidden" name="logsArr">
 
             <div class="form-group row">
-                <label for="name" class="col-sm-3 col-form-label requiredAsterisk"> Name</label>
+                <label for="name" class="col-sm-3 col-form-label requiredAsterisk"> @lang('labels.name')</label>
                 <div class="col-sm-9">
                      <x-jet-input type="text" class="fw-600" name="name" id="name" required />
                 </div>
             </div>
             <div class="form-group row">
-                <label for="status" class="col-sm-3 col-form-label requiredAsterisk">Status</label>
+                <label for="status" class="col-sm-3 col-form-label requiredAsterisk">@lang('labels.status')</label>
                 <div class="col-sm-9">
                     {!! form_dropdown('status', [1 => 'Enable', 0 => 'Disable'], '', [
                         'class' => 'ui dropdown input-sm w-100',
@@ -22,14 +22,14 @@
                 </div>
             </div>
             <div class="form-group row">
-                <label for="description" class="col-sm-3 col-form-label requiredAsterisk"> Description</label>
+                <label for="description" class="col-sm-3 col-form-label requiredAsterisk"> @lang('labels.description')</label>
                 <div class="col-sm-9">
                     <textarea name="description" id="description" class="form-control" required cols="30" rows="3"></textarea>
 
                 </div>
             </div>
             <div class="form-group row">
-                <label for="template" class="col-sm-3 col-form-label requiredAsterisk"> Text</label>
+                <label for="template" class="col-sm-3 col-form-label requiredAsterisk"> @lang('labels.text')</label>
                 <div class="col-sm-9">
                     <textarea name="template" id="template" class="form-control financeAgreementCodemirrorEditor templateEditor" required
                         cols="30" rows="3"></textarea>
@@ -58,12 +58,12 @@
             ]">
                 <thead>
                     <tr>
-                        <th class="" data-sortable="true" data-field="created_at" data-width="170">Created Date
+                        <th class="" data-sortable="true" data-field="created_at" data-width="170">@lang('labels.created_date')
                         </th>
 
-                        <th class="" data-sortable="true" data-field="username" data-width="200">User Name
+                        <th class="" data-sortable="true" data-field="username" data-width="200">@lang('labels.user_name')
                         </th>
-                        <th class="" data-sortable="true" data-field="message">Description</th>
+                        <th class="" data-sortable="true" data-field="message">@lang('labels.description')</th>
                     </tr>
                 </thead>
             </x-bootstrap-table>

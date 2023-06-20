@@ -56,13 +56,13 @@
                             <div class="columns">
                                 <div class="ui selection dropdown table-head-dropdown">
                                     <input type="hidden" x-bind:value=open /><i class="dropdown icon"></i>
-                                    <div class="text" x-text="title">General Information</div>
+                                    <div class="text" x-text="title">@lang('labels.general_information')</div>
                                     <div class="menu">
-                                        <div class="item" @click="open = 'general-information'" x-show="open != 'general-information'">General Information</div>
-                                        <div class="item" @click="open = 'contacts'" x-show="open != 'contacts'">Contacts</div>
-                                         <div class="item" @click="open = 'notices'" x-show="open != 'notices'">Notices</div>
-                                        <div class="item" @click="open = 'attachments'" x-show="open != 'attachments'"> Attachments</div>
-                                        <div class="item" @click="open = 'accounts'" x-show="open != 'accounts'">Accounts</div>
+                                        <div class="item" @click="open = 'general-information'" x-show="open != 'general-information'">@lang('labels.general_information')</div>
+                                        <div class="item" @click="open = 'contacts'" x-show="open != 'contacts'">@lang('labels.contact')</div>
+                                         <div class="item" @click="open = 'notices'" x-show="open != 'notices'">@lang('labels.notices')</div>
+                                        <div class="item" @click="open = 'attachments'" x-show="open != 'attachments'"> @lang('labels.attachments')</div>
+                                        <div class="item" @click="open = 'accounts'" x-show="open != 'accounts'">@lang('labels.accounts')</div>
 
                                     </div>
                                 </div>
@@ -200,7 +200,7 @@
             </div>
 
             <div class="row mailing_address_box">
-                <label for="mailing_address" class="col-sm-3 col-form-label ">Mailing Address </label>
+                <label for="mailing_address" class="col-sm-3 col-form-label ">@lang('labels.mailing_address') </label>
                 <div class="col-sm-9">
                     <div class="form-group row">
                         <div class="col-md-12 mb-1">
@@ -266,14 +266,13 @@
                         <thead>
                             <tr>
                                 <th class="" data-sortable="true" data-field="created_at" data-width="170">
-                                    Created
-                                    Date
+                                  @lang('labels.created_date')
                                 </th>
 
-                                <th class="" data-sortable="true" data-field="username" data-width="200">User
-                                    Name
+                                <th class="" data-sortable="true" data-field="username" data-width="200">
+                                    @lang('labels.user_name')
                                 </th>
-                                <th class="" data-sortable="true" data-field="message">Description</th>
+                                <th class="" data-sortable="true" data-field="message">@lang('labels.description')</th>
                             </tr>
                         </thead>
                     </x-bootstrap-table>

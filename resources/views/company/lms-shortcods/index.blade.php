@@ -1,7 +1,8 @@
 <x-app-layout>
     <section class="font-1 pt-5 hq-full">
         <div class="container">
-            <div class="row justify-content-center" x-data="{ open: 'Action' }" x-effect="async () => {
+            <div class="row justify-content-center" x-data="{ open: 'Action' }"
+                x-effect="async () => {
                  $('.loadHtml').removeClass('loadHtml');
             }">
                 <div class="col-lg-12 page_table_menu">
@@ -11,32 +12,33 @@
                     <div class="my-4"></div>
                     <div class="row mb-2 align-items-center ">
                         <div class="col-md-6">
-                            <div class="ui selection dropdown table-head-dropdown disabled" >
+                            <div class="ui selection dropdown table-head-dropdown disabled">
                                 <input type="hidden" /><i class="dropdown icon"></i>
                                 <div class="text">{{ dynamicPageTitle('page') ?? '' }}</div>
                                 <div class="menu">
-                                    <div class="item" @click="open = 'InsuranceCompany'">Insurance Company</div>
-                                    <div class="item" @click="open = 'GeneralAgent'">General Agent</div>
-                                    <div class="item" @click="open = 'Agent'">Agent</div>
-                                    <div class="item" @click="open = 'Insured'">Insured</div>
-                                    <div class="item" @click="open = 'Lienholders'">Lienholders</div>
-                                    <div class="item" @click="open = 'Brokers'">Brokers</div>
-                                    <div class="item" @click="open = 'Vendors'">Vendors</div>
-                                    <div class="item" @click="open = 'Salesorganization'">Sales Organization</div>
-                                    <div class="item" @click="open = 'FinanceCompany'">Finance Company</div>
-                                    <div class="item" @click="open = 'Quotes'">Quotes</div>
-                                    <div class="item" @click="open = 'Payment'">Payment</div>
-                                    <div class="item" @click="open = 'Account'">Account</div>
-                                    <div class="item" @click="open = 'Notice'">Notice</div>
+                                    <div class="item" @click="open = 'InsuranceCompany'">@lang('labels.insurance_company') </div>
+                                    <div class="item" @click="open = 'GeneralAgent'">@lang('labels.general_agent') </div>
+                                    <div class="item" @click="open = 'Agent'">@lang('labels.agent') </div>
+                                    <div class="item" @click="open = 'Insured'">@lang('labels.insured') </div>
+                                    <div class="item" @click="open = 'Lienholders'">@lang('labels.lienholder') </div>
+                                    <div class="item" @click="open = 'Brokers'">@lang('labels.brokers') </div>
+                                    <div class="item" @click="open = 'Vendors'">@lang('labels.vendors') </div>
+                                    <div class="item" @click="open = 'Salesorganization'">@lang('labels.sales_organization')  </div>
+                                    <div class="item" @click="open = 'FinanceCompany'">@lang('labels.finance_company')  </div>
+                                    <div class="item" @click="open = 'Quotes'">@lang('labels.quotes') </div>
+                                    <div class="item" @click="open = 'Payment'">@lang('labels.payment') </div>
+                                    <div class="item" @click="open = 'Account'">@lang('labels.account') </div>
+                                    <div class="item" @click="open = 'Notice'">@lang('labels.notice') </div>
 
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6" >
+                        <div class="col-md-6">
                             <div class="row align-items-end" x-show="open != 'Action'">
                                 <div class="col-md-12">
-                                    <div class="columns d-flex justify-content-end" >
-                                        <button class="btn btn-default" type="button"  @click="open = 'Action'"> @lang('text.exit')</button>
+                                    <div class="columns d-flex justify-content-end">
+                                        <button class="btn btn-default" type="button" @click="open = 'Action'">
+                                            @lang('text.exit')</button>
                                     </div>
                                 </div>
                             </div>
@@ -44,64 +46,78 @@
                     </div>
 
                     <div class="table-responsive-sm" x-show="open == 'Action'">
-                        <table id="mainName"   data-toggle="table" >
+                        <table id="mainName" data-toggle="table">
                             <thead>
                                 <tr>
-                                    <th  data-field="name" >@lang('labels.name')</th>
+                                    <th data-field="name">@lang('labels.name')</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td > <span @click="open = 'FinanceCompany'" class="cursor-pointer"> @lang('labels.finance_company')</span></td>
-                                   
+                                    <td> <span @click="open = 'FinanceCompany'" class="cursor-pointer">
+                                            @lang('labels.finance_company')</span></td>
+
                                 </tr>
                                 <tr>
-                                   <td > <span @click="open = 'InsuranceCompany'" class="cursor-pointer"> @lang('labels.insurance_company')</span></td>
+                                    <td> <span @click="open = 'InsuranceCompany'" class="cursor-pointer">
+                                            @lang('labels.insurance_company')</span></td>
                                 </tr>
                                 <tr>
-                                 <td > <span @click="open = 'GeneralAgent'" class="cursor-pointer">   @lang('labels.general_agent')</span></td>
+                                    <td> <span @click="open = 'GeneralAgent'" class="cursor-pointer">
+                                            @lang('labels.general_agent')</span></td>
                                 </tr>
                                 <tr>
-                                      <td > <span @click="open = 'Agent'" class="cursor-pointer">@lang('labels.agent')</span></td>
+                                    <td> <span @click="open = 'Agent'" class="cursor-pointer">@lang('labels.agent')</span>
+                                    </td>
                                 </tr>
                                 <tr>
-                                     <td > <span @click="open = 'Insured'" class="cursor-pointer">  @lang('labels.insured')</span></td>
+                                    <td> <span @click="open = 'Insured'" class="cursor-pointer">
+                                            @lang('labels.insured')</span></td>
                                 </tr>
                                 <tr>
-                                     <td > <span @click="open = 'Salesorganization'" class="cursor-pointer">  @lang('labels.sales_organization')</span></td>
+                                    <td> <span @click="open = 'Salesorganization'" class="cursor-pointer">
+                                            @lang('labels.sales_organization')</span></td>
                                 </tr>
                                 <tr>
-                                     <td > <span @click="open = 'Brokers'" class="cursor-pointer">  @lang('labels.broker')</span></td>
+                                    <td> <span @click="open = 'Brokers'" class="cursor-pointer">
+                                            @lang('labels.broker')</span></td>
                                 </tr>
                                 <tr>
-                                       <td > <span @click="open = 'Lienholders'" class="cursor-pointer"> @lang('labels.lienholder')</span></td>
+                                    <td> <span @click="open = 'Lienholders'" class="cursor-pointer">
+                                            @lang('labels.lienholder')</span></td>
                                 </tr>
-                               
+
                                 <tr>
-                                      <td > <span @click="open = 'Quotes'" class="cursor-pointer"> @lang('labels.quote')</span></td>
-                                </tr>
-                                <tr>
-                                     <td > <span @click="open = 'Account'" class="cursor-pointer"> @lang('labels.account')</span></td>
-                                </tr>
-                                <tr>
-                                     <td > <span @click="open = 'Payment'" class="cursor-pointer"> @lang('labels.payments')</span></td>
+                                    <td> <span @click="open = 'Quotes'" class="cursor-pointer">
+                                            @lang('labels.quote')</span></td>
                                 </tr>
                                 <tr>
-                                    <td > <span @click="open = 'Notice'" class="cursor-pointer"> @lang('labels.notices')</span></td>
+                                    <td> <span @click="open = 'Account'" class="cursor-pointer">
+                                            @lang('labels.account')</span></td>
                                 </tr>
                                 <tr>
-                                    <td > <span @click="open = 'Vendors'" class="cursor-pointer">  @lang('labels.vendors')</span></td>
+                                    <td> <span @click="open = 'Payment'" class="cursor-pointer">
+                                            @lang('labels.payments')</span></td>
+                                </tr>
+                                <tr>
+                                    <td> <span @click="open = 'Notice'" class="cursor-pointer">
+                                            @lang('labels.notices')</span></td>
+                                </tr>
+                                <tr>
+                                    <td> <span @click="open = 'Vendors'" class="cursor-pointer">
+                                            @lang('labels.vendors')</span></td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                     <div x-show="open == 'InsuranceCompany'" class="loadHtml">
                         <div class="table-responsive-sm">
-                            <table id="Insurance_Companycode" data-loading-template="loadingTemplate" data-show-header="true" data-toggle="table">
+                            <table id="Insurance_Companycode" data-loading-template="loadingTemplate"
+                                data-show-header="true" data-toggle="table">
                                 <thead>
                                     <tr>
-                                        <th class="" data-field="Name" data-width="300">Name</th>
-                                        <th class="" data-field="Description" data-width="700">Description</th>
+                                        <th class="" data-field="Name" data-width="300">@lang('labels.name')</th>
+                                        <th class="" data-field="Description" data-width="700">@lang('labels.description') </th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -194,7 +210,8 @@
                     </div>
                     <div x-show="open == 'GeneralAgent'" class="loadHtml">
                         <div class="table-responsive-sm">
-                            <table id="General_Agentcode" data-loading-template="loadingTemplate" data-show-header="true" data-toggle="table">
+                            <table id="General_Agentcode" data-loading-template="loadingTemplate"
+                                data-show-header="true" data-toggle="table">
                                 <thead>
                                     <tr>
                                         <th class="" data-field="Name" data-width="300">Name
@@ -239,7 +256,8 @@
                                         <td>General agent state resident license</td>
                                     </tr>
                                     <tr>
-                                        <td><span class="badge  p-2 badge-shortcode fw-500">{GA_License_Epeiration_Date}</span>
+                                        <td><span
+                                                class="badge  p-2 badge-shortcode fw-500">{GA_License_Epeiration_Date}</span>
                                         </td>
                                         <td>General agent license expiration date</td>
                                     </tr>
@@ -304,7 +322,8 @@
                                         <td>General agent mailing zip</td>
                                     </tr>
                                     <tr>
-                                        <td><span class="badge  p-2 badge-shortcode fw-500">{General_Agent_Office_Name}</span>
+                                        <td><span
+                                                class="badge  p-2 badge-shortcode fw-500">{General_Agent_Office_Name}</span>
                                         </td>
                                         <td>General agent office name</td>
                                     </tr>
@@ -334,7 +353,8 @@
                     </div>
                     <div x-show="open == 'Agent'" class="loadHtml">
                         <div class="table-responsive-sm">
-                            <table id="Agentcode" data-loading-template="loadingTemplate" data-show-header="true" data-toggle="table">
+                            <table id="Agentcode" data-loading-template="loadingTemplate" data-show-header="true"
+                                data-toggle="table">
                                 <thead>
                                     <tr>
                                         <th class="" data-field="Name" data-width="300">Name</th>
@@ -413,12 +433,14 @@
                                         <td>Agent state resident</td>
                                     </tr>
                                     <tr>
-                                        <td><span class="badge  p-2 badge-shortcode fw-500">{AG_State_Resident_License}</span>
+                                        <td><span
+                                                class="badge  p-2 badge-shortcode fw-500">{AG_State_Resident_License}</span>
                                         </td>
                                         <td>Agent state resident license</td>
                                     </tr>
                                     <tr>
-                                        <td><span class="badge  p-2 badge-shortcode fw-500">{AG_License_Expiration_Date}</span>
+                                        <td><span
+                                                class="badge  p-2 badge-shortcode fw-500">{AG_License_Expiration_Date}</span>
                                         </td>
                                         <td>Agent license expiration date</td>
                                     </tr>
@@ -428,7 +450,8 @@
                                         <td>Agent non-resident insurance license</td>
                                     </tr>
                                     <tr>
-                                        <td><span class="badge  p-2 badge-shortcode fw-500">{AG_Year_Established}</span>
+                                        <td><span
+                                                class="badge  p-2 badge-shortcode fw-500">{AG_Year_Established}</span>
                                         </td>
                                         <td>Agent year established</td>
                                     </tr>
@@ -496,7 +519,8 @@
                     </div>
                     <div x-show="open == 'Insured'" class="loadHtml">
                         <div class="table-responsive-sm">
-                            <table id="Insuredcode" data-loading-template="loadingTemplate" data-show-header="true" data-toggle="table">
+                            <table id="Insuredcode" data-loading-template="loadingTemplate" data-show-header="true"
+                                data-toggle="table">
                                 <thead>
                                     <tr>
                                         <th class="" data-field="Name" data-width="300">Name</th>
@@ -624,7 +648,8 @@
                                         <td>Insured mailing zip</td>
                                     </tr>
                                     <tr>
-                                        <td><span class="badge  p-2 badge-shortcode fw-500">{IN_Decline_Reinstatement_Payment_Cancellation}</span>
+                                        <td><span
+                                                class="badge  p-2 badge-shortcode fw-500">{IN_Decline_Reinstatement_Payment_Cancellation}</span>
                                         </td>
                                         <td>Insured decline reinstatement if payment received after cancellation</td>
                                     </tr>
@@ -643,7 +668,8 @@
                                         <td>Insured DUNS</td>
                                     </tr>
                                     <tr>
-                                        <td><span class="badge  p-2 badge-shortcode fw-500">{IN_DB_Confidence_Code}</span>
+                                        <td><span
+                                                class="badge  p-2 badge-shortcode fw-500">{IN_DB_Confidence_Code}</span>
                                         </td>
                                         <td>Insured D&B Confidence Code</td>
                                     </tr>
@@ -664,7 +690,8 @@
                     </div>
                     <div x-show="open == 'Lienholders'" class="loadHtml">
                         <div class="table-responsive-sm">
-                            <table id="Lienholderscode" data-loading-template="loadingTemplate" data-show-header="true" data-toggle="table">
+                            <table id="Lienholderscode" data-loading-template="loadingTemplate"
+                                data-show-header="true" data-toggle="table">
                                 <thead>
                                     <tr>
                                         <th class="" data-field="Name" data-width="300">Name</th>
@@ -728,7 +755,8 @@
                     </div>
                     <div x-show="open == 'Brokers'" class="loadHtml">
                         <div class="table-responsive-sm">
-                            <table id="Brokerscode" data-loading-template="loadingTemplate" data-show-header="true" data-toggle="table">
+                            <table id="Brokerscode" data-loading-template="loadingTemplate" data-show-header="true"
+                                data-toggle="table">
                                 <thead>
                                     <tr>
                                         <th class="" data-field="Name" data-width="300">Name</th>
@@ -754,17 +782,20 @@
                                         <td>Broker TIN #</td>
                                     </tr>
                                     <tr>
-                                        <td><span class="badge  p-2 badge-shortcode fw-500">{Broker_State_Resident}</span>
+                                        <td><span
+                                                class="badge  p-2 badge-shortcode fw-500">{Broker_State_Resident}</span>
                                         </td>
                                         <td>Broker state resident</td>
                                     </tr>
                                     <tr>
-                                        <td><span class="badge  p-2 badge-shortcode fw-500">{Broker_State_Resident_License}</span>
+                                        <td><span
+                                                class="badge  p-2 badge-shortcode fw-500">{Broker_State_Resident_License}</span>
                                         </td>
                                         <td>Broker state resident license</td>
                                     </tr>
                                     <tr>
-                                        <td><span class="badge  p-2 badge-shortcode fw-500">{Broker_License_Expiration_Date}</span>
+                                        <td><span
+                                                class="badge  p-2 badge-shortcode fw-500">{Broker_License_Expiration_Date}</span>
                                         </td>
                                         <td>Broker license expiration date</td>
                                     </tr>
@@ -825,7 +856,8 @@
                     </div>
                     <div x-show="open == 'Vendors'" class="loadHtml">
                         <div class="table-responsive-sm">
-                            <table id="Vendorscode" data-loading-template="loadingTemplate" data-show-header="true" data-toggle="table">
+                            <table id="Vendorscode" data-loading-template="loadingTemplate" data-show-header="true"
+                                data-toggle="table">
                                 <thead>
                                     <tr>
                                         <th class="" data-field="Name" data-width="300">Name</th>
@@ -881,17 +913,20 @@
                                         <td>Vendor zip</td>
                                     </tr>
                                     <tr>
-                                        <td><span class="badge  p-2 badge-shortcode fw-500">{Vendor_Mailing_Address}</span>
+                                        <td><span
+                                                class="badge  p-2 badge-shortcode fw-500">{Vendor_Mailing_Address}</span>
                                         </td>
                                         <td>Vendor address</td>
                                     </tr>
                                     <tr>
-                                        <td><span class="badge  p-2 badge-shortcode fw-500">{Vendor_Mailing_City}</span>
+                                        <td><span
+                                                class="badge  p-2 badge-shortcode fw-500">{Vendor_Mailing_City}</span>
                                         </td>
                                         <td>Vendor city</td>
                                     </tr>
                                     <tr>
-                                        <td><span class="badge  p-2 badge-shortcode fw-500">{Vendor_Mailing_State}</span>
+                                        <td><span
+                                                class="badge  p-2 badge-shortcode fw-500">{Vendor_Mailing_State}</span>
                                         </td>
                                         <td>Vendor state</td>
                                     </tr>
@@ -906,7 +941,8 @@
                     </div>
                     <div x-show="open == 'Salesorganization'" class="loadHtml">
                         <div class="table-responsive-sm">
-                            <table id="Sales_organizationcode" data-loading-template="loadingTemplate" data-show-header="true" data-toggle="table">
+                            <table id="Sales_organizationcode" data-loading-template="loadingTemplate"
+                                data-show-header="true" data-toggle="table">
                                 <thead>
                                     <tr>
                                         <th class="" data-field="Name" data-width="300">Name</th>
@@ -915,37 +951,44 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td><span class="badge  p-2 badge-shortcode fw-500">{Sales_Organization_Full_Name}</span>
+                                        <td><span
+                                                class="badge  p-2 badge-shortcode fw-500">{Sales_Organization_Full_Name}</span>
                                         </td>
                                         <td>Sales organization full name</td>
                                     </tr>
                                     <tr>
-                                        <td><span class="badge  p-2 badge-shortcode fw-500">{Sales_Organization_First_Name}</span>
+                                        <td><span
+                                                class="badge  p-2 badge-shortcode fw-500">{Sales_Organization_First_Name}</span>
                                         </td>
                                         <td>Sales organization first name</td>
                                     </tr>
                                     <tr>
-                                        <td><span class="badge  p-2 badge-shortcode fw-500">{Sales_Organization_Middle_Name}</span>
+                                        <td><span
+                                                class="badge  p-2 badge-shortcode fw-500">{Sales_Organization_Middle_Name}</span>
                                         </td>
                                         <td>Sales organization middle name</td>
                                     </tr>
                                     <tr>
-                                        <td><span class="badge  p-2 badge-shortcode fw-500">{Sales_Organization_Last_Name}</span>
+                                        <td><span
+                                                class="badge  p-2 badge-shortcode fw-500">{Sales_Organization_Last_Name}</span>
                                         </td>
                                         <td>Sales organization last name</td>
                                     </tr>
                                     <tr>
-                                        <td><span class="badge  p-2 badge-shortcode fw-500">{Sales_Organization_Title}</span>
+                                        <td><span
+                                                class="badge  p-2 badge-shortcode fw-500">{Sales_Organization_Title}</span>
                                         </td>
                                         <td>Sales organization title</td>
                                     </tr>
                                     <tr>
-                                        <td><span class="badge  p-2 badge-shortcode fw-500">{Sales_Organization_DOB}</span>
+                                        <td><span
+                                                class="badge  p-2 badge-shortcode fw-500">{Sales_Organization_DOB}</span>
                                         </td>
                                         <td>Sales organization DOB</td>
                                     </tr>
                                     <tr>
-                                        <td><span class="badge  p-2 badge-shortcode fw-500">{Sales_OrganizationEmail}</span>
+                                        <td><span
+                                                class="badge  p-2 badge-shortcode fw-500">{Sales_OrganizationEmail}</span>
                                         </td>
                                         <td>Sales organization user email</td>
                                     </tr>
@@ -1040,7 +1083,8 @@
                     </div>
                     <div x-show="open == 'FinanceCompany'" class="loadHtml">
                         <div class="table-responsive-sm">
-                            <table id="Finance_Companycode" data-loading-template="loadingTemplate" data-show-header="true" data-toggle="table">
+                            <table id="Finance_Companycode" data-loading-template="loadingTemplate"
+                                data-show-header="true" data-toggle="table">
                                 <thead>
                                     <tr>
                                         <th class="" data-field="Name" data-width="300">Name</th>
@@ -1229,7 +1273,8 @@
                     </div>
                     <div x-show="open == 'Quotes'" class="loadHtml">
                         <div class="table-responsive-sm">
-                            <table id="Quotescode" data-loading-template="loadingTemplate" data-show-header="true" data-toggle="table">
+                            <table id="Quotescode" data-loading-template="loadingTemplate" data-show-header="true"
+                                data-toggle="table">
                                 <thead>
                                     <tr>
                                         <th class="" data-field="Name" data-width="300">Name</th>
@@ -1258,7 +1303,8 @@
                                         <td>Origination state</td>
                                     </tr>
                                     <tr>
-                                        <td><span class="badge  p-2 badge-shortcode fw-500">{Insured_Existing_Balance}</span>
+                                        <td><span
+                                                class="badge  p-2 badge-shortcode fw-500">{Insured_Existing_Balance}</span>
                                         </td>
                                         <td>Insured existing balance</td>
                                     </tr>
@@ -1277,7 +1323,8 @@
                                         <td>Line of business</td>
                                     </tr>
                                     <tr>
-                                        <td><span class="badge  p-2 badge-shortcode fw-500">{Q_Email_Notification}</span>
+                                        <td><span
+                                                class="badge  p-2 badge-shortcode fw-500">{Q_Email_Notification}</span>
                                         </td>
                                         <td>Email notification</td>
                                     </tr>
@@ -1299,17 +1346,20 @@
                                         <td>Payment with late charge</td>
                                     </tr>
                                     <tr>
-                                        <td><span class="badge  p-2 badge-shortcode fw-500">{Payment_Installment_Number}</span>
+                                        <td><span
+                                                class="badge  p-2 badge-shortcode fw-500">{Payment_Installment_Number}</span>
                                         </td>
                                         <td>Payment installment number</td>
                                     </tr>
                                     <tr>
-                                        <td><span class="badge  p-2 badge-shortcode fw-500">{Payment_Installment_Due_Date}</span>
+                                        <td><span
+                                                class="badge  p-2 badge-shortcode fw-500">{Payment_Installment_Due_Date}</span>
                                         </td>
                                         <td>Payment Installment due date</td>
                                     </tr>
                                     <tr>
-                                        <td><span class="badge  p-2 badge-shortcode fw-500">{Payment_Late_Charge_Installment_Due_Date}</span>
+                                        <td><span
+                                                class="badge  p-2 badge-shortcode fw-500">{Payment_Late_Charge_Installment_Due_Date}</span>
                                         </td>
                                         <td>Payment Installment late charge due date</td>
                                     </tr>
@@ -1329,7 +1379,8 @@
                                         <td>Total down payment </td>
                                     </tr>
                                     <tr>
-                                        <td><span class="badge  p-2 badge-shortcode fw-500">{Setup_Fee_Down_Payment}</span>
+                                        <td><span
+                                                class="badge  p-2 badge-shortcode fw-500">{Setup_Fee_Down_Payment}</span>
                                         </td>
                                         <td>Setup fee in down payment</td>
                                     </tr>
@@ -1339,7 +1390,8 @@
                                         <td>Inception date</td>
                                     </tr>
                                     <tr>
-                                        <td><span class="badge  p-2 badge-shortcode fw-500">{First_Payment_Due_Date}</span>
+                                        <td><span
+                                                class="badge  p-2 badge-shortcode fw-500">{First_Payment_Due_Date}</span>
                                         </td>
                                         <td>First payment due date</td>
                                     </tr>
@@ -1443,7 +1495,8 @@
                                         <td>Pure premium</td>
                                     </tr>
                                     <tr>
-                                        <td><span class="badge  p-2 badge-shortcode fw-500">{Minimum_Earned_Premium}</span>
+                                        <td><span
+                                                class="badge  p-2 badge-shortcode fw-500">{Minimum_Earned_Premium}</span>
                                         </td>
                                         <td>Minimum earned premium %</td>
                                     </tr>
@@ -1478,7 +1531,8 @@
                                         <td>Expiration date</td>
                                     </tr>
                                     <tr>
-                                        <td><span class="badge  p-2 badge-shortcode fw-500">{First_Installment_Date}</span>
+                                        <td><span
+                                                class="badge  p-2 badge-shortcode fw-500">{First_Installment_Date}</span>
                                         </td>
                                         <td>First installment date</td>
                                     </tr>
@@ -1608,7 +1662,8 @@
                     </div>
                     <div x-show="open == 'Payment'" class="loadHtml">
                         <div class="table-responsive-sm">
-                            <table id="Paymentcode" data-loading-template="loadingTemplate" data-show-header="true" data-toggle="table">
+                            <table id="Paymentcode" data-loading-template="loadingTemplate" data-show-header="true"
+                                data-toggle="table">
                                 <thead>
                                     <tr>
                                         <th class="" data-field="Name" data-width="300">Name</th>
@@ -1688,7 +1743,8 @@
                                         <td>Total Amount Due</td>
                                     </tr>
                                     <tr>
-                                        <td><span class="badge  p-2 badge-shortcode fw-500">{Payment_Amount_Made}</span>
+                                        <td><span
+                                                class="badge  p-2 badge-shortcode fw-500">{Payment_Amount_Made}</span>
                                         </td>
                                         <td>Payment Amount Made</td>
                                     </tr>
@@ -1752,17 +1808,20 @@
                                         <td>All Fees</td>
                                     </tr>
                                     <tr>
-                                        <td><span class="badge  p-2 badge-shortcode fw-500">{Cancellation_Reason}</span>
+                                        <td><span
+                                                class="badge  p-2 badge-shortcode fw-500">{Cancellation_Reason}</span>
                                         </td>
                                         <td>Cancellation Reason</td>
                                     </tr>
                                     <tr>
-                                        <td><span class="badge  p-2 badge-shortcode fw-500">{Account_Balance_Cancellation}</span>
+                                        <td><span
+                                                class="badge  p-2 badge-shortcode fw-500">{Account_Balance_Cancellation}</span>
                                         </td>
                                         <td>Account Balance Cancellation</td>
                                     </tr>
                                     <tr>
-                                        <td><span class="badge  p-2 badge-shortcode fw-500">{Next_Installment_Including_Shortage}</span>
+                                        <td><span
+                                                class="badge  p-2 badge-shortcode fw-500">{Next_Installment_Including_Shortage}</span>
                                         </td>
                                         <td>Next Installment Including Shortage</td>
                                     </tr>
@@ -1772,7 +1831,8 @@
                                         <td>Shortage Amount</td>
                                     </tr>
                                     <tr>
-                                        <td><span class="badge  p-2 badge-shortcode fw-500">{Next_Installment_excluding_Shortage}</span>
+                                        <td><span
+                                                class="badge  p-2 badge-shortcode fw-500">{Next_Installment_excluding_Shortage}</span>
                                         </td>
                                         <td>Next Installment Excluding Shortage</td>
                                     </tr>
@@ -1797,7 +1857,8 @@
                     </div>
                     <div x-show="open == 'Account'" class="loadHtml">
                         <div class="table-responsive-sm">
-                            <table id="Accountcode" data-loading-template="loadingTemplate" data-show-header="true" data-toggle="table">
+                            <table id="Accountcode" data-loading-template="loadingTemplate" data-show-header="true"
+                                data-toggle="table">
                                 <thead>
                                     <tr>
                                         <th class="" data-field="Name" data-width="300">Name</th>
@@ -1811,7 +1872,8 @@
                                         <td>Account number</td>
                                     </tr>
                                     <tr>
-                                        <td><span class="badge  p-2 badge-shortcode fw-500">{A_Intent_To_Cancel_Date}</span>
+                                        <td><span
+                                                class="badge  p-2 badge-shortcode fw-500">{A_Intent_To_Cancel_Date}</span>
                                         </td>
                                         <td></td>
                                     </tr>
@@ -1830,7 +1892,8 @@
                     </div>
                     <div x-show="open == 'Notice'" class="loadHtml">
                         <div class="table-responsive-sm">
-                            <table id="Noticecode" data-loading-template="loadingTemplate" data-show-header="true" data-toggle="table">
+                            <table id="Noticecode" data-loading-template="loadingTemplate" data-show-header="true"
+                                data-toggle="table">
                                 <thead>
                                     <tr>
                                         <th class="" data-field="Name" data-width="300">Name</th>
@@ -1844,7 +1907,8 @@
                                         <td>Today's Date</td>
                                     </tr>
                                     <tr>
-                                        <td><span class="badge  p-2 badge-shortcode fw-500">{NO_Created_Date_Time}</span>
+                                        <td><span
+                                                class="badge  p-2 badge-shortcode fw-500">{NO_Created_Date_Time}</span>
                                         </td>
                                         <td>Today's Date and Time</td>
                                     </tr>
@@ -1853,12 +1917,14 @@
                                         <td>Description in notice</td>
                                     </tr>
                                     <tr>
-                                        <td><span class="badge  p-2 badge-shortcode fw-500">{Send_bymmddyyyyHHMM}</span>
+                                        <td><span
+                                                class="badge  p-2 badge-shortcode fw-500">{Send_bymmddyyyyHHMM}</span>
                                         </td>
                                         <td>The send by method date and time</td>
                                     </tr>
                                     <tr>
-                                        <td><span class="badge  p-2 badge-shortcode fw-500">{NO_Last_Updated_Date_Time}</span>
+                                        <td><span
+                                                class="badge  p-2 badge-shortcode fw-500">{NO_Last_Updated_Date_Time}</span>
                                         </td>
                                         <td>Notice last updated date and time</td>
                                     </tr>
@@ -1876,7 +1942,8 @@
 
                     <div x-show="open == 'SalesExcutive'" class="loadHtml">
                         <div class="table-responsive-sm">
-                            <table id="sales_excutive" data-loading-template="loadingTemplate" data-show-header="true" data-toggle="table">
+                            <table id="sales_excutive" data-loading-template="loadingTemplate"
+                                data-show-header="true" data-toggle="table">
                                 <thead>
                                     <tr>
                                         <th class="" data-field="Name" data-width="300">Name</th>

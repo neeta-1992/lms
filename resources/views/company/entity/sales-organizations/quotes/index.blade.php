@@ -10,23 +10,22 @@
       <thead>
           <tr>
               <th class="align-middle" data-sortable="false" data-field="id">
-                  Quote #
+                  @lang('labels.quote')
               </th>
               <th class="align-middle" data-sortable="false" data-field="created_at">
-                  Created Date
+                @lang('labels.created_date')
               </th>
               <th class="align-middle" data-sortable="false" data-field="updated_at">
-                  Last
-                  Modified </th>
-              <th class="align-middle" data-sortable="false" data-field="name"> Insured Name
+                @lang('labels.last_modified') </th>
+              <th class="align-middle" data-sortable="false" data-field="name">@lang('labels.insured_name')
               </th>
-              <th class="align-middle" data-sortable="false" data-field="name"> Account Type
+              <th class="align-middle" data-sortable="false" data-field="name">@lang('labels.account_type')
               </th>
-              <th class="align-middle" data-sortable="false" data-field="name"> Quote Type
+              <th class="align-middle" data-sortable="false" data-field="name">@lang('labels.quote_type')
               </th>
-              <th class="align-middle" data-sortable="false" data-field="name"> Pure Premium
+              <th class="align-middle" data-sortable="false" data-field="name">@lang('labels.pure_premium')
               </th>
-              <th class="align-middle" data-sortable="false" data-field="name"> Total
+              <th class="align-middle" data-sortable="false" data-field="name">@lang('labels.total') 
               </th>
           </tr>
       </thead>

@@ -17,7 +17,7 @@
                                 @change="insuredDropDown($el.value);">
                             <i class="dropdown icon"></i>
                             <input type="text" class="search">
-                            <div class="default text">Search Agency</div>
+                            <div class="default text">@lang('labels.search_agency')</div>
                         </div>
                     </div>
                 </div>
@@ -67,7 +67,7 @@
                        }
                     },
                     insuredDropDown(agency = this.agency){
-                        this.agency = agency 
+                        this.agency = agency
                         remotelyDropDown('.insuredList', 'common/entity/insured', {
                             agency: parseInt(agency)
                         });
@@ -106,9 +106,9 @@
                                 percentageInput();
                                 singleDatePicker($('#inception_date'));
                                 remotelyDropDown('.insurance_companyDropdown',
-                                    'common/entity/insurance_company',{istype:'quote'});
+                                    'common/entity/insurance_company');
                                 remotelyDropDown('.general_agentDropdown',
-                                    'common/entity/general_agent',{istype:'quote'});
+                                    'common/entity/general_agent');
                                 $('.account_type input').change();
                                 switch (this.open) {
                                     case 'version1':

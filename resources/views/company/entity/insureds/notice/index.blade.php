@@ -7,12 +7,12 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>Description</th>
-                            <th>Mail</th>
-                            <th>Fax</th>
-                            <th>Email</th>
-                            <th>Do Not Send</th>
-                            <th>Send To(Leave Blank For Default)</th>
+                            <th>@lang('labels.description')</th>
+                            <th>@lang('labels.mail')</th>
+                            <th>@lang('labels.fax')</th>
+                            <th>@lang('labels.email')</th>
+                            <th>@lang('labels.do_not_send')</th>
+                            <th>@lang('labels.send_to_leave_blank_for_default') </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -26,7 +26,7 @@
                                 @endphp
                                 <tr>
                                     <td><a href="javascript:void(0)" class="noticeTemplateShow"
-                                            data-url="{{ routeCheck('ajax.notice-template-data', ['type' => 'insured', 'action' => $key ?? '']) }}"
+                                            data-url="{{ routeCheck('ajax.notice-template-data', ['type' => 'agent', 'action' => $key ?? '']) }}"
                                             data-notice-type="{{ $sendType ?? '' }}">{{ $row ?? '' }}</a></td>
                                     <td>
                                         <div class="zinput zradio zradio-sm  zinput-inline p-0 mb-2">
