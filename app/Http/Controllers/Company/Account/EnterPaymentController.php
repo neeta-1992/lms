@@ -46,13 +46,13 @@ class EnterPaymentController extends Controller
             $type           = $request->payment_method;
             $amount         = $request->amount;
             $data           = $this->model::getData()->where('id', $accountId)->firstOrFail();
-/* 
+ 
            if($data->suspend_status == 1){
                  return response()->json(['status' => false,'msg' => 'This Account Is Suspended'], 200);
             } 
            if($data->payment_status == -1){
                  return response()->json(['status' => false,'msg' => 'You cannot enter payment. Payment pending.'], 200);
-            }  */
+            }  
 
             $quoteData      = $data?->q_data;
             $accountType    = $quoteData?->account_type;

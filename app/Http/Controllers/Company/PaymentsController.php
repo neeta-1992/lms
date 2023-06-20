@@ -9,9 +9,13 @@ use App\Models\Payment;
 use App\Models\PaymentsHistory;
 use App\Models\QuoteAccount;
 use App\Models\Setting;
-use App\Models\TransactionHistory;use Error;
+use App\Models\TransactionHistory;
 use Illuminate\Http\Request;
-
+use Square\SquareClient;
+use Square\Models\Money;
+use Square\Exceptions\ApiException;
+use Square\Environment;
+use Str,Error;
 class PaymentsController extends Controller
 {
     private $viwePath = "company.Payments.";
@@ -76,7 +80,6 @@ class PaymentsController extends Controller
                 $paymentData = $paymentData->whereIn('id', $installment);
             }
             $paymentData = $paymentData->latest()->get();
-/* dd($paymentData); */
             $payoffpaymentsdatas = $this->model::getData(['status' => 0, 'users' => $users, 'payoff_status' => 1]);
             if (!empty($payoff) && $type == 'process') {
                 $payoffpaymentsdatas = $payoffpaymentsdatas->whereIn('id', $payoff);
@@ -90,7 +93,6 @@ class PaymentsController extends Controller
     {
 
         try {
-
             $userData = $request->user();
             $username = $userData?->name;
             $status = $request->post('status');
@@ -100,7 +102,7 @@ class PaymentsController extends Controller
             $type = $request->post('type');
             $payoffArr = !empty($payoffArr) ? $payoffArr : [];
             $installmentArr = !empty($installmentArr) ? $installmentArr : [];
-            $paymentArr = $paymentIds = $achPaymentArr = $achPaymentIdArr = [];
+            $paymentArr = $paymentIds = $achPaymentArr = $achPaymentIdArr = $paymentError=  [];
             $totlaAmount  = $totalOtherFee = $otherfee = $totalInterest = $totalSetupFee = 
             $totalStopPayment = $totalConvientFee = $setupFee = $totalLateFee = $totalNsfFee = $totalCancelFee = $interest = $principal = $installment = $totalPrincipal = $totalInterest = 0;
             $achTotlaAmount= $achtotalOtherFee  = $achTotalInterest = $achTotalSetupFee = $achTotalStopPayment = $achTotalConvientFee = $achTotalLateFee = $achTotalNsfFee = $achTotalCancelFee = $achTotalPrincipal = $achTotalInterest = 0;
@@ -112,9 +114,9 @@ class PaymentsController extends Controller
                     $paymentData = $paymentData->whereIn('id', $allId);
                 }
                 $paymentData = $paymentData->get();
-             
+         
                 $totalDeposits = 0;
-                $view = $paymentsHistoryData = $achpaymentsHistoryId = $paymentHistoryId = null ;
+                $view = $paymentsHistoryData = $achpaymentsHistoryId = $paymentHistoryId = $api_response=  null ;
                 if (!empty($paymentData)) {
                     foreach ($paymentData as $key => $value) {
                         $paymentId = $value?->id ?? 0;
@@ -169,6 +171,8 @@ class PaymentsController extends Controller
                         ];
                         $totalDeposits++;
 
+
+
                         if (strtolower($paymentMethod) == 'ach' || strtolower($paymentMethod) == 'echeck') {
 
                             $achPaymentIdArr[] = $paymentId;
@@ -197,30 +201,118 @@ class PaymentsController extends Controller
                                 'otherfee' => $otherfee,
                             ];
                         }
+                        
 
                         /* account payment status change  */
                         if (!empty($accountId)) {
                             $quoteAccountData = QuoteAccount::getData(['id' => $accountId])->first();
+
+                            /* Verrify Patment For Creadt Card Square */
+                            if(strtolower($paymentMethod) == 'credit card' && (!empty($value?->sqtoken) || (!empty($quoteAccountData->square_card_id) && !empty($quoteAccountData->square_customer_id)))){
+                                $electronicPaymentSettings = Setting::getData(['type'=>'electronic-payment-setting'])->first();
+                                $EPS = !empty($electronicPaymentSettings->json) ? json_decode($electronicPaymentSettings->json) : null;
+                              
+                                if($EPS->payment_gateway == 'square'){
+                                    $square_application_name    = $EPS?->square_application_name ?? '';
+                                    $square_application_id      = $EPS?->square_application_id ?? '';
+                                    $square_access_token        = $EPS?->square_access_token ?? '';
+                                    $square_location_id         = $EPS?->square_location_id ?? '';
+                                    $square_payment_mode        = $EPS?->square_payment_mode ?? '';
+
+
+                                    try {
+                                        $client = new SquareClient([
+                                            'accessToken'       => $square_access_token,
+                                            'environment'       => $square_payment_mode == 'test' ? Environment::SANDBOX : Environment::PRODUCTION,
+                                            'userAgentDetail'   => $square_application_name
+                                        ]);
+    
+                                        $note = 'Payment installment '.$paymentNumber.' of '.dollerFA($amount).' is processed for Account #'.$quoteAccountData->account_number;
+                                        $randomString = Str::random(8).'-'.Str::random(4).'-'.Str::random(4).'-'.Str::random(4).'-'.Str::random(15);
+                                       
+                                        $amountMoney = new \Square\Models\Money();
+                                        $amountMoney->setAmount($amount*100);
+                                        $amountMoney->setCurrency('USD');
+
+                                        if($value->payment_type == 1 && !empty($quoteAccountData->square_card_id) && !empty($quoteAccountData->square_customer_id)){
+                                            $square_card_id = $quoteAccountData->square_card_id;
+                                            $square_customer_id = $quoteAccountData->square_customer_id;
+                                            $body   = new \Square\Models\CreatePaymentRequest(
+                                                $square_card_id,
+                                                $randomString,
+                                                $amountMoney
+                                            );
+                                            $body->setCustomerId($square_customer_id);
+                                            $api_response = $client->getPaymentsApi()->createPayment($body);
+                                        }else if(!empty($value?->sqtoken)){
+                                            $body = new \Square\Models\CreatePaymentRequest(
+                                                $value?->sqtoken,
+                                                $randomString,
+                                            
+                                            );
+                                            $body->setAmountMoney($amountMoney);
+                                            $body->setAutocomplete(true);
+                                            $body->setLocationId($square_location_id);
+                                            $body->setReferenceId($value->id);
+                                            $body->setNote($note);
+                                            $api_response = $client->getPaymentsApi()->createPayment($body);
+                                        }
+                                       
+                                        if($api_response?->isSuccess()){
+                                            $result     = $api_response->getResult()?->getPayment();
+                                            $sqPaymentId = $result->getId();
+
+                                            /* square Payment id Save  */
+                                            $value->square_payment_id = $sqPaymentId;
+                                            $value->save();
+                                           
+                                        }else{
+                                            $errors     = $api_response?->getErrors();
+                                            $str        = implode(' and ', array_map(function($x) { return $x->getDetail(); }, $errors));
+                                            throw new Error($str,1);
+                                            
+                                        }
+                                    } catch (\Throwable $e) {
+                                        $errors = $e->getMessage();
+                                       
+                                        $paymentError[$paymentId] = $errors;
+                                        $logEMessages ='Payment installment '.$paymentNumber.' of '.$quoteAccountData?->quote_term?->number_of_payment.' '.dollerFA($amount).' is failed due to credit card error: '.$errors;
+                                        Logs::saveLogs(['type' =>'payment', 'user_id' => $userData?->id, 'type_id' => $value?->id, 'message' => $logEMessages]);
+                                        Payment::reversePaymentInstallment($value,$errors);
+                                        if(array_search($paymentId, $paymentIds) != false){
+                                            unset($paymentIds[array_search($paymentId, $paymentIds)]);
+                                        }
+                                        
+
+                                        /* Payment Status reverse update  */
+                                        $value->status = 2;
+                                        $value->save();
+                                      
+                                    }
+
+                                }
+                            }
+
+
                             $status = $quoteAccountData?->status ?? 0;
 
                             $transactionHistory = TransactionHistory::getData(['accountId' => $accountId])->orderBy('iid', 'desc')->first();
                             $balance = !empty($transactionHistory?->balance) ? toFloat($transactionHistory?->balance) : 0;
 
                             if (empty($balance)) {
-                                $accountStatusArr = accountStatus(7);
                                 $status = 7;
                             } else {
                                 $status = 1;
-                                $accountStatusArr = accountStatus(1);
+                                
                             }
 
                             $quoteAccountData->status = $status;
                             $quoteAccountData->payment_status = 0;
                             $quoteAccountData->save();
-
+                            $accountStatusArr = accountStatus($status);
                             $accountStatus = !empty($accountStatusArr['text']) ? $accountStatusArr['text'] : '';
-                            $accountText = $accountStatus . ' by ' . $username;
-                            Logs::saveLogs(['type' => 'accounts', 'user_id' => $userData?->id, 'type_id' => $accountId, 'message' => $accountText]);
+                            $accountText = "{$accountStatus} by {$username}";
+                            !empty($accountText) &&  Logs::saveLogs(['type' => 'accounts', 'user_id' => $userData?->id, 'type_id' => $accountId, 'message' => $accountText]);
 
                             
                             $input['payment_id'] = $value->id;
@@ -230,7 +322,6 @@ class PaymentsController extends Controller
                                 $input['description'] = $accountStatus;
                                 $input['balance'] = $balance;
                                 $input['debit'] = 0;
-                               /*  dd($input); */
                                 TransactionHistory::insertOrUpdate($input);
                             }
                            
@@ -297,7 +388,7 @@ class PaymentsController extends Controller
                     }
 
                     Logs::saveLogs(['type' => $this->activePage, 'user_id' => $userData?->id, 'type_id' => $paymentsHistoryData?->id, 'message' => 'Payments is in processed']);
-                    $view = view($this->viwePath . "find-payment", ['route' => $this->route, 'paymentData' => $paymentData, 'activePage' => $this->activePage, 'type' => $type])->render();
+                    $view = view($this->viwePath . "find-payment", ['route' => $this->route, 'paymentData' => $paymentData, 'activePage' => $this->activePage, 'type' => $type,'paymentError'=>$paymentError])->render();
 
                 }
             }
@@ -308,7 +399,7 @@ class PaymentsController extends Controller
             }
 
         } catch (\Throwable $th) {
-            /*   dd($th); */
+             dd($th);
             return response()->json(['status' => false, 'msg' => 'Something went wrong please try again'], 200);
         }
     }

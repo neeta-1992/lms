@@ -941,7 +941,7 @@ if (!function_exists('accountStatus')) {
 		$AccountStatusArr[7] = array('html'=>'<span class="badge badge-light background-grey">Closed</span>','text'=>'Closed','colorclass'=>'iconcolorgrey');
 		$AccountStatusArr[8] = array('html'=>'<span class="badge badge-danger background-red">Flat Cancel</span>','text'=>'Flat Cancel','colorclass'=>'iconcolorred');
         if (!empty($key)) {
-            return isset($arr[$key]) ? $arr[$key] : '';
+            return isset($AccountStatusArr[$key]) ? $AccountStatusArr[$key] : '';
         }
         return $AccountStatusArr;
 	}

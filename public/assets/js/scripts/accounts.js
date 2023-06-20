@@ -352,8 +352,8 @@ let  paymentArr  = null;
                         forM.find('input[name="sqtoken"]').val(cardResult.token);
                         forM.find(".sq-card-wrapper").removeClass("sq-error");
                     }
-                } catch (error) {
-                    console.error(error);
+                } catch ( error) {
+                    console.log(error.msg);
                 }
             }
            /*  

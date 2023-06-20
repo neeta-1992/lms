@@ -13,7 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-      
+        Schema::table('payments', function (Blueprint $table) {
+            $table->string('square_payment_id')->nullable()->default(null)->after('sqtoken');
+         
+           });
         if (!Schema::hasTable('return_premium_commissions')) {
             Schema::create('return_premium_commissions', function (Blueprint $table) {
                 $table->uuid('id')->primary();
