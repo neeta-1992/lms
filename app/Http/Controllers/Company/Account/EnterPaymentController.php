@@ -220,7 +220,7 @@ class EnterPaymentController extends Controller
         if(!empty($setting->allow_cancel_rp_gross)){ 
              $applyPaymentOption['allow_cancel_rp_gross'] = 'Cancellation Return Premium (Gross)';
         }
-        if(!empty($setting->allow_agent_commission_rp)){ 
+        if(!empty($setting->allow_agent_return_commission_rp)){ 
              $applyPaymentOption['allow_agent_commission_rp'] = 'Agent Return Commission';
         }
 
