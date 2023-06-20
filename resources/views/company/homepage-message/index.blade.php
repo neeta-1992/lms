@@ -13,10 +13,10 @@
             ]">
                 <thead>
                     <tr>
-                        <th class="align-middle" data-sortable="false" data-width="170" data-field="created_at">Created Date</th>
-                        <th class="align-middle" data-sortable="false" data-width="170" data-field="updated_at">Last Update Date</th>
-                        <th class="align-middle" data-sortable="false" data-width="460" data-field="user_type">User Type</th>
-                        <th class="align-middle" data-sortable="false" data-width="200" data-field="status">Status</th>
+                        <th class="align-middle" data-sortable="false" data-width="170" data-field="created_at">@lang('labels.created_date')</th>
+                        <th class="align-middle" data-sortable="false" data-width="170" data-field="updated_at">@lang('labels.last_update_date')</th>
+                        <th class="align-middle" data-sortable="false" data-width="460" data-field="user_type">@lang('labels.user_type')</th>
+                        <th class="align-middle" data-sortable="false" data-width="200" data-field="status">@lang('labels.status')</th>
                     </tr>
                 </thead>
             </x-bootstrap-table>

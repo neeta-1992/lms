@@ -3,7 +3,7 @@
         method="post">
         @slot('form')
             <div class="form-group row">
-                <label for="name" class="col-sm-3 col-form-label">Lienholder General Information</label>
+                <label for="name" class="col-sm-3 col-form-label">@lang('labels.lienholder_general_information')</label>
             </div>
 
             <div class="form-group row">
@@ -80,7 +80,7 @@
             </div>
 
             <div class="mb-3">
-                <h6 class="fw-600">Lienholder Contacts</h6>
+                <h6 class="fw-600">@lang('labels.lienholder_contacts')</h6>
             </div>
 
             <div class="cloneBox">

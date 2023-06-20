@@ -3,7 +3,7 @@
         method="post" x-data="{ domiciliary: 'no' }">
         @slot('form')
             <div class="mb-3">
-                <p class="fw-600">General Information</p>
+                <p class="fw-600">@lang('labels.general_information')  </p>
             </div>
 
             <div class="form-group row">

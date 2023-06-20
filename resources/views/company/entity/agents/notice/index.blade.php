@@ -7,12 +7,12 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>Description</th>
-                            <th>Mail</th>
-                            <th>Fax</th>
-                            <th>Email</th>
-                            <th>Do Not Send</th>
-                            <th>Send To(Leave Blank For Default)</th>
+                            <th>@lang('labels.description') </th>
+                            <th>@lang('labels.mail')</th>
+                            <th>@lang('labels.fax') </th>
+                            <th>@lang('labels.email') </th>
+                            <th>@lang('labels.do_not_send') </th>
+                            <th>@lang('labels.send_to_leave_blank_for_default') </th>
                         </tr>
                     </thead>
                     <tbody>

@@ -13,11 +13,11 @@
             ]">
                 <thead>
                     <tr>
-                        <th class="align-middle" data-sortable="false" data-width="170" data-field="created_at">Created Date
+                        <th class="align-middle" data-sortable="false" data-width="170" data-field="created_at">@lang('labels.created_date')
                         </th>
-                        <th class="align-middle" data-sortable="false" data-width="170" data-field="updated_at">Last Update
+                        <th class="align-middle" data-sortable="false" data-width="170" data-field="updated_at">@lang('labels.last_update_date')
                             Date</th>
-                        <th class="align-middle" data-sortable="false" data-width="" data-field="name">Name</th>
+                        <th class="align-middle" data-sortable="false" data-width="" data-field="name">@lang('labels.name')</th>
                      {{--    <th class="align-middle" data-sortable="false" data-width="100" data-field="name">A.M Best Rating
                         </th> --}}
 

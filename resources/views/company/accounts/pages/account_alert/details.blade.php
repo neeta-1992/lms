@@ -60,7 +60,7 @@
             <div class="row align-items-start">
                 <div class="col-md-12">
                     <div class="columns d-flex justify-content-start">
-                        <h5>Alert History</h5>
+                        <h5>@lang('labels.alert_history')</h5>
                     </div>
                 </div>
             </div>

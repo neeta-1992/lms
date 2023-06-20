@@ -17,7 +17,7 @@
                     <div class="col-sm-9">
                         <x-jet-input type="text" class="amount" name="aggregate_limit" />
                     </div>
-                </div> 
+                </div>
             @endif
 
             <div class="form-group row">
@@ -197,9 +197,9 @@
             </div>
 
             <div class="form-group row">
-                <label for="" class="col-sm-3 col-form-label fw-600">Agency Adminstrator</label>
+                <label for="" class="col-sm-3 col-form-label fw-600">@lang('labels.agency_adminstrator')  </label>
                 <div class="col-sm-9">
-                    <small class="fw-300">**This is The Agency Adminstrator</small>
+                    <small class="fw-300">@lang('labels.this_is_the_agency_adminstrator')</small>
                 </div>
             </div>
 
@@ -264,7 +264,7 @@
                                 class="form-check-input" value="false">
                             <label for="inmail_service_disable_1" class="form-check-label">@lang('labels.no')</label>
                         </div>
-                        <small class="ml-2">**must have an email address</small>
+                        <small class="ml-2">@lang('labels.must_have_an_email_address')</small>
                     </div>
                 </div>
 

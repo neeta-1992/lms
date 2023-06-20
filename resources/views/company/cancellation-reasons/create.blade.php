@@ -34,13 +34,13 @@
                 </div>
             </div>
 
-           {{--   <div class="form-group row">
+            <div class="form-group row">
                 <label for="name" class="col-sm-3 col-form-label requiredAsterisk">@lang('labels.status_id')</label>
                 <div class="col-sm-9">
                     <x-jet-input type="text" name="status_id" class="digitLimit w-25" required />
 
                 </div>
-            </div>  --}}
+            </div>
 
              <x-button-group :cancel="routeCheck($route . 'index')"/>
         @endslot

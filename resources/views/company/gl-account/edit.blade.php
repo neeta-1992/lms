@@ -6,27 +6,27 @@
             @method('put')
             <input type="hidden" name="logsArr">
             <div class="form-group row">
-                <label for="name" class="col-sm-3 col-form-label requiredAsterisk">GL Account
-                    Name</label>
+                <label for="name" class="col-sm-3 col-form-label requiredAsterisk">
+                    @lang("labels.gl_account_name")</label>
                 <div class="col-sm-9">
                     <x-jet-input type="text" class="" name="name" required disabled/>
 
                 </div>
             </div>
             <div class="form-group row">
-                <label for="status" class="col-sm-3 col-form-label requiredAsterisk">Status</label>
+                <label for="status" class="col-sm-3 col-form-label requiredAsterisk">@lang('labels.status')</label>
                 <div class="col-sm-9">
                    {!! form_dropdown('status',[1=>'Enable',0=>'Disable'],'', ["class"=>"ui dropdown input-sm w-100","required"=>true]) !!}
                 </div>
             </div>
             <div class="form-group row">
-                <label for="number" class="col-sm-3 col-form-label requiredAsterisk">GL Account #</label>
+                <label for="number" class="col-sm-3 col-form-label requiredAsterisk">@lang('labels.gl_account')</label>
                 <div class="col-sm-9">
                      <x-jet-input type="text"  name="number" required/>
                 </div>
             </div>
             <div class="form-group row">
-                <label for="notes" class="col-sm-3 col-form-label "> Notes</label>
+                <label for="notes" class="col-sm-3 col-form-label "> @lang('labels.notes')</label>
                 <div class="col-sm-9">
                     <textarea name="notes" id="notes" class="form-control"  cols="30"
                         rows="3"></textarea>
@@ -50,13 +50,13 @@
             ]">
                 <thead>
                     <tr>
-                        <th class="" data-sortable="true" data-field="created_at" data-width="170">Created Date
+                        <th class="" data-sortable="true" data-field="created_at" data-width="170">@lang('labels.created_date')
                         </th>
 
                         <th class="" data-sortable="true" data-field="username" data-width="200">
-                            User Name
+                         @lang('labels.user_name')
                         </th>
-                        <th class="" data-sortable="true" data-field="message">Description</th>
+                        <th class="" data-sortable="true" data-field="message">@lang('labels.description')</th>
                     </tr>
                 </thead>
             </x-bootstrap-table>

@@ -26,18 +26,18 @@
                             'sortorder' =>'desc',
                             'sortname'  =>'created_at',
                             'type'      =>'serverside',
-                           
+
                             'ajaxUrl'   => (Route::has($route.'index') ? route($route.'index') : ''),
                             'addUrl'    => (Route::has($route.'create') ? route($route.'create') : '')
                             ]">
                             <thead>
                                 <tr>
-                                    <th class="align-middle" data-sortable="false" data-width="170" data-field="created_at">Created Date</th>
-                                    <th class="align-middle" data-sortable="false" data-width="170" data-field="updated_at">Last Updatd</th>
-                                    <th class="align-middle" data-sortable="false" data-width="" data-field="name">Task Name</th>
-                                    <th class="align-middle" data-sortable="false" data-width="200" data-field="name">How Often</th>
-                                    <th class="align-middle" data-sortable="false" data-width="100" data-field="name">Start Time</th>
-                                    <th class="align-middle" data-sortable="false" data-width="100" data-field="name">Status</th>
+                                    <th class="align-middle" data-sortable="false" data-width="170" data-field="created_at">@lang('labels.created_date')</th>
+                                    <th class="align-middle" data-sortable="false" data-width="170" data-field="updated_at">@lang('labels.last_updated')  </th>
+                                    <th class="align-middle" data-sortable="false" data-width="" data-field="name">@lang('labels.task_name')  </th>
+                                    <th class="align-middle" data-sortable="false" data-width="200" data-field="name">@lang('labels.how_often') </th>
+                                    <th class="align-middle" data-sortable="false" data-width="100" data-field="name">@lang('labels.start_time')  </th>
+                                    <th class="align-middle" data-sortable="false" data-width="100" data-field="name">@lang('labels.status')</th>
                                 </tr>
                             </thead>
                         </x-bootstrap-table>
@@ -55,18 +55,18 @@
                             'ajaxUrl'   => (Route::has('company.logs') ? route('company.logs',['type'=>'gl-account']) : ''),
                             'addUrl'    => (Route::has($route.'create') ? route($route.'create') : '')
                             ]">
-                
+
                             <thead>
                                 <tr>
-                                  <th class="" data-sortable="true" data-field="created_at" data-width="170">Created Date</th>
-                                    <th class="" data-sortable="true" data-field="username" data-width="200">User Name</th>
-                                    <th class="" data-sortable="true" data-field="message">Description</th>
+                                  <th class="" data-sortable="true" data-field="created_at" data-width="170">@lang('labels.created_date') </th>
+                                    <th class="" data-sortable="true" data-field="username" data-width="200">@lang('labels.user_name') </th>
+                                    <th class="" data-sortable="true" data-field="message">@lang('labels.description')</th>
                                 </tr>
                             </thead>
                         </x-bootstrap-table>
                     </div>
-                
-                
+
+
                 </div>
             </div>
         </div>

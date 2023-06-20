@@ -5,9 +5,9 @@
                 <table class="table table_left_padding_0 mb-3 isTitleHeading">
                     <thead class="">
                         <tr>
-                            <th>Notice Type</th>
-                            <th>Frequency</th>
-                            <th>Cancel Days</th>
+                            <th>@lang('labels.notice_type')</th>
+                            <th>@lang('labels.frequency')</th>
+                            <th>@lang('labels.cancel_days')  </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -89,12 +89,12 @@
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th>Description</th>
-                                    <th>Mail</th>
-                                    <th>Fax</th>
-                                    <th>Email</th>
-                                    <th>Do Not Send</th>
-                                    <th>Send To(Leave Blank For Default)</th>
+                                    <th>@lang('labels.description')</th>
+                                    <th>@lang('labels.mail')</th>
+                                    <th>@lang('labels.fax')</th>
+                                    <th>@lang('labels.email')</th>
+                                    <th>@lang('labels.do_not_send')
+                                    <th>@lang('labels.send_to_leave_blank_for_default')</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -169,13 +169,13 @@
                 ]">
                     <thead>
                         <tr>
-                            <th class="" data-sortable="true" data-field="created_at" data-width="170">Created Date
+                            <th class="" data-sortable="true" data-field="created_at" data-width="170">@lang('labels.created_date')
                             </th>
 
                             <th class="" data-sortable="true" data-field="username" data-width="200">
-                                User Name
+                              @lang('labels.user_name')
                             </th>
-                            <th class="" data-sortable="true" data-field="message">Description</th>
+                            <th class="" data-sortable="true" data-field="message">@lang('labels.description')</th>
                         </tr>
                     </thead>
                 </x-bootstrap-table>

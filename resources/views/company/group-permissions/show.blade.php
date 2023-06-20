@@ -23,11 +23,11 @@
                             <div class="columns">
                                 <div class="ui selection dropdown table-head-dropdown">
                                     <input type="hidden" x-bind:value=open /><i class="dropdown icon"></i>
-                                    <div class="text" x-text="title">Default Values</div>
+                                    <div class="text" x-text="title">@lang('labels.default_values')</div>
                                     <div class="menu">
-                                        <div class="item" @click="open = 'default-values'" x-show="open !== 'default-values'">Default Values</div>
-                                        <div class="item" @click="open = 'user-permissions'" x-show="open !== 'user-permissions'">User Permissions</div>
-                                        <div class="item" @click="open = 'user-reports'" x-show="open !== 'user-reports'">User Reports</div>
+                                        <div class="item" @click="open = 'default-values'" x-show="open !== 'default-values'"> @lang('labels.default_values')</div>
+                                        <div class="item" @click="open = 'user-permissions'" x-show="open !== 'user-permissions'">@lang('labels.user_permissions')</div>
+                                        <div class="item" @click="open = 'user-reports'" x-show="open !== 'user-reports'">@lang('labels.user_reports')  </div>
                                     </div>
                                 </div>
                             </div>
@@ -53,7 +53,7 @@
                         @csrf
                         <input type="hidden" name="logsArr">
                         <div class="mb-3">
-                            <p class="fw-600">Default values used when creating new users</p>
+                            <p class="fw-600">@lang('labels.default_values_used_when_creating_new_users')</p>
                         </div>
                         <div class="form-group row">
                             <label for="name" class="col-sm-3 col-form-label">@lang('labels.days_allowed_to_modify_due_date')</label>

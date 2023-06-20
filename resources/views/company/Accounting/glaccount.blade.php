@@ -21,13 +21,13 @@
                                 <thead>
                                     <tr>
                                         <th class="align-middle" data-sortable="false" data-width="170"
-                                            data-field="created_at">Created Date</th>
+                                            data-field="created_at">@lang('labels.created_date')</th>
                                         <th class="align-middle" data-sortable="false" data-width="170"
-                                            data-field="updated_at">Last modified</th>
+                                            data-field="updated_at">@lang('labels.last_modified')</th>
                                         <th class="align-middle" data-sortable="false" data-width="660"
-                                            data-field="name">GL Account #</th>
+                                            data-field="name">@lang('labels.gl_account')</th>
                                         <th class="align-middle" data-sortable="false" data-width="100"
-                                            data-field="account_type">GL Account Name</th>
+                                            data-field="account_type">@lang('labels.gl_account_name')</th>
 
                                     </tr>
                                 </thead>
@@ -52,13 +52,13 @@
                                 <thead>
                                     <tr>
                                         <th class="" data-sortable="true" data-field="created_at"
-                                            data-width="170">Created Date</th>
+                                            data-width="170">@lang('labels.created_date')</th>
 
 
                                         <th class="" data-sortable="true" data-field="username" data-width="200">
-                                            User Name
+                                          @lang('labels.user_name')
                                         </th>
-                                        <th class="" data-sortable="true" data-field="message">Description</th>
+                                        <th class="" data-sortable="true" data-field="message">@lang('labels.description')</th>
                                     </tr>
                                 </thead>
                             </x-bootstrap-table>

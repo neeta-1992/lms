@@ -10,29 +10,28 @@
      <thead>
          <tr>
              <th class="align-middle" data-sortable="false" data-field="id">
-                 Account #
+                @lang('labels.account')
              </th>
              <th class="align-middle" data-sortable="false" data-field="created_at">
-                 Created Date
+               @lang('labels.created_date')
              </th>
              <th class="align-middle" data-sortable="false" data-field="updated_at">
-                 Last
-                 Modified </th>
-             <th class="align-middle" data-sortable="false" data-field="name">Insured Name
+                  @lang('labels.last_modified') </th>
+             <th class="align-middle" data-sortable="false" data-field="name">@lang('labels.insured_name')
              </th>
-             <th class="align-middle" data-sortable="false" data-field="name"> Status
+             <th class="align-middle" data-sortable="false" data-field="name"> @lang('labels.status')
              </th>
-             <th class="align-middle" data-sortable="false" data-field="name">Balance Due
+             <th class="align-middle" data-sortable="false" data-field="name">@lang('labels.balance_due')
              </th>
-             <th class="align-middle" data-sortable="false" data-field="name"> Payoff Amount
+             <th class="align-middle" data-sortable="false" data-field="name">@lang('labels.payoff_amount')
              </th>
-             <th class="align-middle" data-sortable="false" data-field="name">Installment Amount
+             <th class="align-middle" data-sortable="false" data-field="name">@lang('labels.installment_amount')
              </th>
-             <th class="align-middle" data-sortable="false" data-field="name">Next Due Date
+             <th class="align-middle" data-sortable="false" data-field="name">@lang('labels.next_due_date')
              </th>
-             <th class="align-middle" data-sortable="false" data-field="name">Installment #
+             <th class="align-middle" data-sortable="false" data-field="name">@lang('labels.installment')
              </th>
-             <th class="align-middle" data-sortable="false" data-field="name">Last Payment Date
+             <th class="align-middle" data-sortable="false" data-field="name">@lang('labels.last_payment_date')
              </th>
 
          </tr>

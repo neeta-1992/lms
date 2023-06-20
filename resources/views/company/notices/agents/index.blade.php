@@ -12,18 +12,17 @@
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th>Description</th>
-                                    <th>Mail</th>
-                                    <th>Fax</th>
-                                    <th>Email</th>
-                                    <th>Do Not Send</th>
-                                    <th>Send To(Leave Blank For Default)</th>
+                                    <th>@lang('labels.description') </th>
+                                    <th>@lang('labels.mail') </th>
+                                    <th>@lang('labels.fax') </th>
+                                    <th>@lang('labels.email') </th>
+                                    <th>@lang('labels.do_not_send')</th>
+                                    <th>@lang('labels.send_to_leave_blank_for_default')</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @php
                                     $noticesDescriptionText = noticesDescriptionText(['onDB'=>true,'select'=>'name','type'=>'Agent']);
-                             
                                 @endphp
                                 @if($noticesDescriptionText)
                                     @foreach($noticesDescriptionText as $key => $row)
@@ -31,7 +30,7 @@
                                         $sendType = !empty($data['option'][$key]['send_type']) ? $data['option'][$key]['send_type'] : '' ;
                                     @endphp
                                            <tr>
-                                                <td><a href="javascript:void(0)" class="noticeTemplateShow" data-url="{{ routeCheck('ajax.notice-template-data',['type'=>'agent','action'=>($key ??  "")]) }}" data-notice-type="{{ $sendType ?? '' }}" >{{ $row ?? '' }}</a></td>
+                                                <td><a href="javascript:void(0)" class="noticeTemplateShow" data-url="{{ routeCheck('ajax.notice-template-data',['type'=>'general-agent','action'=>($key ??  "")]) }}" data-notice-type="{{ $sendType ?? '' }}" >{{ $row ?? '' }}</a></td>
                                                 <td>
                                                     <div class="zinput zradio zradio-sm  zinput-inline p-0 mb-2">
                                                         <input id="mail_{{ $key ??  ""}}" class="form-check-input notices_description_radio" @checked($sendType == "Mail")  name="option[{{ $key ??  ""}}]"
@@ -65,9 +64,9 @@
                                                     @if($sendType == "Do not send")
                                                         <x-jet-input type="text" class="notices_description_text" readonly name="send_to[{{ $key  }}]" />
                                                     @elseif ($sendType == "Fax")
-                                                      <x-jet-input type="text" class="notices_description_text" name="send_to[{{ $key  }}]" value="{{ $data['option'][$key]['send_to'] ?? '' }}" />
+                                                      <x-jet-input type="text" class="notices_description_text" name="send_to[{{ $key  }}]" value="{{ $data['description'][$key]['send_to'] ?? '' }}" />
                                                     @else
-                                                    <x-jet-input type="text" class="notices_description_text" name="send_to[{{ $key  }}]" value="{{ $data['option'][$key]['send_to'] ?? '' }}" />
+                                                    <x-jet-input type="text" class="notices_description_text" name="send_to[{{ $key  }}]" value="{{ $data['description'][$key]['send_to'] ?? '' }}" />
                                                     @endif
 
                                                 </td>
@@ -95,13 +94,13 @@
                 ]">
                     <thead>
                         <tr>
-                            <th class="" data-sortable="true" data-field="created_at" data-width="170">Created Date
+                            <th class="" data-sortable="true" data-field="created_at" data-width="170">@lang('labels.created_date')
                             </th>
 
                             <th class="" data-sortable="true" data-field="username" data-width="200">
-                                User Name
+                               @lang('labels.user_name')
                             </th>
-                            <th class="" data-sortable="true" data-field="message">Description</th>
+                            <th class="" data-sortable="true" data-field="message">@lang('labels.description')</th>
                         </tr>
                     </thead>
                 </x-bootstrap-table>

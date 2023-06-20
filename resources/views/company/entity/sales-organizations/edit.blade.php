@@ -94,29 +94,29 @@
                             <div class="columns">
                                 <div class="ui selection dropdown table-head-dropdown">
                                     <input type="hidden" x-bind:value=open /><i class="dropdown icon"></i>
-                                    <div class="text" x-text="title">General Information</div>
+                                    <div class="text" x-text="title">@lang('labels.general_information')</div>
                                     <div class="menu">
                                         <div class="item" @click="open = 'general-information'"
-                                            x-show="open != 'general-information'">General Information</div>
-                                        <div class="item" @click="open = 'offices'" x-show="open != 'offices'">Offices
+                                            x-show="open != 'general-information'">@lang('labels.general_information')</div>
+                                        <div class="item" @click="open = 'offices'" x-show="open != 'offices'">@lang('labels.offices')
                                         </div>
 
-                                        <div class="item" @click="open = 'users'" x-show="open != 'users'">Users</div>
-                                        <div class="item" @click="open = 'compensation-table'" x-show="open != 'compensation-table'">Compensation Table</div>
+                                        <div class="item" @click="open = 'users'" x-show="open != 'users'">@lang('labels.users') </div>
+                                        <div class="item" @click="open = 'compensation-table'" x-show="open != 'compensation-table'"> @lang('labels.compensation_table')</div>
 
-                                        <div class="item" @click="open = 'funding'" x-show="open != 'funding'">Funding
+                                        <div class="item" @click="open = 'funding'" x-show="open != 'funding'">@lang('labels.funding')
                                         </div>
-                                        <div class="item" @click="open = 'notices'" x-show="open != 'notices'">Notices
+                                        <div class="item" @click="open = 'notices'" x-show="open != 'notices'">@lang('labels.notices')
                                         </div>
                                          <div class="item" @click="open = 'attachments'"
-                                            x-show="open != 'attachments'">Attachments</div>
+                                            x-show="open != 'attachments'">@lang('labels.attachments') </div>
 
-                                        <div class="item" @click="open = 'quotes'" x-show="open != 'quotes'">Quotes
+                                        <div class="item" @click="open = 'quotes'" x-show="open != 'quotes'">@lang('labels.quotes')
                                         </div>
                                         <div class="item" @click="open = 'accounts'" x-show="open != 'accounts'">
                                             Accounts</div>
 
-                                        <div class="item" @click="open = 'logs'" x-show="open != 'logs'">Logs</div>
+                                        <div class="item" @click="open = 'logs'" x-show="open != 'logs'">@lang('labels.logs')</div>
                                     </div>
                                 </div>
                             </div>
@@ -332,14 +332,13 @@
                         <thead>
                             <tr>
                                 <th class="" data-sortable="true" data-field="created_at" data-width="170">
-                                    Created
-                                    Date
+                                  @lang('labels.created_date')
                                 </th>
 
                                 <th class="" data-sortable="true" data-field="username" data-width="200">
-                                    User Name
+                                   @lang('labels.user_name')
                                 </th>
-                                <th class="" data-sortable="true" data-field="message">Description</th>
+                                <th class="" data-sortable="true" data-field="message">@lang('labels.description')</th>
                             </tr>
                         </thead>
                     </x-bootstrap-table>

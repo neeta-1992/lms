@@ -50,7 +50,7 @@
                             class="ingnorTitleCase form-check-label d-flex align-items-center">
                             <x-jet-input type="text" name="days_after_policy_inception_text"
                                 style="width: 10% !important;" :value="$data['days_after_policy_inception_text'] ?? ''" />
-                            <span class="pl-3">Days After Policy Inception</span>
+                            <span class="pl-3">@lang('labels.days_after_policy_inception')</span>
                         </label>
                     </div>
                     <div class="zinput zradio  zradio-sm pb-0">
@@ -59,7 +59,7 @@
                             value="15 Days After the End of The Month of Policy Inception">
                         <label for="Remittance_schedule_option_Month"
                             class="ingnorTitleCase form-check-label d-flex align-items-center">
-                            15 Days After the End of The Month of Policy Inception
+                         @lang('labels.15_days_after_the_end_of_the_month_of_policy_inception')
                         </label>
                     </div>
                     <div class="zinput zradio zradio-sm pb-0">
@@ -69,7 +69,7 @@
                             class="ingnorTitleCase form-check-label d-flex align-items-center">
                             <x-jet-input type="text" name="days_after_1st_payment_due_date_text"
                                 style="width: 10% !important;" :value="$data['days_after_1st_payment_due_date_text'] ?? ''" />
-                            <span class="pl-3">Days After 1st Payment Due Date</span>
+                            <span class="pl-3">@lang('labels.days_after_1st_payment_due_date') </span>
                         </label>
                     </div>
 
@@ -120,7 +120,7 @@
                             class="ingnorTitleCase form-check-label d-flex align-items-center">
                             <x-jet-input type="text" name="compensation_days_after_policy_inception_text"
                                 style="width: 10% !important;" :value="$data['compensation_days_after_policy_inception_text'] ?? ''" />
-                            <span class="pl-3">Days After Policy Inception</span>
+                            <span class="pl-3">@lang('labels.days_after_policy_inception')</span>
                         </label>
                     </div>
                     <div class="zinput zradio  zradio-sm pb-0">
@@ -129,7 +129,7 @@
                             value="15 Days After the End of The Month of Policy Inception">
                         <label for="compensation_Remittance_schedule_option_Month"
                             class="ingnorTitleCase form-check-label d-flex align-items-center">
-                            15 Days After the End of The Month of Policy Inception
+                          @lang('labels.15_days_after_the_end_of_the_month_of_policy_inception')
                         </label>
                     </div>
                     <div class="zinput zradio zradio-sm pb-0">
@@ -139,7 +139,7 @@
                             class="ingnorTitleCase form-check-label d-flex align-items-center">
                             <x-jet-input type="text" name="compensation_days_after_1st_payment_due_date_text"
                                 style="width: 10% !important;" :value="$data['compensation_days_after_1st_payment_due_date_text'] ?? ''" />
-                            <span class="pl-3">Days After 1st Payment Due Date</span>
+                            <span class="pl-3">@lang('labels.days_after_1st_payment_due_date')</span>
                         </label>
                     </div>
 
@@ -190,7 +190,7 @@
                 </div>
             </div>
             <div class="form-group row">
-                <label for="license_state" class="col-sm-3 col-form-label ">Funding Address</label>
+                <label for="license_state" class="col-sm-3 col-form-label ">@lang('labels.funding_address')  </label>
                 <div class="col-sm-9">
                     <x-jet-checkbox for="funding_address_checkbox"
                         @change="FundingAddress = $event.target.checked ? true : '';" :checked="($data['funding_address_checkbox'] ?? 1) == 1 ? true : false"
@@ -232,7 +232,7 @@
             </div>
 
             <div class="form-group row">
-                <label for="hold_all_payables" class="col-sm-3 col-form-label ">Hold All Payables</label>
+                <label for="hold_all_payables" class="col-sm-3 col-form-label ">@lang('labels.hold_all_payables')   </label>
                 <div class="col-sm-9">
                      <x-jet-checkbox for="hold_all_payables"
                         labelText='' class="changesetup setup_fees" name="hold_all_payables"
@@ -274,9 +274,9 @@
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th>GL Accounts</th>
-                                    <th>Default Bank Account</th>
-                                    <th>Details</th>
+                                    <th>@lang('labels.gl_accounts') </th>
+                                    <th>@lang('labels.default_bank_account')</th>
+                                    <th>@lang('labels.details') </th>
 
                                 </tr>
                             </thead>
@@ -354,13 +354,13 @@
             ]">
                 <thead>
                     <tr>
-                        <th class="" data-sortable="true" data-field="created_at" data-width="170">Created Date
+                        <th class="" data-sortable="true" data-field="created_at" data-width="170">@lang('labels.created_date')
                         </th>
 
                         <th class="" data-sortable="true" data-field="username" data-width="200">
-                            User Name
+                         @lang('labels.user_name')
                         </th>
-                        <th class="" data-sortable="true" data-field="message">Description</th>
+                        <th class="" data-sortable="true" data-field="message">@lang('labels.description')</th>
                     </tr>
                 </thead>
             </x-bootstrap-table>

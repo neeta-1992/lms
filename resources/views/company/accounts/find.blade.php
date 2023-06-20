@@ -104,7 +104,7 @@
                         {!! form_dropdown('primary_address_state', stateDropDown(), '', [
                         'class' => "ui dropdown input-sm
                         w-100",
-                       
+
                         'id' => 'primary_address_state',
                         ]) !!}
 
@@ -131,7 +131,7 @@
                             <label for="telephone" class="col-sm-5 col-form-label">@lang("labels.payment_due_date")</label>
                             <div class="col-sm-7">
                                  <x-jet-input type="hidden" name="payment_due_date" class="dataDropDown" />
-                            
+
                             </div>
                         </div>
                     </div>
@@ -167,7 +167,7 @@
                 <div class="row">
                     <div class="col-sm-4">
                         <x-select :options='accountPaymentMethod()' class='ui dropdown' name='payment_method'/>
-                       
+
                     </div>
                     <div class="col-sm-8">
                         <div class="form-group row">
@@ -199,7 +199,7 @@
             <x-table id="{{ $activePage }}-find" ajaxUrl="{{ routeCheck($route . 'index') }}">
                 <thead>
                     <tr>
-                          <th class="align-middle" data-sortable="false" data-field="account_number">@lang('labels.account') #
+                          <th class="align-middle" data-sortable="false" data-field="account_number">@lang('labels.account') 
                         </th>
                         <th class="align-middle" data-sortable="true" data-field="insured">@lang('labels.insured') @lang('labels.name')</th>
                         <th class="align-middle" data-sortable="true" data-field="agency">@lang('labels.agency') @lang('labels.name')</th>
@@ -226,7 +226,7 @@
                     remotelyDropDown('.insuredList', 'common/entity/insured');
                 }
                 ,findForm(formData) {
-                   
+
                     let fillerObj = objClean(formData);
 
                     let isValid = isValidation($('.findForm'), (notClass = true));
@@ -237,7 +237,7 @@
                         $('#{{ $activePage ?? '' }}-find').bootstrapTable("refresh",{
                             url: "{{ routeCheck($route . 'index') }}?" + $.param(args),
                         });
-                      
+
 
                     }
                 }

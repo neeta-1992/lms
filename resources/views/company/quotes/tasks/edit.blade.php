@@ -117,7 +117,7 @@ $currentStatus = !empty($data['current_status']) ? $data['current_status'] : 0;
 
     <div class="remodal" id="closeTaskModel" data-remodal-options="hashTracking: false, closeOnOutsideClick: false">
         <button data-remodal-action="close" class="remodal-close"></button>
-        <h5>Close Task</h5>
+        <h5>@lang('labels.close_task')</h5>
         <form action="{{ routeCheck('company.task.cloes-task',['qId' => $qId]) }}" class="reloadForm">
             <div class="form-group text-left ">
                 <x-jet-input type="hidden" name="id" value="{{ $id }}" />
@@ -134,7 +134,7 @@ $currentStatus = !empty($data['current_status']) ? $data['current_status'] : 0;
     </div>
     <div class="remodal" id="reopenTaskModel" data-remodal-options="hashTracking: false, closeOnOutsideClick: false">
         <button data-remodal-action="close" class="remodal-close"></button>
-        <h5>Reopen Task</h5>
+        <h5>@lang('labels.reopen_task')</h5>
         <form action="{{ routeCheck('company.task.reopen-task',['qId' => $qId]) }}" class="reloadForm">
             <div class="form-group text-left ">
                 <x-jet-input type="hidden" name="id" value="{{ $id }}" />

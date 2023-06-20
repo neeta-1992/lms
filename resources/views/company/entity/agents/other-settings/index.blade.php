@@ -136,7 +136,7 @@
         </div>
 
         <div class="mb-3">
-            <p class="fw-600">E-Signature Workflow Settings</p>
+            <p class="fw-600"> @lang('labels.e_signature_workflow_settings')</p>
         </div>
 
         <div class="form-group row">
@@ -177,7 +177,7 @@
         </div>
 
         <div class="mb-3">
-            <p class="fw-600">Signing Order</p>
+            <p class="fw-600">@lang('labels.signing_order')</p>
         </div>
 
         <div class="form-group row">
@@ -194,7 +194,7 @@
         </div>
 
         <div class="mb-3">
-            <p class="fw-600">Approval Step</p>
+            <p class="fw-600">@lang('labels.approval_step')</p>
         </div>
 
         <div class="form-group row">

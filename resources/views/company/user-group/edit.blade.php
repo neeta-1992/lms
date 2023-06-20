@@ -5,7 +5,7 @@
             @method('put')
             <input type="hidden" name="logsArr">
             <div class="form-group row">
-                <label for="name" class="col-sm-3 col-form-label requiredAsterisk">Name</label>
+                <label for="name" class="col-sm-3 col-form-label requiredAsterisk">@lang('labels.name')</label>
                 <div class="col-sm-9">
                     <input type="text" class="form-control input-sm" name="name" id="name" required
                         placeholder="">
@@ -56,13 +56,13 @@
             ]">
                 <thead>
                     <tr>
-                        <th class="" data-sortable="true" data-field="created_at" data-width="170">Created Date
+                        <th class="" data-sortable="true" data-field="created_at" data-width="170">@lang('labels.created_date')
                         </th>
 
                         <th class="" data-sortable="true" data-field="username" data-width="200">
-                            User Name
+                          @lang('labels.user_name')
                         </th>
-                        <th class="" data-sortable="true" data-field="message">Description</th>
+                        <th class="" data-sortable="true" data-field="message">@lang('labels.description')</th>
                     </tr>
                 </thead>
             </x-bootstrap-table>

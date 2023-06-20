@@ -23,7 +23,6 @@
             }
 
         }">
-        
         <div class="container tableButtonInlineShow">
             <div class="row">
                 <div class="col-md-12 page_table_heading">
@@ -39,15 +38,15 @@
                             <div class="columns">
                                 <div class="ui selection dropdown table-head-dropdown">
                                     <input type="hidden" x-bind:value=open /><i class="dropdown icon"></i>
-                                    <div class="text" x-text="title">Default Values</div>
+                                    <div class="text" x-text="title">@lang('labels.default_values') </div>
                                     <div class="menu">
-                                        <div class="item" @click="open = 'isForm'" x-show="open !== 'isForm'">Default
-                                            Values</div>
+                                        <div class="item" @click="open = 'isForm'" x-show="open !== 'isForm'">
+                                            @lang('labels.default_values')</div>
                                         <div class="item" @click="open = 'user-permissions'"
-                                            x-show="open !== 'user-permissions'"> User Permissions</div>
+                                            x-show="open !== 'user-permissions'">@lang('labels.user_permissions')   </div>
                                         <div class="item" @click="open = 'user-reports'"
-                                            x-show="open !== 'user-reports';title == 'User Reports'">User Reports</div>
-                                        <div class="item" @click="open = 'logs';" x-show="open != 'logs'">Logs</div>
+                                            x-show="open !== 'user-reports';title == 'User Reports'">@lang('labels.user_reports')  </div>
+                                        <div class="item" @click="open = 'logs';" x-show="open != 'logs'">@lang('labels.logs') </div>
                                     </div>
                                 </div>
                             </div>
@@ -76,7 +75,7 @@
                         <input type="hidden" name="userType" value="{{ $id ?? '' }}">
                         <div class="col-md-12" x-show="open == 'isForm'">
                             <div class="mb-3">
-                                <p class="fw-600">Default values used when creating new users</p>
+                                <p class="fw-600">@lang('labels.default_values_used_when_creating_new_users')</p>
                             </div>
                             <div class="form-group row">
                                 <label for="name" class="col-sm-3 col-form-label">@lang('labels.days_allowed_to_modify_due_date')</label>
@@ -142,21 +141,16 @@
                                 @foreach ($permissions as $key => $value)
                                     <div class="form-group row">
                                         <label for="comp_name"
-                                            class="col-sm-4 col-form-label ">{{ $value['text'] ?? '' }}</label>
-                                        <div class="col-sm-8">
+                                            class="col-sm-3 col-form-label ">{{ $value['text'] ?? '' }}</label>
+                                        <div class="col-sm-9">
                                             @if (!empty($value['permissions']))
                                                 @foreach ($value['permissions'] as $pkey => $permissions)
-                                                    @php
-                                                        $block = isset($permissions['block']) ? $permissions['block'] : true;
-                                                        $chackValue = !empty($permissions['value']) ? $permissions['value'] : $permissions['name'] ;
-                                                        $chackId = !empty($permissions['value']) ? $permissions['value'].'-'.$permissions['name'] : $permissions['name'] ;
-                                                    @endphp
-                                                    <x-jet-checkbox :isBlock="$block" for="{{ $chackId ?? '' }}"
-                                                        labelText="{{ $permissions['text'] }}" 
+                                                    <x-jet-checkbox :isBlock="true" for="{{ $permissions['name'] }}"
+                                                        labelText="{{ $permissions['text'] }}"
                                                         name="permission[{{ $value['key'] ?? '' }}][]"
-                                                        class="permissionCheckBox {{ isset($permissions['class']) ? $permissions['class'] : '' }}"
-                                                        id="{{ $chackId ?? '' }}"
-                                                        value="{{ $chackValue }}"  data-key="{{ $value['key'] ?? '' }}"/>
+                                                        class="permissionCheckBox" id="{{ $permissions['name'] }}"
+                                                        value="{{ $permissions['name'] }}"
+                                                        data-key="{{ $value['key'] ?? '' }}" />
                                                 @endforeach
                                             @endif
 
@@ -178,9 +172,9 @@
                                                     <x-jet-checkbox :isBlock="true" for="{{ $permissions['name'] }}"
                                                         labelText="{{ $permissions['text'] }}"
                                                         name="report[{{ $value['key'] ?? '' }}][]"
-                                                          class="permissionCheckBox"
-                                                        id="{{ $permissions['name'] }}"
-                                                        value="{{ $permissions['name'] }}" data-key="{{ $value['key'] ?? '' }}" />
+                                                        class="permissionCheckBox" id="{{ $permissions['name'] }}"
+                                                        value="{{ $permissions['name'] }}"
+                                                        data-key="{{ $value['key'] ?? '' }}" />
                                                 @endforeach
                                             @endif
                                         </div>
@@ -225,9 +219,11 @@
                         ajaxUrl="{{ routeCheck('company.logs', ['type' => $activePage, 'id' => $id]) }}">
                         <thead>
                             <tr>
-                                <th class="" data-sortable="true" data-field="created_at" data-width="170">Created Date</th>
-                                <th class="" data-sortable="true" data-field="username" data-width="200">User Name</th>
-                                <th class="" data-sortable="true" data-field="message">Description</th>
+                                <th class="" data-sortable="true" data-field="created_at" data-width="170">
+                                @lang('labels.created_date')     </th>
+                                <th class="" data-sortable="true" data-field="username" data-width="200">
+                                 @lang('labels.user_name')   </th>
+                                <th class="" data-sortable="true" data-field="message">@lang('labels.description')</th>
                             </tr>
                         </thead>
                     </x-table>

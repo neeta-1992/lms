@@ -14,10 +14,10 @@
                 ]">
                     <thead>
                         <tr>
-                            <th class="align-middle" data-sortable="true" data-width="170" data-field="created_at">Created Date</th>
-                            <th class="align-middle" data-sortable="true" data-width="170" data-field="updated_at">Last Update Date</th>
-                            <th class="align-middle" data-sortable="true" data-width="200" data-field="number">GL Number</th>
-                            <th class="align-middle" data-sortable="true" data-width=""    data-field="name">GL Name</th>
+                            <th class="align-middle" data-sortable="true" data-width="170" data-field="created_at">@lang('labels.created_date')</th>
+                            <th class="align-middle" data-sortable="true" data-width="170" data-field="updated_at">@lang('labels.last_update_date')</th>
+                            <th class="align-middle" data-sortable="true" data-width="200" data-field="number">@lang('labels.gl_number')</th>
+                            <th class="align-middle" data-sortable="true" data-width=""    data-field="name">@lang('labels.gl_name')</th>
                         </tr>
                     </thead>
                 </x-bootstrap-table>

@@ -74,16 +74,16 @@
                             <div class="columns">
                                 <div class="ui selection dropdown table-head-dropdown">
                                     <input type="hidden" x-bind:value=open /><i class="dropdown icon"></i>
-                                    <div class="text" x-text="title">General Information</div>
+                                    <div class="text" x-text="title">@lang('labels.general_information') </div>
                                     <div class="menu">
                                         <div class="item" @click="open = 'general-information'"
                                             x-show="open != 'general-information'">
-                                            General Information</div>
+                                           @lang('labels.general_information')</div>
                                         <div class="item" @click="open = 'contacts'" x-show="open != 'contacts'">
-                                            Contacts</div>
-                                        <div class="item" @click="open = 'offices'" x-show="open != 'offices'">Offices
+                                          @lang('labels.contacts')  </div>
+                                        <div class="item" @click="open = 'offices'" x-show="open != 'offices'">@lang('labels.offices')
                                         </div>
-                                        <div class="item" @click="open = 'logs';" x-show="open != 'logs'">Logs
+                                        <div class="item" @click="open = 'logs';" x-show="open != 'logs'">@lang('labels.logs')
                                         </div>
                                     </div>
                                 </div>
@@ -225,14 +225,14 @@
                         <thead>
                             <tr>
                                 <th class="" data-sortable="true" data-field="created_at" data-width="170">
-                                    Created
-                                    Date
+                                  @lang('labels.created_date')
+
                                 </th>
 
                                 <th class="" data-sortable="true" data-field="username" data-width="200">
-                                    User Name
+                                   @lang('labels.user_name')
                                 </th>
-                                <th class="" data-sortable="true" data-field="message">Description</th>
+                                <th class="" data-sortable="true" data-field="message">@lang('labels.description')</th>
                             </tr>
                         </thead>
                     </x-bootstrap-table>

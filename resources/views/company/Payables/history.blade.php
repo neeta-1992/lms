@@ -3,7 +3,7 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-12">
-                    <h4>Payable History</h4>
+                    <h4>@lang('labels.payable_history')</h4>
                     <form class="validationForm" novalidate method="POST"
                         action="{{ Route::has($route . 'store') ? route($route . 'store') : '' }}">
                         @csrf

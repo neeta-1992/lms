@@ -5,7 +5,7 @@
         </x-slot>
 
         @slot('uiDropDwon')
-       
+
             @if($pageType == 'index')
                 <div class="ui selection dropdown table-head-dropdown maindropdown">
                     <input type="hidden" x-bind:value=tab /><i class="dropdown icon"></i>
@@ -39,7 +39,7 @@
                     <div class="menu">
                         <div class="item" @click="tab = 'request_for_activation';title = '{{ __('labels.request_for_activation') }}';initTable()" x-show="tab != 'request_for_activation'">@lang('labels.request_for_activation')</div>
                         <div class="item" @click="tab = 'in_process_request';title = '{{ __('labels.in_process_request') }}';initTable()" x-show="tab != 'in_process_request'">@lang('labels.in_process_request')</div>
-         
+
                     </div>
                 </div>
                 @endslot
@@ -55,15 +55,15 @@
                                 <th class="align-middle" data-sortable="true" data-field="insured">@lang('labels.insured') @lang('labels.name')</th>
                                 <th class="align-middle" data-sortable="true" data-field="agency">@lang('labels.agency') @lang('labels.name')</th>
                                 <th class="align-middle" data-sortable="true" data-field="premium">@lang('labels.premium') </th>
-                                <th class="align-middle" data-sortable="false" data-field="down_payment">  Down Payment</th>
-                                <th class="align-middle" data-sortable="false" data-field="total">  Total</th>
+                                <th class="align-middle" data-sortable="false" data-field="down_payment">@lang('labels.down_payment')   </th>
+                                <th class="align-middle" data-sortable="false" data-field="total">@lang('labels.total')  </th>
                              </tr>
                         </thead>
                     </x-table>
                 </div>
             @endif
         @endslot
-         
+
 
     </x-jet-action-section>
     <!--/.section-->
@@ -82,7 +82,7 @@
                         url: "{{ routeCheck($route . 'index') }}?tab=" + this.tab
                     });
                 }
-                
+
 
             }));
         });

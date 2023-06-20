@@ -9,7 +9,6 @@
             <th class="align-middle" data-field="credit">@lang('labels.credit')</th>
             <th class="align-middle" data-field="balance">@lang('labels.balance')</th>
             <th class="align-middle" data-field="description">@lang("labels.description")</th>
-           {{--   <th class="align-middle" data-field="action">@lang("labels.action")</th>  --}}
         </tr>
     </thead>
 </x-table>

@@ -116,7 +116,7 @@
             </div>
 
             <div class="form-group row">
-                <label for="" class="col-sm-3 col-form-label fw-600">Contacts</label>
+                <label for="" class="col-sm-3 col-form-label fw-600">@lang('labels.contacts') </label>
                 {{-- <div class="col-sm-9">
                     <small class="fw-300">**This is The Agency Adminstrator</small>
                 </div> --}}

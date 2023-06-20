@@ -218,7 +218,7 @@
             </div>
 			<hr>
             <div class="mb-3">
-                <h6>Accepted card types</h6>
+                <h6>@lang('labels.accepted_card_types')</h6>
             </div>
             <div class="row form-group">
                 <label for="open_status" class="col-sm-4 col-form-label requiredAsterisk">
@@ -237,7 +237,7 @@
             </div>
 			<hr>
             <div class="mb-3">
-                <h6>Recurring options</h6>
+                <h6>@lang('labels.recurring_options')</h6>
             </div>
 
 
@@ -513,13 +513,13 @@
             ]">
                 <thead>
                     <tr>
-                        <th class="" data-sortable="true" data-field="created_at" data-width="170">Created Date
+                        <th class="" data-sortable="true" data-field="created_at" data-width="170">@lang('labels.created_date')
                         </th>
 
                         <th class="" data-sortable="true" data-field="username" data-width="200">
-                            User Name
+                          @lang('labels.user_name')
                         </th>
-                        <th class="" data-sortable="true" data-field="message">Description</th>
+                        <th class="" data-sortable="true" data-field="message">@lang('labels.description')</th>
                     </tr>
                 </thead>
             </x-bootstrap-table>

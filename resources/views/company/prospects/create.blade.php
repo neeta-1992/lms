@@ -63,7 +63,7 @@
             </div>
         </div>
         <div class="mb-3">
-            <h6 class="fw-600"> Contacts</h6>
+            <h6 class="fw-600">@lang('labels.contacts') </h6>
         </div>
         <div class="cloneBox">
             <div class="row">

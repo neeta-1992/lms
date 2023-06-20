@@ -1,10 +1,12 @@
-
 @extends("layouts.blank",['class'=>['jSignature','pdf','datepicker']])
 
 @push('common_style')
-    <style>
-       {!! DBHelper::metaValue('finance-agreement') ?? '' !!}
-    </style>
+<style>
+    {
+         ! ! DBHelper: :metaValue('finance-agreement') ?? '' ! !
+    }
+
+</style>
 @endpush
 @section("content")
 @isset($quoteId)
@@ -122,7 +124,7 @@
             </div>
         </x-form>
 
-       {{--  <div class="buttons">
+        {{-- <div class="buttons">
             <button class="btn btn-sm btn-primary">@lang('Submit')</button>
         </div> --}}
 
@@ -153,7 +155,7 @@
 
 @push("page_script_code")
 <script>
-    let signatureArr = @json($quoteSignature ?? []);
+    let signatureArr = @json($quoteSignature ? ? []);
     var clicksignature = 0;
     var lastsignArr = [];
     const fontarry = ["Great Vibes", "Marck Script", "Niconne", "Dancing Script", "cursive", "Allura"];
@@ -173,7 +175,7 @@
         if (isAgent !== 'yes' && isIsnured !== 'yes') {
             $(".drawignature").removeAttr('data-type data-id');
         } else if (isAgent == 'yes' && isnuredAllow == false) {
-            if('{{ $agentCount ?? 0 }}' != 1){
+            if ('{{ $agentCount ?? 0 }}' != 1) {
                 $(".drawignature.isnured").removeAttr('data-type data-id');
             }
 
@@ -294,7 +296,7 @@
             });
             let url = await forM.attr("action");
             let _method = forM.find(" input[name='_method']").val();
-            _method = _method ?? "post";
+            _method = _method ? ? "post";
             let data = await doAjax(url, _method, args, {
                 dataType: "json"
             , }, formClass);

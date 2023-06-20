@@ -7,7 +7,7 @@
             <x-table id="{{ $activePage }}" ajaxUrl="{{ routeCheck($route . 'index') }}" >
                 <thead>
                     <tr>
-                        <th class="align-middle" data-sortable="false" data-field="account_number">@lang('labels.account') #
+                        <th class="align-middle" data-sortable="false" data-field="account_number">@lang('labels.account')
                         </th>
                         <th class="align-middle" data-sortable="true" data-field="insured">@lang('labels.insured') @lang('labels.name')</th>
                         <th class="align-middle" data-sortable="true" data-field="agency">@lang('labels.agency') @lang('labels.name')</th>

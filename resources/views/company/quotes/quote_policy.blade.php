@@ -32,7 +32,7 @@
                                 @change="insurance_company = $el.value;entityId =$el.value" required>
                             <i class="dropdown icon"></i>
                             <input type="text" class="search">
-                            <div class="default text">Search Insurance Company</div>
+                            <div class="default text">@lang('labels.search_insurance_company')</div>
                         </div>
                     </div>
                 </div>
@@ -45,7 +45,7 @@
                                 @change="general_agent = $el.value;entityId =$el.value">
                             <i class="dropdown icon"></i>
                             <input type="text" class="search">
-                            <div class="default text">Search General Agent</div>
+                            <div class="default text">@lang('labels.search_general_agent')</div>
                         </div>
                     </div>
                 </div>
