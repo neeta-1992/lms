@@ -199,9 +199,9 @@ class CommonController extends Controller
             }
             $data = Entity::getData(['type' => $type,'search'=>$request->search,'agency'=>$agency])->get(['name','id as value','name as text'])?->makeHidden(['upload_agency_ec_insurance_url'])?->toArray();
           
-            if(($requestType == 'insurance_company' || $requestType ==  'general_agent') && empty($data) && $istype == 'quote'){
+            /*if(($requestType == 'insurance_company' || $requestType ==  'general_agent') && empty($data) && $istype == 'quote'){
                 $data[] = ['name' => $request->search,'value' => $request->search,"text"=>$request->search];
-            } 
+            } */
             return response()->json(['success'=>true,'results'=>$data], 200);
         } catch (\Throwable $th) {
             dd($th);
