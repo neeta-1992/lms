@@ -1,23 +1,22 @@
+
 @extends("layouts.blank",['class'=>['jSignature','pdf','datepicker']])
 
 @push('common_style')
-<style>
-    {
-         ! ! DBHelper: :metaValue('finance-agreement') ?? '' ! !
-    }
-
-</style>
+    <style>
+       {!! DBHelper::metaValue('finance-agreement') ?? '' !!}
+    </style>
 @endpush
 @section("content")
 @isset($quoteId)
-<div class=" d-flex justify-content-end pr-2">
-
+<div class="pdf_access_bar d-flex justify-content-end pr-2">
     <a class="mx-1" href="{{  routeCheck('quotes.download-quote',['q'=>$qId,'v'=>$vId]) }}"><i class="fal fa-download"></i></a>
-    <div class="createdPrint mx-1" id="disclosureprint" data-content=".template_section" title=""><i class="fal fa-print"></i></div>
+    <div class="createdPrint mx-1" id="disclosureprint" data-content=".template_section" title=""><i class="fal fa-print"></i>
+</div>
+	
+	<a class="mx-1" class="close_w" href="#" onClick="window.close();"><i class="fa-solid fa-xmark"></i></a>
 
     {{-- <div class="windowpop_close mx-1"><i class="fa-regular fa-circle-xmark"></i></div>  --}}
 </div>
-<hr>
 @endisset
 <div class="w-100 template_section">
     {!! $template !!}
@@ -124,7 +123,7 @@
             </div>
         </x-form>
 
-        {{-- <div class="buttons">
+       {{--  <div class="buttons">
             <button class="btn btn-sm btn-primary">@lang('Submit')</button>
         </div> --}}
 
@@ -155,7 +154,7 @@
 
 @push("page_script_code")
 <script>
-    let signatureArr = @json($quoteSignature ? ? []);
+    let signatureArr = @json($quoteSignature ?? []);
     var clicksignature = 0;
     var lastsignArr = [];
     const fontarry = ["Great Vibes", "Marck Script", "Niconne", "Dancing Script", "cursive", "Allura"];
@@ -175,7 +174,7 @@
         if (isAgent !== 'yes' && isIsnured !== 'yes') {
             $(".drawignature").removeAttr('data-type data-id');
         } else if (isAgent == 'yes' && isnuredAllow == false) {
-            if ('{{ $agentCount ?? 0 }}' != 1) {
+            if('{{ $agentCount ?? 0 }}' != 1){
                 $(".drawignature.isnured").removeAttr('data-type data-id');
             }
 
@@ -208,7 +207,7 @@
         $('#signature_text').val('');
         $('.agenttexturl').val('');
     });
-
+ 	
     $(document).on('input', '#signature_text', function() {
         let tCtx = document.getElementById('textCanvas').getContext('2d');
         tCtx.clearRect(0, 0, document.getElementById('textCanvas').width, document.getElementById('textCanvas').height);
@@ -296,7 +295,7 @@
             });
             let url = await forM.attr("action");
             let _method = forM.find(" input[name='_method']").val();
-            _method = _method ? ? "post";
+            _method = _method ?? "post";
             let data = await doAjax(url, _method, args, {
                 dataType: "json"
             , }, formClass);
