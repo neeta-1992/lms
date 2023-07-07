@@ -5,6 +5,21 @@ $(function () {
         }
     });
 
+    if(!isEmptyChack(toolTip)){
+        toolTip = JSON.parse(toolTip);
+        $.each(toolTip, function (indexInArray, valueOfElement) { 
+            let toolTipField = valueOfElement.field;
+            let toolTipDescription = valueOfElement.description;
+            let toolTipTitle = valueOfElement.title;
+            let html = `<i class="ml-1 large fw-600 color-info fa-regular fa-circle-info tooltipPopup" data-sm-title="${toolTipTitle}" data-sm-content="${toolTipDescription}"></i>`;
+           /*  if($(`[name="${toolTipField}"]`).parents('.row,.form-group').find('.tooltipPopup') != 0){ */
+                $(`[name="${toolTipField}"]`).parents('.row,.form-group').children('label').append(html);
+            /* } */
+           
+            tooltipPopup();
+        });
+    }
+
     /* make checkbox behave like radio buttons  */
     $(document).on("change", '.checkboxradio', function (event) {
         let name = $(this).attr('name');
@@ -68,6 +83,34 @@ $(function () {
         }
     });
 
+    let cancelButton = null;
+    $(document).on("click", '.deleteRow', async function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        let attr     =  $(this).attr('data-attr');
+        let URL     =  $(this).attr('data-url');
+        let text    =  $(this).attr('data-text');
+        text        =  isEmptyChack(text) ?  `Are you sure?` : `Do you want to delete ${text}?`;
+
+        if(!isEmptyChack(URL)){
+            if($(this).hasClass('deleteSuccess')){
+                let result = await doAjax(URL, 'delete');
+                if(result.status == true){
+                    if(result.type == "attr"){
+                        cancelButton?.click();
+                        $("[data-remodal-id='deleteModel']").remodal()?.close();
+                    }
+                }
+            }else{
+                deleteModel(text,type='url',action=URL,{class:'deleteRow deleteSuccess'});
+                cancelButton = $(this).closest('.row').find('.cancelList');
+            }
+            
+        }else if(!isEmptyChack(attr)){
+            deleteModel(text,type='attr',action=attr);
+        }
+    });
+
     /*
     Bootstrap Table Is Empty And Add Pagination Button Defilt 1
     */
@@ -88,8 +131,8 @@ $(function () {
             const url = $(this).attr('data-delete-url');
             let result = await doAjax(url, 'delete', { ids: tableIdArr })
             if (result.status == true) {
-                const tableId = $(this).parents('.bootstrap-table ').find('.fixed-table-body table').attr('id');
-                $('#' + tableId).bootstrapTable('refresh')
+                const tableId = $(this).parents('.bootstrap-table').find('.fixed-table-body table').attr('id');
+                $('#' + tableId).bootstrapTable('refresh');
             }
         }
     });
@@ -142,18 +185,7 @@ $(function () {
  */
 $(function () {
     if ($('.tooltipPopup').length > 0) {
-        $('.tooltipPopup').each(function (index, element) {
-            const title = $(element).data("sm-title");
-            const content = $(element).data("sm-content");
-            let htmlPopup = `<div class="header">${title}</div>  <div class="content">${content}</div>`;
-           /*  console.log(htmlPopup); */
-            $(element).popup({
-                inline: true,
-                html: htmlPopup,
-            })
-
-        });
-
+        tooltipPopup('.tooltipPopup');
     }
 });
 
@@ -739,6 +771,7 @@ $(document).on('click','.createdPrint', async function () {
 
 
 
+
 if ($(".tableForm").length > 0) {
     let tableFormArr = {};
     let formEach = $(".tableForm:not(.titleArrForm)").find("input,select,textarea").not("input[type='hidden'],input[type='file'].addRateTable input,input[name='save_option'],.addOtherFeeTable  input");
@@ -799,8 +832,8 @@ $(document).on('change','.selectDataTabs select', async function () {
     $val        = $this.val()?.toLowerCase();
     $name        = $this.attr('name');
  
-    $('div[data-stab][data-name="'+$name+'"]').addClass('d-none').find('input.required,select.required').removeAttr('required').val(null);
-    $('div[data-stab="'+ $val +'"][data-name="'+$name+'"]').removeClass('d-none').find('input.required,select.required').attr('required','required');
+    $('[data-stab][data-name="'+$name+'"]').addClass('d-none').find('input.required,select.required').removeAttr('required').val(null);
+    $('[data-stab="'+ $val +'"][data-name="'+$name+'"]').removeClass('d-none').find('input.required,select.required').attr('required','required');
     
     if($name == 'apply_payment' && $val == 'allow_agent_commission_rp'){
        $('.enterReturnPremiumCommissionForm .agent_commision_none_fields').addClass('d-none')
@@ -809,9 +842,96 @@ $(document).on('change','.selectDataTabs select', async function () {
     }
 
     if($name == 'apply_payment' && ($val == 'allow_cancel_rp_net' || $val == 'allow_cancel_rp_gross')){
-        $('.enterReturnPremiumCommissionForm .agent_return_commission_due_div').removeClass('d-none')
+        
+        $('.enterReturnPremiumCommissionForm .agent_return_commission_due_div,.agent_commission_due_amount_div').removeClass('d-none')
      }else{
-         $('.enterReturnPremiumCommissionForm .agent_return_commission_due_div').addClass('d-none')
+         $('.enterReturnPremiumCommissionForm .agent_return_commission_due_div,.agent_commission_due_amount_div').addClass('d-none')
      }
+});
 
+
+
+$(document).on('change','.tinSelect', async function () {
+    let value = $(this).val();
+    let parentEle = $(this).closest('.row');
+    parentEle.find('input[name="tin"]').removeClass('sstin tin');
+    if(value == "SSN"){
+        parentEle.find('input[name="tin"]').addClass('sstin');
+        sstin();
+    }else if(value == "EIN"){
+        parentEle.find('input[name="tin"]').addClass('tin');
+        tin();
+    }
+});
+
+let statusTypeent= "",enstatus=null;
+$(document).on('click','.entityStatusChange', async function () {
+    let id = $(this).data('id');
+    let status = $(this).data('status');
+    let type = $(this).data('type');
+    statusTypeent = type;
+    enstatus = status;
+    $("[data-remodal-id='statusModel']").remove();
+    modelHtml = `<div class="remodal" data-remodal-id="statusModel">
+    <button class="remodal-close" data-remodal-action="close"></button>
+    <h4>${status} Status</h4>
+    <p>Do you want to ${status?.toLowerCase()} ${type?.toLowerCase()} ?</p><br>
+        <div class="buttons">
+            <button class="btn btn-sm btn-primary entityStatusChangeBtn" data-id="${id}" >${status} Status</button>
+            <button class="btn btn-default btn-sm" data-remodal-action="cancel">Cancel</button>
+        </div>
+    </div>`;
+    $("body").append(modelHtml);
+    const successAlertModelOptions = {
+        closeOnOutsideClick: false,
+    };
+    var inst = $("[data-remodal-id=statusModel]").remodal(successAlertModelOptions);
+    inst.open();
+});
+
+
+$(document).on('click','.entityStatusChangeBtn', async function () {
+    let id = $(this).data('id');
+    let response = await doAjax(`${BASE_URL}${statusTypeent}/status-update/${id}`,'post',{status:enstatus});
+
+    if(response.status == true){
+        successAlertModel(response.msg,response.single, 'url', 'single');
+    }
+}
+);
+
+
+$(document).on('click','.togglePassword', async function () {
+    let type = 'password';
+    if($(this).hasClass('fa-eye')){
+         type = 'text';
+        $(this).removeClass('fa-eye').addClass('fa-eye-slash');
+    }else{
+        $(this).removeClass('fa-eye-slash').addClass('fa-eye');
+    }
+    $(this).closest('div.position-relative').find('input').attr('type',type)
+});
+
+
+
+/* Paasword set eye icon */
+if($('input[type="password"]').length > 0){
+    $('input[type="password"]').each(function (index, element) {
+        // element == this
+        $(element).closest('div').addClass('position-relative').append(function(){
+            if($(this).find('.togglePassword').length == 0){
+                $(this).append('<i class="far fa-eye togglePassword" ></i>');
+            }
+        })
+    });
+}
+$(function () {
+	$(document).mouseup(function(e)
+	{
+		var container = $(".dropdown");
+		if (!container.is(e.target) && container.has(e.target).length === 0)
+		{
+			$(".dropdown-menu").removeClass('show');
+		}
+	});
 });
