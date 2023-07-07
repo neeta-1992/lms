@@ -6,6 +6,10 @@ body {
   color: #000;
 }
 
+.daterangepicker td.active, .daterangepicker td.active:hover {
+    background-color: #007AFF;
+}
+
 .bootstrap-table {
   position: relative;
 }
@@ -209,6 +213,7 @@ lable.required:after {
   border-radius: 3px !important;
   background-color: #fafafa !important;
   height: 33px;
+  min-height: 33px;
   padding: 0.4rem !important;
   min-width: 100%;
 }
@@ -1003,7 +1008,7 @@ textarea.form-control.is-valid {
 
 .was-validated .form-control:invalid,
 .form-control.is-invalid,
-.ui.dropdown.is-invalid,.sq-card-wrapper.is-invalid .sq-card-iframe-container {
+.ui.dropdown.is-invalid,.sq-card-wrapper.is-invalid {
   border-color: #FF3B30 !important;
   padding-right: calc(1.45em + 1.142rem) !important;
   /* background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23FF3B30'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23FF3B30' stroke='none'/%3e%3c/svg%3e");
@@ -1013,7 +1018,7 @@ textarea.form-control.is-valid {
   background-size: calc(0.725em + 0.571rem) calc(0.725em + 0.571rem) !important;
 }
 
- .sq-card-wrapper.is-invalid .sq-card-iframe-container {  box-sizing: border-box;}
+
 
 .was-validated .zinput input:invalid+label:before {
   border-color: #FF3B30;
@@ -1677,11 +1682,9 @@ table td a:hover {
 
 .linkButton {
   font-size: 12px;
-  color: #000;
-
+  color: #000 !important;
   background: none;
-  cursor: pointer;
-  text-decoration: underline;
+  text-decoration: underline !important;
   margin: 0px;
   line-height: 10px;
   cursor: pointer;
@@ -1769,10 +1772,11 @@ table td a:hover {
   bottom: 10px;
   right: 20px;
   z-index: 10;
-  background: rgba(0, 0, 0, 0.8);
   border-radius: 5px;
 }
-
+.editor_top_icons{
+	top:40px !important;
+}
 .editor-toolbar ul {
   padding: 0px;
   list-style: none;
@@ -2076,4 +2080,32 @@ body .accountmaindropdown .menu.visible {
 }
 .process_radio_buttons .zinput label:before{
     left:18.5px !important;
+}
+.pdf_access_bar{
+	    background: #000;
+    padding: 10px 60px !important;
+}
+.pdf_access_bar a,
+.pdf_access_bar .createdPrint{
+	color:#fff;
+}
+.text_card a{
+	font-size: 13px !important;
+}
+
+div.position-relative .togglePassword{
+  position: absolute;
+  right: 20px;
+  top: 8px;
+  font-size: 14px;
+  cursor: pointer;
+}
+.auth_page div.position-relative {
+  position: relative !important;
+}
+
+.auth_page div.position-relative .togglePassword{
+  top: 15px !important;
+  font-size: 15px !important;
+
 }

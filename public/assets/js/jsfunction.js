@@ -356,7 +356,7 @@ const serializeFilter = (attr = null, isFilter = false,isFom) => {
 };
 
 const titlelabelsTextForm = (element) => {
-
+    
     let lableText = "",space = "",Mlabel="";
     let labelObj = element.parents(".row").closest(".row").find(".col-form-label:first");
     if (labelObj.length >= 2) {
@@ -383,11 +383,11 @@ const titlelabelsTextForm = (element) => {
     } else {
         lableText = labelObj[0]?.textContent;
     }
-
+ 
     if(isEmptyChack(lableText)){
        lableText = element.closest('.form-group,.row').find('.labelText').text();
     }
-
+    /* console.log(lableText); */
     lableText = lableText?.replace(/[\s\n\r]+/g, " ");
     return lableText;
 }
@@ -397,6 +397,7 @@ const editLogArr = (attrname,currentValue,preValue,logsArr=[],$this) => {
     let isDoller = "", isPercentage = "", msg = "";
 
     let lableText = titlelabelsTextForm($this);
+    
         if ($this.hasClass("percentageinput") || $this.hasClass("percentageInput")
         ) {
             if (!isEmptyChack(preValue)) {
@@ -430,6 +431,10 @@ const editLogArr = (attrname,currentValue,preValue,logsArr=[],$this) => {
             msg = `${lableText}  was changed from <b>${preValue}</b> to <b>${currentValue}</b>`;
         }
 
+        if($this.attr('type') == 'password'){
+            msg = `${lableText} was updated`;
+        }
+
         if ($this.hasClass("templateEditor")) {
             msg = `<a href="javascript:void(0)" class="templateEditorLogsPreview" data-id="{LOGSID}">${lableText} was changed</a>`;
         }
@@ -457,11 +462,11 @@ const editLogArr = (attrname,currentValue,preValue,logsArr=[],$this) => {
 }
 
 /* form Rest */
-const resrtForm = (form) => {
+const resrtForm = (form,not=null) => {
     $(form).not(".quote_subject,.qId,.vId,.version").trigger("reset");
     $(form).find("input:not(.quote_subject,.qId,.vId,.version)").val(null);
     $(form).find('.ui.dropdown').dropdown('clear');
-    $(form).find('.ui.dropdown').dropdown('setup menu',{values:[]});
+   /*  $(form).find('.ui.dropdown').dropdown('setup menu',{values:[]}); */
     if($(form).find("#message-editor").length > 0){
         var quill = $(form).find("#message-editor")[0].__quill;
          quill.innerHTML = "";
@@ -479,6 +484,7 @@ const formTitleObj = (form) => {
         let lableText = titlelabelsTextForm($(element));
 
         let name = $(element).attr("name");
+        
         let fieldType = $(element).attr("type");
         let classText = $(element).attr("class");
         classText = !isEmptyChack(classText) ? classText ?.replaceAll("form-control", '') ?.replaceAll("input-sm", '') : '';
@@ -506,25 +512,32 @@ const formTitleObj = (form) => {
                    });
                 }
            }else{
-               currentvalue = $(element).val();
+              if(name != '_token' || name != '_method'){
+                    currentvalue = $(element).val();
+                    tagType = "input";
+              }
+              
            }
         } else if ($(element)[0].type == "select-one") {
             currentvalue = $(element).find('option:selected').text();
+        
             tagType = "select";
             let optionBox = $(element)[0];
+            
             optionArr[fieldName] = [];
             if (!isEmptyChack(optionBox)) {
                 $.each(optionBox, function (indexInArray, valueOfElement) {
-                    if (!isEmptyChack(valueOfElement.text)) {
+                    if (!isEmptyChack(valueOfElement.value)) {
                         optionArr[fieldName][valueOfElement.value] = removeWhiteSpace(valueOfElement.text);
                     }
                 });
             }
+          
         } else if (fieldType != "hidden") {
             currentvalue = $(element).val();
             tagType = "input";
         };
-
+         /* console.log(optionArr[fieldName]  );  */
         currentvalue = !isEmptyChack(currentvalue) ?  removeWhiteSpace(currentvalue) : null;
         tagType = !isEmptyChack(tagType) ?  tagType : null;
         (tagType && name) && (titleArr[name] = {
@@ -534,7 +547,7 @@ const formTitleObj = (form) => {
             ...(!isEmptyChack(optionArr) &&  {optionArr:optionArr})
         });
     });
-  /*   console.log(titleArr); */
+  /*  console.log(titleArr);  */
     const titleJson = JSON.stringify(titleArr);
     return titleJson;
 }
@@ -607,8 +620,7 @@ const daterangepicker = (element) => {
 
 }
 
-var buttonhtml = '<div class="editor-toolbar">'+
-	'<ul>'+
+var buttonhtml = '<ul>'+
 		'<li class="searchbox-enable">'+
 			'<a href="javascript:void(0);" title="" data-original-title="Open Search box (<strong>ctrl+f</strong>)">'+
 				'<i class="fa-solid fa-magnifying-glass"></i>'+
@@ -624,8 +636,7 @@ var buttonhtml = '<div class="editor-toolbar">'+
 				'<i class="fa-sharp fa-solid fa-desktop"></i>'+
 			'</a>'+
 		'</li>'+
-	'</ul>'+
-'</div>';
+	'</ul>';
 
 /*
  codemirror Editor Function Create textarea to codemirror editor
@@ -718,14 +729,23 @@ const codemirrorEditor = (element) => {
         const text = editor.doc.getValue();
         $(element).val(text).change();
     });
-	parentElement.find(".CodeMirror").append(buttonhtml);
+	parentElement.find(".CodeMirror").prepend('<div class="editor-toolbar editor_top_icons">'+buttonhtml+'</div>');
+	parentElement.find(".CodeMirror").append('<div class="editor-toolbar editor_bottom_icons">'+buttonhtml+'</div>');
 	parentElement.find('.editor-toolbar .searchbox-enable').on('click',function(){
-		$(this).toggleClass("active");
-		CodeMirror.commands.findPersistent(htmlEditor);
+		if($(this).hasClass("active")){		
+			$(this).removeClass("active");
+		}else{
+			$(".editor-toolbar .searchbox-enable").addClass("active");
+			CodeMirror.commands.findPersistent(htmlEditor);
+		}
 	})
 	parentElement.find('.editor-toolbar .replacebox-enable').on('click',function(){
-		$(this).toggleClass("active");
-		CodeMirror.commands.replace(htmlEditor);
+		if($(this).hasClass("active")){		
+			$(this).removeClass("active");
+		}else{
+			$(".editor-toolbar .replacebox-enable").addClass("active");
+			CodeMirror.commands.replace(htmlEditor);
+		}
 	})
 	parentElement.find('.editor-toolbar .fullscreen-enable').on('click',function(){
 		$(this).toggleClass("active");
@@ -1059,6 +1079,20 @@ const dollerFA = (amount) => {
     return amount;
 }
 
+const tooltipPopup = (element = '.tooltipPopup') => {
+    $(element).each(function (index, element) {
+        const title = $(element).data("sm-title");
+        const content = $(element).data("sm-content");
+        let htmlPopup = `<div class="header">${title}</div>  <div class="content">${content}</div>`;
+       
+        $(element).popup({
+            inline: true,
+            html: htmlPopup,
+        })
+
+    });
+}
+
 
 const sqCardLoad =  async  (element) => {
     showLoader();
@@ -1087,3 +1121,4 @@ const sqCardLoad =  async  (element) => {
 	}
   
 }
+
