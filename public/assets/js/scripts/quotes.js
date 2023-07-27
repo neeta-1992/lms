@@ -26,6 +26,7 @@ function esignatureaLogs (params){
 document.addEventListener("alpine:init", () => {
     Alpine.data("quotesEdit", () => ({
         open: pageType == "edit" ?  "quote_information" : 'policies',
+       // open: pageType == "edit" ?  "policies" : 'policies',
         title: "Quote Information",
         quoteId: editArr.id,
         versionId: editArr.vid,
@@ -33,6 +34,7 @@ document.addEventListener("alpine:init", () => {
         versiontab: editArr.version,
         versionMax: versionCount,
         versionText: editArr.version,
+        policyId: null,
         back: null,
         tab: null,
         otp: null,
@@ -93,15 +95,40 @@ document.addEventListener("alpine:init", () => {
                 `${this.AJAXBASEURL}/clone-version/${this.versionId}`,"post");
             if (!isEmptyChack(response)) {
 
-                console.log(optionsHtml);
-                $(".versiondropdown .menu").append(optionsHtml);
-                $(".versiondropdown").dropdown();
+              /*   $(".versiondropdown .menu").append(optionsHtml); */
+                $(".versiondropdown").removeClass('disabled').dropdown();
                 successAlertModel(response.msg, `changeVersion('${response.versionId}','${response.version}')`, "attr",'cancel',{
                     'text' : 'Continue to Version '+response.version,
                     'class' : 'btn btn-info actionButton',
                 });
             }
+        },
 
+        async cloneQuote() {
+            if(isEmptyChack(this.quoteId)) return false;
+            const response = await doAjax(
+                `${this.AJAXBASEURL}/clone-quote/${this.quoteId}`,"post");
+            if (!isEmptyChack(response) && response.status == true) {
+                successAlertModel(response.msg,response.url, "url",'cancel',{
+                    'text' : 'Continue to new  Quote' + response.q_number,
+                    'class' : 'btn btn-info actionButton',
+                });
+            }
+        },
+
+        async deleteVersion(id) {
+            if(isEmptyChack(id)) return false;
+           
+            const response = await doAjax(
+                `${this.AJAXBASEURL}/delete-version/${id}`,"delete");
+            if (!isEmptyChack(response) && response.status == true) {
+                this.versionText = response.version;
+                this.changeVersion(response.versionId,response.version);
+                $('.versiondropdown').find('.item[data-value="'+ id +'"]').remove();
+                $("[data-remodal-id='deleteModel']").remodal()?.close();
+            }else{
+                textAlertModel(true, response.msg);
+            }
         },
 
         async notesFn(url,type=null) {
@@ -198,8 +225,63 @@ document.addEventListener("alpine:init", () => {
                 return windowpop(`${this.AJAXBASEURL}/signature?q=${this.quoteId}&v=${this.versionId}`,1000, 1000)
             }
         },
-        async esignatureaTab() {
-
+        async lienholders(id) {
+            this.tab = "lienholders";
+            this.policyId = id;
+             $(`#quotes-lienholder`)
+                .bootstrapTable("destroy")
+                .bootstrapTable({
+                    url: `${this.AJAXBASEURL}/lienholder-list/${id}`,
+                });
+        },
+        async addLienholder(id=null) {
+            if(this.policyId){
+                let url = `${this.AJAXBASEURL}/lienholder/${this.policyId}`;
+                if(!isEmptyChack(id)){
+                    url = `${url}/${id}`
+                }
+                const res = await doAjax(url, "get");
+                if(res.status == true){
+                     $('.notes').html(res.view);
+                     uiDropdown();
+                     zipMask();
+                     telephoneMaskInput();
+                     faxMaskInput();
+                }else if(res.status == false){
+                    textAlertModel(true,res.msg)
+                }
+                this.tab = "notes";
+            }
+        },
+        async additionalInsureds(id) {
+            this.tab = "additionalInsureds";
+            this.policyId = id;
+             $(`#quotes-additional-insureds`)
+                .bootstrapTable("destroy")
+                .bootstrapTable({
+                    url: `${this.AJAXBASEURL}/additional-insureds-list/${id}`,
+                });
+        },
+        async addAdditionalInsureds(id=null) {
+      
+            if(this.policyId){
+                let url = `${this.AJAXBASEURL}/additional-insureds/${this.policyId}`;
+                if(!isEmptyChack(id)){
+                    url = `${url}/${id}`
+                }
+                const res = await doAjax(url, "get");
+                if(res.status == true){
+                     $('.notes').html(res.view);
+                     uiDropdown();
+                     zipMask();
+                     telephoneMaskInput();
+                     faxMaskInput();
+                }else if(res.status == false){
+                    textAlertModel(true,res.msg)
+                }
+                this.tab = "notes";
+            }
+            
         },
         async quoteRequestActivation(type=null) {
             /* if(type == 'continue'){ */
@@ -214,7 +296,7 @@ document.addEventListener("alpine:init", () => {
             } */
         },
         async quoteDelete(type=null) {
-            console.log(type)
+            
             if(type == 'continue'){
                 const res = await doAjax(`${this.AJAXBASEURL}/${editArr.id}`, "delete",{current_date:getCurrentTimeZone()});
                 if(res.status == true){
@@ -252,6 +334,16 @@ document.addEventListener("alpine:init", () => {
             const res = await doAjax(`${this.AJAXBASEURL}/aggregate-limit-status/${editArr.id}`, "post",{current_date:getCurrentTimeZone(),type:type});
             if(res.status == true){
                 successAlertModel(res.msg, res.url, "url","single");
+            }else if(res.status == false){
+                textAlertModel(true,res.msg)
+            }
+
+        },
+        async statusUpdate(type=null) {
+
+            const res = await doAjax(`${this.AJAXBASEURL}/quote-update-data/${editArr.id}`, "post",{type:type});
+            if(res.status == true){
+             //   successAlertModel(res.msg, res.url, "url","single");
             }else if(res.status == false){
                 textAlertModel(true,res.msg)
             }
@@ -300,7 +392,10 @@ document.addEventListener("alpine:init", () => {
             if(type == 'continue'){
                 const res = await doAjax(`${this.AJAXBASEURL}/underwriting-verification/${editArr.id}`, "post",{current_date:getCurrentTimeZone()});
                 if(res.status == true){
+                    showLoader();
+                     $('[data-remodal-id="successAlertModel"]').remodal()?.close();
                      window.location.href = res.url;
+                     
                 }else if(res.status == false){
                     textAlertModel(true,res.msg)
                 }
@@ -409,6 +504,8 @@ document.addEventListener("alpine:init", () => {
                             ".general_agentDropdown",
                             "common/entity/general_agent",{istype:'quote'}
                         );
+                        remotelyDropDown('.broker_dropdown',
+                        'common/entity/broker',{istype:'quote'});
                         $(".account_type input").change();
                     }
                     this.tab = "policies";
@@ -438,6 +535,11 @@ document.addEventListener("alpine:init", () => {
                             ".general_agentDropdown",
                             "common/entity/general_agent",{istype:'quote'}
                         );
+                        
+                        remotelyDropDown('.broker_dropdown',
+                        'common/entity/broker',{istype:'quote'});
+
+
                         $(".account_type input").change();
                     }
                     this.tab = "policies";
@@ -549,6 +651,8 @@ $(document).on("click", ".policyDetails", async function (e) {
                 "common/entity/general_agent",{istype:'quote'},
                 response.generalAgentJson
             );
+            remotelyDropDown('.broker_dropdown',
+            'common/entity/broker',{istype:'quote'}, response.brokerDataJson);
             $(".account_type input").change();
         }
     } else {
@@ -652,7 +756,7 @@ $(document).on("click", ".saveData", async function (e) {
     if (isValid) {
         let formClass = forM;
         let args = await serializeFilter(forM, (filter = true));
-        if(forM.hasClass('quoteEditForm')){
+        if(forM.hasClass('quoteEditForm') || forM.hasClass('additionalInsuredsForm')){
             titleArr = formTitleObj(forM);
             args.push({name:"titleArr",value:titleArr});
         }
@@ -707,7 +811,9 @@ $(document).on("click", ".saveData", async function (e) {
 		}
     }
     $(this).find(".button--loading").addClass("d-none");
+    $(".text_box").addClass("d-none");
     $(this).removeAttr("disabled", true);
+
 });
 
 let logsArr = {};
@@ -853,13 +959,12 @@ $(document).on("change", 'input[name="inception_date"]', function () {
 });
 $(document).on("click", '.payModelsCancel', function () {
     let active_payment_methode = $('input[name="active_payment_methode"]').val();
-
-
     if(isEmptyChack(active_payment_methode)){
         $('#payment_method_ach').prop('checked',true)
     }else{
         $('input#payment_method_'+active_payment_methode).prop('checked',true)
     }
+    clickcount =1
 });
 $(document).on("change", 'select[name="policy_term"]', function () {
     var termvalues = $(this).val();
@@ -891,10 +996,16 @@ $(document.body).on("change", 'input[name="minimum_earned"]', function () {
         }
     }
 });
-
+let card =null;
+let clickcount = 1;
 $(document).on("change", 'input[name="payment_method"]', async function () {
     var payment_method = $(this).val();
-
+    if(clickcount > 1){
+         return false;
+    }
+    clickcount++;
+  
+    $('.paymentReModel form').removeClass('creditCardForm');
     if (payment_method == "ach" || payment_method == "credit_card") {
 
         var inst = $(".paymentReModel").remodal({
@@ -956,15 +1067,56 @@ $(document).on("change", 'input[name="payment_method"]', async function () {
             dateDropdowns($(".dateDropdowns"));
             $(".paymentReModel .date-dropdowns").find(".day").hide();
         }
+
+        if (payment_method == "credit_card" && $('#card-container-model').length > 0 && !$('.text_box').hasClass('d-none')) {
+            $('.paymentReModel form').addClass('creditCardForm');
+            card = await sqCardLoad("#card-container-model");
+        } else {
+            $(".paymenttab").find('form #card-container-model').html(null)
+        }
+        
+        
         digitLimit(".digitLimit");
     } else {
         $(".mainForm").find(".model_details_fied").remove();
     }
+    setTimeout(() => {
+        clickcount = 1
+    }, 3000);
 });
 
-$(document).on("click", ".paySave", function (e) {
+$(document).on("click", ".paySave", async function (e) {
     let forM = $(this).closest(".paymentforms");
     let isValid = isValidation(forM, true);
+    const tab = $(".paymenttab.active").data("tab");
+    let token = '';
+    if (forM.hasClass('creditCardForm')) {
+        let showSqCard = false;
+        if (forM.hasClass('creditCardForm')) {
+            showSqCard = tab == 'credit_card'
+        }
+        token  = forM.find('input[name="sqtoken"]').val()
+        
+        if (showSqCard == true && $('.sqcard__payment').length > 0 && isEmptyChack(token)) {
+            try {
+                const cardResult = await card?.tokenize();
+                console.log(cardResult);
+                if (cardResult.status == 'OK') {
+                    token = cardResult.token;
+                    
+                    forM.find('input[name="sqtoken"]').val(cardResult.token);
+                    forM.find(".sq-card-wrapper").removeClass("sq-error");
+                    $(this).click();
+                }
+            } catch (error) {
+                isValid = false;
+               /*  console.log(error); */
+                console.log(error.msg);
+            }
+        }
+        /*
+     if (result.status === 'OK') { */
+    }
     if (isValid) {
         let inputHtml = "";
         $(".paymenttab.active")
@@ -983,7 +1135,8 @@ $(document).on("click", ".paySave", function (e) {
                     inputHtml += `<input type='hidden' name="${name}" value="${val}">`;
                 }
             });
-        const tab = $(".paymenttab.active").data("tab");
+      
+        inputHtml += `<input type='hidden' name="sqtoken" value="${token}">`;
         inputHtml += `<input type='hidden' name="active_payment_methode" value="${tab}">`;
         inputHtml = `<div class="model_details_fied">${inputHtml}</div>`;
         if ($(".mainForm").find(".model_details_fied").length > 0) {
@@ -1004,10 +1157,28 @@ $(document).on("change", ".termsPayment input,.termsPayment .ui select", async f
     const quote = $(".termsPayment input[name='quote']").val();
     const name = $(this).attr('name');
     const val = $(this).val()?.replace("$", "")?.replace("%", "")?.replace(",", "");
-    console.log(val);
+   
 	const response = await doAjax(`${BASE_URL}quotes/task-update/${quote}/${version}`,'post',{name:name,value:val});
 	if(response.status){
 		termsData(quote,version);
+	}else{
+		$(this).addClass("is-invalid");
+		$(this).parent().append('<div class="invalid-feedback">'+response.msg+'<a href="javascript:void(0);" class="revertChangesTerm ml-2"><i class="fa-solid fa-arrow-rotate-left"></i></a></div>');
+	}
+});
+
+$(document).on("change", ".agent_compensation_box input", async function (e) {
+    const version = $(".termsPayment input[name='version']").val();
+    const quote = $(".termsPayment input[name='quote']").val();
+    const name = $(this).attr('name');
+    const val = $(this).val()?.replace("$", "")?.replace("%", "")?.replace(",", "");
+   
+	const response = await doAjax(`${BASE_URL}quotes/compensation-update/${quote}/${version}`,'post',{name:name,value:val});
+	if(response.status){
+		termsData(quote,version);
+		setTimeout(function(){
+			$("#view_agent_compensation").prop('checked',true).change();
+		},1000)
 	}else{
 		$(this).addClass("is-invalid");
 		$(this).parent().append('<div class="invalid-feedback">'+response.msg+'<a href="javascript:void(0);" class="revertChangesTerm ml-2"><i class="fa-solid fa-arrow-rotate-left"></i></a></div>');
@@ -1050,9 +1221,22 @@ $(document).on("change", "#view_down_payment_rule", function(){
 });
 
 
-$(document).on("click", ".zinput-inline", function(){
-	 $(this).find('input[name="payment_method"]:checked').trigger('change')
-});
+ $(document).on("click", ".zinput-inline ", function(){
+	$(this).find('input[name="payment_method"]:checked').trigger('change')
+}); 
+
+
+$(document).on('click','.change_card',function(){
+   
+    clickcount = 1;
+    $('.paymentReModel .text_card').addClass('d-none');
+    $('.paymentReModel .text_box').removeClass('d-none');
+    $('input[name="payment_method"]:checked').trigger('change')
+})
+$(document).on('click','.change_card_cancel',function(){
+    clickcount = 1;
+    $('input[name="payment_method"]:checked').trigger('change')
+})
 $(document).on("change", ".underwriting_information_form input,.underwriting_information_form select",async function(e){
     let forM = $(this).parents("form");
     forM.find('input[type="radio"]').removeAttr('required') ;
@@ -1072,3 +1256,16 @@ $(document).on("change", ".underwriting_information_form input,.underwriting_inf
      $('.versionsigagentstatus').html(data.agentSignatureStatus);
      $('.versionsiginsuredstatus').html(data.isnuredSignatureStatus);
 });
+
+
+
+if(!isEmptyChack(quoteRequestActivationButtonIntervalStart)){
+    quote_request_activation_button_interval =  setInterval( async () => {
+        let quote_request_activation_button = await doAjax(`${BASE_URL}quotes/quote_request_activation_button/${editArr.id}`,'post',null,null,null,false);
+        if(quote_request_activation_button.status == true){
+            $('.quote_request_activation_button_div').html(quote_request_activation_button.html);
+            clearInterval(quote_request_activation_button_interval);
+            
+        }
+    }, 2000);
+}
